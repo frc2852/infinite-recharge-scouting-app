@@ -30,6 +30,5 @@ module.exports = {
             chunkFilename: 'main.css'
         }),
         new HtmlWebpackPlugin({ template: srcPath + 'index.html', filename: 'index.html' })
-    ],
-    watch: true
+    ]
 }

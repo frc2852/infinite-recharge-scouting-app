@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "node_modules/.bin/webpack",
-    "dev-server": "node_modules/.bin/webpack-dev-server --host 0.0.0.0"
+    "dev-server": "node_modules/.bin/webpack-dev-server --host 0.0.0.0 --watch"
   },
   "author": "",
   "license": "ISC",

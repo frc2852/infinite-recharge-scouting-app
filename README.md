@@ -1,6 +1,6 @@
 # Infinite Recharge Scouting App
 
-This project will be use for students to scouting robots at FRC complitions
+This project will be use for students to scout robots at FRC complitions
 
 ## Setting up project
 

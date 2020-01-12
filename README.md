@@ -4,7 +4,7 @@ This project will be use for students to scouting robots at FRC complitions
 
 ## Setting up project
 
-1. Install libaries 
+1. Install libraries 
 ```npm install```
 
 2. Start Server

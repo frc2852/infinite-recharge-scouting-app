@@ -4,9 +4,37 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="shortcut icon" type="image/jpg" href="images/joof.jpg"/>
     <title>2852 Scouting App</title>
   </head>
   <body>
-    <h1>hello world!</h1>
+    <h1 class="text-green-600 hover:text-red-600">Scouting App</h1>
+    <form class="text-purple-600">
+      Name<br>
+      <input type=text name="firstName"><br>
+      Team<br>
+      <input type=text name="team"><br>
+      Match Number<br>
+      <input type="number" name="matchNumber"><br>
+      <br>
+      <form>
+        Alliance<br>
+        <input type="radio" name="alliance" value="red" class="text-red-600">Red<br>
+        <input type="radio" name="alliance" value="blue" class="text-blue-600">Blue<br>
+        Drive Station<br>
+        <input type="radio" name="driveStation" value="1">1<br>
+        <input type="radio" name="driveStation" value="2">2<br>
+        <input type="radio" name="driveStation" value="3">3<br>
+      </form>
+    </form>
+    <br>
+    <h2>Make sure to scout all data accurately.</h2><br>
+    <p><i>field scouting placeholder</i></p><br>
+    <form>
+      <b>Please confirm you have entered all data correctly.</b><br>
+      When you are finished, please submit your data and prepare for the next match.<br>
+      <br>
+      <input type="button" id="Submit Data" name="Submit Data" value="Submit Data" action="/127.0.0.1:8080/">
+    </form>
   </body>
 </html>

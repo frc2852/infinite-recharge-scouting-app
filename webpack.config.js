@@ -1,6 +1,7 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 const htmlLoader = require('./helpers/html-loader');
 
 const srcPath = path.resolve('src') + '/';
@@ -26,6 +27,10 @@ module.exports = {
         ],
     },
     plugins: htmlLoader(srcPath + 'pages', [
+        new webpack.ProvidePlugin({
+            $: 'jquery-lite',
+            jQuery: 'jquery-lite'
+        }),
         new MiniCssExtractPlugin({
             filename: 'main.css',
             chunkFilename: 'main.css',

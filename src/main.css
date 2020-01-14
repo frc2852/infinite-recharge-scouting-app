@@ -2,7 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+.container {
+      padding: 100px;
+}
 
-html, body {
-      height: 100%
+.square-button-rb {
+      display: inline-block;
+      margin: auto;
+      @apply bg-gray-300;
+      @apply p-12;
+}
+
+img {
+      border-radius: 50%;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 50%;
 }

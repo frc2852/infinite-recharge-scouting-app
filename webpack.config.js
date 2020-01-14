@@ -28,8 +28,8 @@ module.exports = {
     },
     plugins: htmlLoader(srcPath + 'pages', [
         new webpack.ProvidePlugin({
-            $: 'jquery-lite',
-            jQuery: 'jquery-lite'
+            $: 'jquery',
+            jQuery: 'jquery'
         }),
         new MiniCssExtractPlugin({
             filename: 'main.css',

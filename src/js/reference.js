@@ -15,7 +15,7 @@ function addBall(number){
 
 // if statements:
 
-if (balls<3){
+if (balls < 3){
       balls = addBall(balls);
 }
 

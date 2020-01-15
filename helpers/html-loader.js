@@ -10,7 +10,6 @@ module.exports = (folder, plugins) => {
 
     return files
         .map(file => {
-            console.log({ template: folder + file, filename: file });
             return new HtmlWebpackPlugin({ template: folder + file, filename: file });
         })
         .concat(plugins);

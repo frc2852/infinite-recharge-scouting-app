@@ -1,3 +1,17 @@
+# Infinite Recharge Scouting App
+
+This project will be use for students to scout robots at FRC complitions
+
+## Setting up project
+
+1. Install libraries 
+```npm install```
+
+2. Start Server
+```npm run dev-server```
+
+## LICENSE
+
 Copyright (c) 2020 Team 2852
 
 Permission is hereby granted, free of charge, to any person obtaining a copy

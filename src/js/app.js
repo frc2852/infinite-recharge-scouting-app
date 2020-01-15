@@ -1,13 +1,37 @@
 import '../main.css';
-import $ from 'jquery';          //uses $ as a variable for jquery
+import $ from 'jquery';          // uses $ as a variable for jquery (this file is js by default)
 
 $(document).ready(function(){    // forces jquery to wait until the site is ready
-      $('#rotation-successful').click(function(){      // # means go to; look at the rotation successful key
-            alert('hello button');                     // and when it is clicked, run the function (run alert)
+
+      const robot = {
+            points = {
+                  high = 0,
+                  low = 0,
+                  miss = 0
+            }
+      }
+
+      funtion robotStatus(robot){
+            console.log(robot)
+      }
+
+      $('#rotation-successful').click(function(){
+            alert('hello button');
       })
 
-      $('.btn-high-goal').click(function(){   // . means in this class, meaning this fires for all in this class
-            alert('hello class');
+      $('.btn-high-goal').click(function(){
+            robot.points.high++;
+            robotStatus(robot);
+      })
+
+      $('.btn-low-goal').click(function(){
+            robot.points.low++;
+            robotStatus(robot);
+      })
+
+      $('.btn.miss.ball').click(function(){
+            robot.points.miss++;
+            robotStatus(robot);
       })
 });
 

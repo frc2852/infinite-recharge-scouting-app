@@ -1,5 +1,22 @@
 @tailwind base;
 @tailwind components;
+
+.phase-tab {
+      @apply text-center;
+      @apply block;
+      @apply border-white;
+      @apply text-blue-500;
+      @apply py-2;
+      @apply px-4;
+      @apply m-1;
+      @apply rounded;
+}
+
+.phase-tab:hover {
+      @apply bg-blue-500;
+      @apply text-white;
+}
+
 @tailwind utilities;
 
 .container {
@@ -19,3 +36,9 @@ img {
       margin-right: auto;
       width: 50%;
 }
+
+
+/*text-center block border-white text-blue-500 py-2 px-4 m-1;
+
+
+*/

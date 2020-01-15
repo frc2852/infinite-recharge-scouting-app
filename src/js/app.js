@@ -4,24 +4,24 @@ import $ from 'jquery';          // uses $ as a variable for jquery (this file i
 $(document).ready(function(){    // forces jquery to wait until the site is ready
 
       const robot = {
-            points = {
-                  high = 0,
-                  low = 0,
-                  miss = 0
-            }
-            wheel = {
-                  rotation = {
-                        success = 0,
-                        fail = 0
-                  }
-                  position = {
-                        success = 0,
-                        fail = 0
+            points: {
+                  high: 0,
+                  low: 0,
+                  miss: 0
+            },
+            wheel: {
+                  rotation: {
+                        success: 0,
+                        fail: 0
+                  },
+                  position: {
+                        success: 0,
+                        fail: 0
                   }
             }
       }
 
-      funtion robotStatus(robot){
+      function robotStatus(robot){
             console.log(robot);
       }
 

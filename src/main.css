@@ -13,7 +13,12 @@
 }
 
 .phase-tab:hover {
-      @apply bg-blue-500;
+      @apply bg-blue-300;
+      @apply text-white;
+}
+
+.tab-active {
+      @apply bg-blue-600;
       @apply text-white;
 }
 
@@ -30,6 +35,22 @@
       @apply p-12;
 }
 
+.preload-button-rb {
+      display: inline-block;
+      margin: auto;
+      @apply bg-gray-300;
+      @apply p-12;
+}
+
+.preload-button-rb:hover {
+      @apply bg-gray-400;
+}
+
+.preload-button-rb-active {
+      @apply bg-blue-600;
+      @apply text-white;
+}
+
 img {
       display: block;
       margin-left: auto;
@@ -37,8 +58,16 @@ img {
       width: 50%;
 }
 
-
-/*text-center block border-white text-blue-500 py-2 px-4 m-1;
-
-
-*/
+.start-button {
+      background-image: linear-gradient(to bottom right, cyan, rgb(0, 89, 255), cyan);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      padding: 40px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 24px;
+      margin: 4px 2px;
+}
+    

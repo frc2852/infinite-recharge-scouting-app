@@ -20,48 +20,88 @@
           </div>
         </div>
         <div class="w-2/3">
-          <ul class="flex">
+          <ul class="flex">           <!--tabs-->
             <li class="flex-1 mr-2">
-              <a class="phase-tab phase-tab:hover" data-tab-id="tab-auto" href="#">Autonomous</a>
+              <a class="phase-tab" data-tab-id="tab-pregame" href="#">Pre-game</a>
             </li>
             <li class="flex-1 mr-2">
-              <a class="phase-tab phase-tab:hover" data-tab-id="tab-teleop" href="#">Teleoperated</a>
+              <a class="phase-tab" data-tab-id="tab-auto" href="#">Autonomous</a>
             </li>
             <li class="flex-1 mr-2">
-              <a class="phase-tab phase-tab:hover" data-tab-id="tab-endgame" href="#">Endgame</a>
+              <a class="phase-tab" data-tab-id="tab-teleop" href="#">Teleoperated</a>
+            </li>
+            <li class="flex-1 mr-2">
+              <a class="phase-tab" data-tab-id="tab-endgame" href="#">Endgame</a>
             </li>
           </ul>
-          <br><br><br>
-          <div class="flex mb-4 items-center">          <!--teleop pane begins-->
-            <div class="w-1/3 text-center">
-              <div class="text-center square-button-rb" data-phase="teleop">Pickup Ball</div>
-            </div>
-            <div class="w-1/3 items-center">
-              <div class="text-center btn-high-goal" data-phase="teleop">High Goal</div>
+          <br>
+          <div id="tab-pregame" class="tab-container hidden">
+            <div>
+              <h1>Preload Balls</h1>
               <br>
-              <div class="text-center btn-low-goal" data-phase="teleop">Low Goal</div>
-              <br>
-              <div class="text-center btw-miss-ball" data-phase="teleop">Missed Ball</div>
             </div>
-            <div class="w-1/3 items-center">
-              <div class="text-center btn-undo" data-phase="teleop">Undo Click</div>
+            <div class="flex mb-4 items-center">
+              <div class="w-1/3 text-center">
+                <div class="text-center btn-preload preload-button-rb">1</div>
+              </div>
+              <div class="w-1/3 text-center">
+                <div class="text-center btn-preload preload-button-rb">2</div>
+              </div>
+              <div class="w-1/3 text-center">
+                <div class="text-center btn-preload preload-button-rb">3</div>
+              </div>
+            </div>
+            <br>
+            <div class="flex mb-4 text-center">
+              <div class="w-1/2 items-center">
+                <div class="text-center btn-preload preload-button-rb">0</div>
+              </div>
+              <div class="w-1/2 text-center">
+                <div class="text-center btn-preload preload-button-rb">Unknown</div>
+              </div>
+            </div>
+            <br>
+            <div class="items-center">
+              <button class="start-button items-center" id="start" data-phase="pre">Start</button>
             </div>
           </div>
-          <br><br><br>
-          <div class="flex mb-4 items-center">
-            <div class="w-1/4">
-              <div class="text-center" id="rotation-successful">Rotation Control Successful</div>
+          <div id="tab-auto" class="tab-container">
+          </div>
+          <div id="tab-teleop" class="tab-container">
+            <div class="flex mb-4 items-center">
+              <div class="w-1/3 items-center">
+                <div class="text-center btn-pickup square-button-rb" data-phase="teleop">Pickup Ball</div>
+              </div>
+              <div class="w-1/3 items-center">
+                <div class="text-center btn-high-goal" data-phase="teleop">High Goal</div>
+                <br>
+                <div class="text-center btn-low-goal" data-phase="teleop">Low Goal</div>
+                <br>
+                <div class="text-center btw-miss-ball" data-phase="teleop">Missed Ball</div>
+              </div>
+              <div class="w-1/3 items-center">
+                <div class="text-center btn-undo" data-phase="teleop">Undo Click</div>
+              </div>
             </div>
-            <div class="w-1/4">
-              <div class="text-center" id="rotation-failed">Rotation Control Failed</div>
+            <br><br>
+            <div class="flex mb-4 items-center">
+              <div class="w-1/4">
+                <div class="text-center" id="rotation-successful">Rotation Control Successful</div>
+              </div>
+              <div class="w-1/4">
+                <div class="text-center" id="rotation-failed">Rotation Control Failed</div>
+              </div>
+              <div class="w-1/4">
+                <div class="text-center" id="position-successful">Position Control Successful</div>
+              </div>
+              <div class="w-1/4">
+                <div class="text-center" id="position-failed">Position Control Failed</div>
+              </div>
             </div>
-            <div class="w-1/4">
-              <div class="text-center" id="position-successful">Position Control Successful</div>
-            </div>
-            <div class="w-1/4">
-              <div class="text-center" id="position-failed">Position Control Failed</div>
-            </div>
-         </div>
+          </div>
+          <div id="tab-endgame" class="tab-container">
+          </div>
+        </div>
       </div>
     </div>
   </body>

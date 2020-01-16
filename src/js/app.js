@@ -4,6 +4,9 @@ import $ from 'jquery';          // uses $ as a variable for jquery (this file i
 $(document).ready(function(){    // forces jquery to wait until the site is ready
 
       const robot = {
+            balls: {
+                  preload: 0
+            },
             points: {
                   high: 0,
                   low: 0,
@@ -46,8 +49,27 @@ $(document).ready(function(){    // forces jquery to wait until the site is read
             robotStatus(robot);
       })
 
+      $('.phase-tab').click(function(){
+            const $tab = $(this);
 
-      $('#rotation-successful').click(function(){
+            $('.phase-tab').removeClass('tab-active');
+            $tab.addClass('tab-active');
+
+            const tabId = $tab.data('tab-id');
+            
+            $('.tab-container').addClass('hidden');
+            $('#' + tabId).removeClass('hidden');
+      })
+
+      $('.btn-preload').click(function(){
+            const $preload = $(this);
+
+            $('.btn-preload').removeClass('preload-button-rb-active');
+            $preload.addClass('preload-button-rb-active')
+
+      })
+
+      /*$('#rotation-successful').click(function(){
             robot.wheel.rotation.success++;
             robotStatus(robot)
       })
@@ -65,6 +87,6 @@ $(document).ready(function(){    // forces jquery to wait until the site is read
       $('#position-failed').click(function(){
             robot.wheel.position.fail++;
             robotStatus(robot)
-      })
+      })*/
 });
 

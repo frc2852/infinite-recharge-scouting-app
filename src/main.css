@@ -59,15 +59,15 @@ img {
 }
 
 .start-button {
-      background-image: linear-gradient(to bottom right, cyan, rgb(0, 89, 255), cyan);
+      background-image: linear-gradient(to bottom right, cyan, rgb(0, 89, 255), cyan, rgb(0, 89, 255), cyan);
       border: none;
       border-radius: 50%;
       color: white;
-      padding: 40px;
+      padding: 150px;
       text-align: center;
       text-decoration: none;
       display: inline-block;
-      font-size: 24px;
-      margin: 4px 2px;
+      font-size: 96px;
+      margin: 50px 200px;
 }
     

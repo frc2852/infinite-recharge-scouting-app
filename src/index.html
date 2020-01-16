@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+op<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -22,21 +22,22 @@
         <div class="w-2/3">
           <ul class="flex">           <!--tabs-->
             <li class="flex-1 mr-2">
-              <a class="phase-tab" data-tab-id="tab-pregame" href="#">Pre-game</a>
+              <a class="phase-tab hidden pregame" data-tab-id="tab-pregame" href="#">Back to Pre-game</a>
             </li>
             <li class="flex-1 mr-2">
-              <a class="phase-tab" data-tab-id="tab-auto" href="#">Autonomous</a>
+              <a class="phase-tab hidden" data-tab-id="tab-auto" id="matchTriggerAuto" href="#">Autonomous</a>
             </li>
             <li class="flex-1 mr-2">
-              <a class="phase-tab" data-tab-id="tab-teleop" href="#">Teleoperated</a>
+              <a class="phase-tab hidden" data-tab-id="tab-teleop" href="#">Teleoperated</a>
             </li>
             <li class="flex-1 mr-2">
-              <a class="phase-tab" data-tab-id="tab-endgame" href="#">Endgame</a>
+              <a class="phase-tab hidden" data-tab-id="tab-endgame" href="#">Endgame</a>
             </li>
           </ul>
           <br>
-          <div id="tab-pregame" class="tab-container hidden">
-            <div>
+          <div id="tab-pregame" class="tab-container">
+
+            <!-- <div>
               <h1>Preload Balls</h1>
               <br>
             </div>
@@ -60,14 +61,15 @@
                 <div class="text-center btn-preload preload-button-rb">Unknown</div>
               </div>
             </div>
-            <br>
+            <br> -->
             <div class="items-center">
-              <button class="start-button items-center" id="start" data-phase="pre">Start</button>
+              <div class="start-button items-center" id="start" data-phase="pre">Start</div>
             </div>
           </div>
-          <div id="tab-auto" class="tab-container">
+          <div id="tab-auto" class="tab-container hidden">
+            your did it
           </div>
-          <div id="tab-teleop" class="tab-container">
+          <div id="tab-teleop" class="tab-container hidden">
             <div class="flex mb-4 items-center">
               <div class="w-1/3 items-center">
                 <div class="text-center btn-pickup square-button-rb" data-phase="teleop">Pickup Ball</div>
@@ -99,7 +101,8 @@
               </div>
             </div>
           </div>
-          <div id="tab-endgame" class="tab-container">
+          <div id="tab-endgame" class="tab-container hidden">
+            delet
           </div>
         </div>
       </div>

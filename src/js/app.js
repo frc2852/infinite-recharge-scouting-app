@@ -4,6 +4,7 @@ import $ from 'jquery';          // uses $ as a variable for jquery (this file i
 $(document).ready(function(){    // forces jquery to wait until the site is ready
 
       const robot = {
+            matchStartTime: 0,
             balls: {
                   preload: 0
             },
@@ -32,6 +33,16 @@ $(document).ready(function(){    // forces jquery to wait until the site is read
       $('#rotation-successful').click(function(){
             alert('hello button');
       })
+
+      $('.start-button').click(function(){
+            console.log('Match Start Triggered');
+            $('#matchTriggerAuto').trigger('click');
+            $('.phase-tab').removeClass('hidden');
+      })
+
+      /*$('.pregame').click(function(){
+            $('.phase-tab').addClass('hidden');
+      })  */
 
 
       $('.btn-high-goal').click(function(){
@@ -69,7 +80,11 @@ $(document).ready(function(){    // forces jquery to wait until the site is read
 
       })
 
-      /*$('#rotation-successful').click(function(){
+
+
+      /* when match start pressed, log date.now() as matchStartTime, show tabs, and go to auto tab
+
+      $('#rotation-successful').click(function(){
             robot.wheel.rotation.success++;
             robotStatus(robot)
       })

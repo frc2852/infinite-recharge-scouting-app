@@ -21,16 +21,16 @@ op<!DOCTYPE html>
         </div>
         <div class="w-3/4">
           <ul class="flex">           <!--tabs-->
-            <li class="flex-2.5 mr-2">
+            <li class="flex-2 mr-1">
               <a class="phase-tab hidden pregame" data-tab-id="tab-pregame" href="#">Back to Pre-game</a>
             </li>
-            <li class="flex-1 mr-2">
+            <li class="flex-1 mr-1">
               <a class="phase-tab hidden" data-tab-id="tab-auto" id="matchTriggerAuto" href="#">Autonomous</a>
             </li>
-            <li class="flex-1 mr-2">
+            <li class="flex-1 mr-1">
               <a class="phase-tab hidden" data-tab-id="tab-teleop" href="#">Teleoperated</a>
             </li> 
-            <li class="flex-1 mr-2">
+            <li class="flex-1 mr-1">
               <a class="phase-tab hidden" data-tab-id="tab-endgame" href="#">Endgame</a>
             </li>
           </ul>
@@ -74,10 +74,10 @@ op<!DOCTYPE html>
                 </div>
               </div>
               <div class="w-1/3 items-center">
-                <div class="text-center auto-choice auto-yes" data-phase="auto">YES</div>
+                <div class="text-center auto-choice auto-yes" id="auto-yes" data-phase="auto">YES</div>
               </div>
               <div class="w-1/3 items-center">
-                <div class="text-center auto-choice auto-no" data-phase="auto">NO</div>
+                <div class="text-center auto-choice auto-no" id="auto-no" data-phase="auto">NO</div>
               </div>
             </div>
             <div class="flex mb-4 items-center">

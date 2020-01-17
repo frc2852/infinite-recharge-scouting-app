@@ -45,15 +45,35 @@
 .auto-yes {
       display: inline-block;
       margin: none;
-      @apply bg-green-500;
+      @apply bg-green-200;
       @apply p-12;
+}
+
+.auto-yes:hover {
+      @apply bg-green-400;
 }
 
 .auto-no {
       display: inline-block;
       margin: none;
-      @apply bg-red-500;
+      @apply bg-red-200;
       @apply p-12;
+}
+
+.auto-no:hover {
+      @apply bg-red-400;
+}
+
+.auto-active {
+      display: inline-block;
+      margin: none;
+      @apply bg-blue-500;
+      @apply p-12;
+      border: 4px;
+}
+
+.auto-active:hover {
+      @apply bg-blue-600;
 }
 
 .preload-button-rb {

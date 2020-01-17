@@ -41,6 +41,16 @@ $(document).ready(function(){    // forces jquery to wait until the site is read
             $('.phase-tab').removeClass('hidden');
       })
 
+      $('.auto-choice').click(function(){
+            const $autoChosen = $(this);
+            const $choiceId = $autoChosen.data('id');
+
+            $('.auto-choice').removeClass('.hovered');
+            $('#' + $choiceId).addClass('.hovered');
+
+            console.log('Hovered ' + $choiceId + '.');
+      })
+
       /*$('.pregame').click(function(){
             $('.phase-tab').addClass('hidden');
       })  */
@@ -79,11 +89,7 @@ $(document).ready(function(){    // forces jquery to wait until the site is read
             $('.btn-preload').removeClass('preload-button-rb-active');
             $preload.addClass('preload-button-rb-active')
             
-      })*/
-
-
-
-      /* when match start pressed, log date.now() as matchStartTime, show tabs, and go to auto tab
+      })
 
       $('#rotation-successful').click(function(){
             robot.wheel.rotation.success++;
@@ -105,4 +111,3 @@ $(document).ready(function(){    // forces jquery to wait until the site is read
             robotStatus(robot)
       })*/
 });
-

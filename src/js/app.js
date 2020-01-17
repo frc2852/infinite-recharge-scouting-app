@@ -34,8 +34,9 @@ $(document).ready(function(){    // forces jquery to wait until the site is read
             alert('hello button');
       })
 
-      $('.start-button').click(function(){
-            console.log('Match Start Triggered');
+      $('.start-button').click(function(){          /*MATCH START*/
+            robot.matchStartTime = Date.now();
+            console.log('Match Start Triggered at ', robot.matchStartTime);
             $('#matchTriggerAuto').trigger('click');
             $('.phase-tab').removeClass('hidden');
       })
@@ -72,13 +73,13 @@ $(document).ready(function(){    // forces jquery to wait until the site is read
             $('#' + tabId).removeClass('hidden');
       })
 
-      $('.btn-preload').click(function(){
+      /*$('.btn-preload').click(function(){
             const $preload = $(this);
 
             $('.btn-preload').removeClass('preload-button-rb-active');
             $preload.addClass('preload-button-rb-active')
-
-      })
+            
+      })*/
 
 
 

@@ -35,6 +35,27 @@
       @apply p-12;
 }
 
+.rect-button-rb {
+      display: inline-block;
+      margin: 5px;
+      @apply bg-gray-300;
+      @apply p-2;
+}
+
+.auto-yes {
+      display: inline-block;
+      margin: none;
+      @apply bg-green-500;
+      @apply p-12;
+}
+
+.auto-no {
+      display: inline-block;
+      margin: none;
+      @apply bg-red-500;
+      @apply p-12;
+}
+
 .preload-button-rb {
       display: inline-block;
       margin: auto;

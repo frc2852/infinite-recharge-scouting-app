@@ -10,7 +10,7 @@ op<!DOCTYPE html>
   <body>
     <div class="container">
       <div class="flex absolute inset-0">
-        <div class="w-1/3 bg-blue-700">
+        <div class="w-1/4 bg-blue-700">
           placeholder - top of team pane
           <br><br>
           <h1 class="text-center">team name (header)</h1>
@@ -19,9 +19,9 @@ op<!DOCTYPE html>
             <a href="https://www.instagram.com/jeffwu05/"></a><img src="images/joof.jpg">
           </div>
         </div>
-        <div class="w-2/3">
+        <div class="w-3/4">
           <ul class="flex">           <!--tabs-->
-            <li class="flex-1 mr-2">
+            <li class="flex-2.5 mr-2">
               <a class="phase-tab hidden pregame" data-tab-id="tab-pregame" href="#">Back to Pre-game</a>
             </li>
             <li class="flex-1 mr-2">
@@ -29,7 +29,7 @@ op<!DOCTYPE html>
             </li>
             <li class="flex-1 mr-2">
               <a class="phase-tab hidden" data-tab-id="tab-teleop" href="#">Teleoperated</a>
-            </li>
+            </li> 
             <li class="flex-1 mr-2">
               <a class="phase-tab hidden" data-tab-id="tab-endgame" href="#">Endgame</a>
             </li>
@@ -67,7 +67,34 @@ op<!DOCTYPE html>
             </div>
           </div>
           <div id="tab-auto" class="tab-container hidden">
-            your did it
+            <div class="flex mb-4 items-center">
+              <div class="w-1/4 items-center">
+                <div>
+                  <h1>Does the robot have an autonomous phase?</h1>
+                </div>
+              </div>
+              <div class="w-1/3 items-center">
+                <div class="text-center auto-choice auto-yes" data-phase="auto">YES</div>
+              </div>
+              <div class="w-1/3 items-center">
+                <div class="text-center auto-choice auto-no" data-phase="auto">NO</div>
+              </div>
+            </div>
+            <div class="flex mb-4 items-center">
+              <div class="w-1/3 items-center">
+                <div class="text-center btn-pickup-auto" data-phase="auto">Pickup Ball</div>
+              </div>
+              <div class="w-1/3 items-center">
+                <div class="text-center btn-high-goal-auto" data-phase="auto">High Goal</div>
+                <br>
+                <div class="text-center btn-low-goal-auto" data-phase="auto">Low Goal</div>
+                <br>
+                <div class="text-center btw-miss-ball-auto" data-phase="auto">Missed Ball</div>
+              </div>
+              <div class="w-1/3 items-center">
+                <div class="text-center btn-undo-auto" data-phase="auto">Undo Click</div>
+              </div>
+            </div>
           </div>
           <div id="tab-teleop" class="tab-container hidden">
             <div class="flex mb-4 items-center">
@@ -75,14 +102,14 @@ op<!DOCTYPE html>
                 <div class="text-center btn-pickup square-button-rb" data-phase="teleop">Pickup Ball</div>
               </div>
               <div class="w-1/3 items-center">
-                <div class="text-center btn-high-goal" data-phase="teleop">High Goal</div>
+                <div class="text-center btn-high-goal rect-button-rb" data-phase="teleop">High Goal</div>
                 <br>
-                <div class="text-center btn-low-goal" data-phase="teleop">Low Goal</div>
+                <div class="text-center btn-low-goal rect-button-rb" data-phase="teleop">Low Goal</div>
                 <br>
-                <div class="text-center btw-miss-ball" data-phase="teleop">Missed Ball</div>
+                <div class="text-center btw-miss-ball rect-button-rb" data-phase="teleop">Missed Ball</div>
               </div>
               <div class="w-1/3 items-center">
-                <div class="text-center btn-undo" data-phase="teleop">Undo Click</div>
+                <div class="text-center btn-undo square-button-rb" data-phase="teleop">Undo Click</div>
               </div>
             </div>
             <br><br>
@@ -100,9 +127,26 @@ op<!DOCTYPE html>
                 <div class="text-center" id="position-failed">Position Control Failed</div>
               </div>
             </div>
-          </div>
-          <div id="tab-endgame" class="tab-container hidden">
-            delet
+            <div id="tab-endgame" class="tab-container hidden">
+              <div><h1></h1></div>
+              <br><br>
+              <div class="flex mb-4 items-justify">
+                <div class="w-1/2">
+                  <div class="text-center" id="rotation-successful">Successfully Climbed</div>
+                </div>
+                <div class="w-1/2">
+                  <div class="text-center" id="rotation-failed">Climbed and Fell</div>
+                </div>
+              </div>
+              <div class="flex mb-4 items-justify">
+                <div class="w-1/2">
+                  <div class="text-center" id="position-successful">Climbed with Auto-balance</div>
+                </div>
+                <div class="w-1/2">
+                  <div class="text-center" id="position-failed">Successfully Parked</div>
+                </div> 
+              </div>
+            </div>
           </div>
         </div>
       </div>

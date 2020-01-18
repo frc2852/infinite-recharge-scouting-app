@@ -3,10 +3,20 @@ import $ from 'jquery';          // uses $ as a variable for jquery (this file i
 
 $(document).ready(function(){    // forces jquery to wait until the site is ready
 
+      let rawRotationSuccessStatus = 0;
+      let rawRotationFailureStatus = 0;
+      let rawPositionSuccessStatus = 0;
+      let rawPositionFailureStatus = 0;
+      let RotationSuccessStatus = rawRotationSuccessStatus % 2;
+      let RotationFailureStatus = rawRotationFailureStatus % 2;
+      let PositionSuccessStatus = rawPositionSuccessStatus % 2;
+      let PositionFailureStatus = rawPositionFailureStatus % 2;
+
       const robot = {
             matchStartTime: 0,
+            hasAuto: 0,
             balls: {
-                  preload: 0
+                  current: 0
             },
             points: {
                   high: 0,
@@ -15,15 +25,20 @@ $(document).ready(function(){    // forces jquery to wait until the site is read
             },
             wheel: {
                   rotation: {
-                        success: 0,
-                        fail: 0
+                        success: RotationSuccessStatus,
+                        fail: RotationFailureStatus
                   },
                   position: {
-                        success: 0,
-                        fail: 0
+                        success: PositionSuccessStatus,
+                        fail: PositionFailureStatus
                   }
             }
       }
+      
+      $("#ball-count-display").text(robot.balls.current);
+      $("#high-ball-display").text(robot.points.high);
+      $("#low-ball-display").text(robot.points.low);
+      $("#miss-display").text(robot.points.miss);
 
       function robotStatus(robot){
             console.log(robot);
@@ -39,37 +54,23 @@ $(document).ready(function(){    // forces jquery to wait until the site is read
             console.log('Match Start Triggered at ', robot.matchStartTime);
             $('#matchTriggerAuto').trigger('click');
             $('.phase-tab').removeClass('hidden');
+            $('.hud').removeClass('hidden');
       })
 
       $('.auto-choice').click(function(){
             const $autoChosen = $(this);
-            const $choiceId = $autoChosen.data('id');
+            const activeColour = $autoChosen.data('active-colour');
 
-            $('.auto-choice').removeClass('.hovered');
-            $('#' + $choiceId).addClass('.hovered');
+            $('.auto-choice').removeClass('active-red');
+            $('.auto-choice').removeClass('active-green');
+            $autoChosen.addClass(activeColour);
 
-            console.log('Hovered ' + $choiceId + '.');
+            console.log('Selected ' + $autoChosen + '.');
       })
 
       /*$('.pregame').click(function(){
             $('.phase-tab').addClass('hidden');
       })  */
-
-
-      $('.btn-high-goal').click(function(){
-            robot.points.high++;
-            robotStatus(robot);
-      })
-
-      $('.btn-low-goal').click(function(){
-            robot.points.low++;
-            robotStatus(robot);
-      })
-
-      $('.btn.miss.ball').click(function(){
-            robot.points.miss++;
-            robotStatus(robot);
-      })
 
       $('.phase-tab').click(function(){
             const $tab = $(this);
@@ -83,31 +84,70 @@ $(document).ready(function(){    // forces jquery to wait until the site is read
             $('#' + tabId).removeClass('hidden');
       })
 
-      /*$('.btn-preload').click(function(){
+      $('.btn-pickup').click(function(){
+            robot.balls.current++;
+            updateDisplay();
+      })
+
+      $('.btn-high-goal').click(function(){
+            robot.points.high++;
+            robot.balls.current--;
+            updateDisplay();
+      })
+
+      $('.btn-low-goal').click(function(){
+            robot.points.low++;
+            robot.balls.current--;
+            updateDisplay();
+      })
+
+      $('.btn-miss').click(function(){
+            robot.points.miss++;
+            robot.balls.current--;
+            updateDisplay();
+      })
+
+      function updateDisplay(){
+            if (robot.balls.current < 0){
+                  robot.balls.current = 0;
+            }
+            if (robot.balls.current > 5){
+                  $('#ball-count-display').addClass('.alert-red');
+            }
+            if (robot.balls.current < 5){
+                  $('#ball-count-display').removeClass('.alert-red');
+            }            
+            $("#ball-count-display").text(robot.balls.current);
+            $("#high-ball-display").text(robot.points.high);
+            $("#low-ball-display").text(robot.points.low);
+            $("#miss-display").text(robot.points.miss);
+            return null;
+      }
+
+      $('.btn-preload').click(function(){
             const $preload = $(this);
 
             $('.btn-preload').removeClass('preload-button-rb-active');
-            $preload.addClass('preload-button-rb-active')
-            
+            $preload.addClass('preload-button-rb-active');
       })
 
       $('#rotation-successful').click(function(){
-            robot.wheel.rotation.success++;
-            robotStatus(robot)
+            rotationSuccessStatus++;
+            robotStatus(robot);
       })
 
       $('#rotation-failed').click(function(){
-            robot.wheel.rotation.fail++;
-            robotStatus(robot)
+            rotationFailureStatus++;
+            robotStatus(robot);
       })
 
       $('#position-successful').click(function(){
-            robot.wheel.position.success++;
-            robotStatus(robot)
+            positionSuccessStatus++;
+            robotStatus(robot);
       })
 
       $('#position-failed').click(function(){
-            robot.wheel.position.fail++;
-            robotStatus(robot)
-      })*/
+            positionFailureStatus++;
+            robotStatus(robot);
+      })
 });

@@ -10,16 +10,16 @@ op<!DOCTYPE html>
   <body>
     <div class="container">
       <div class="flex absolute inset-0">
-        <div class="w-1/4 bg-blue-700">
+        <div class="w-1/3 bg-blue-700">
           placeholder - top of team pane
-          <br><br>
-          <h1 class="text-center">team name (header)</h1>
-          <br><br>
+          <br><br><br>
+          <div class="text-center text-5xl">2852</div>
+          <br>
           <div>
             <a href="https://www.instagram.com/jeffwu05/"></a><img src="images/joof.jpg">
           </div>
         </div>
-        <div class="w-3/4">
+        <div class="w-2/3">
           <ul class="flex">           <!--tabs-->
             <li class="flex-2 mr-1">
               <a class="phase-tab hidden pregame" data-tab-id="tab-pregame" href="#">Back to Pre-game</a>
@@ -34,34 +34,20 @@ op<!DOCTYPE html>
               <a class="phase-tab hidden" data-tab-id="tab-endgame" href="#">Endgame</a>
             </li>
           </ul>
-          <br>
-          <div id="tab-pregame" class="tab-container">
-
-            <!-- <div>
-              <h1>Preload Balls</h1>
-              <br>
+          <div class="hud hidden">
+            <hr>
+            <div class="text-1.5xl">
+              <div class="flex mb=4 text-center margin-auto">
+                <div class="w-1/4">Ball Count: <div id="ball-count-display"></div></div>
+                <div class="w-1/4">High Goals: <div id="high-ball-display"></div></div>
+                <div class="w-1/4">Low Goals: <div id="low-ball-display"></div></div>
+                <div class="w-1/4">Misses: <div id="miss-display"></div></div>
+             </div>
             </div>
-            <div class="flex mb-4 items-center">
-              <div class="w-1/3 text-center">
-                <div class="text-center btn-preload preload-button-rb">1</div>
-              </div>
-              <div class="w-1/3 text-center">
-                <div class="text-center btn-preload preload-button-rb">2</div>
-              </div>
-              <div class="w-1/3 text-center">
-                <div class="text-center btn-preload preload-button-rb">3</div>
-              </div>
-            </div>
+            <hr>
             <br>
-            <div class="flex mb-4 text-center">
-              <div class="w-1/2 items-center">
-                <div class="text-center btn-preload preload-button-rb">0</div>
-              </div>
-              <div class="w-1/2 text-center">
-                <div class="text-center btn-preload preload-button-rb">Unknown</div>
-              </div>
-            </div>
-            <br> -->
+          </div>
+          <div id="tab-pregame" class="tab-container">
             <div class="items-center">
               <div class="start-button items-center" id="start" data-phase="pre">Start</div>
             </div>
@@ -74,25 +60,25 @@ op<!DOCTYPE html>
                 </div>
               </div>
               <div class="w-1/3 items-center">
-                <div class="text-center auto-choice auto-yes" id="auto-yes" data-phase="auto">YES</div>
+                <div class="text-center auto-choice auto-yes" id="auto-yes" data-active-colour="active-green">YES</div>
               </div>
               <div class="w-1/3 items-center">
-                <div class="text-center auto-choice auto-no" id="auto-no" data-phase="auto">NO</div>
+                <div class="text-center auto-choice auto-no" id="auto-no" data-active-colour="active-red">NO</div>
               </div>
             </div>
             <div class="flex mb-4 items-center">
               <div class="w-1/3 items-center">
-                <div class="text-center btn-pickup-auto" data-phase="auto">Pickup Ball</div>
+                <div class="text-center btn-pickup square-button-rb" data-phase="auto">Pickup Ball</div>
               </div>
               <div class="w-1/3 items-center">
-                <div class="text-center btn-high-goal-auto" data-phase="auto">High Goal</div>
+                <div class="text-center btn-high-goal rect-button-rb" data-phase="auto">High Goal</div>
                 <br>
-                <div class="text-center btn-low-goal-auto" data-phase="auto">Low Goal</div>
+                <div class="text-center btn-low-goal rect-button-rb" data-phase="auto">Low Goal</div>
                 <br>
-                <div class="text-center btw-miss-ball-auto" data-phase="auto">Missed Ball</div>
+                <div class="text-center btn-miss rect-button-rb" data-phase="auto">Missed Ball</div>
               </div>
               <div class="w-1/3 items-center">
-                <div class="text-center btn-undo-auto" data-phase="auto">Undo Click</div>
+                <div class="text-center btn-undo square-button-rb" data-phase="auto">Undo Click</div>
               </div>
             </div>
           </div>
@@ -106,7 +92,7 @@ op<!DOCTYPE html>
                 <br>
                 <div class="text-center btn-low-goal rect-button-rb" data-phase="teleop">Low Goal</div>
                 <br>
-                <div class="text-center btw-miss-ball rect-button-rb" data-phase="teleop">Missed Ball</div>
+                <div class="text-center btn-miss rect-button-rb" data-phase="teleop">Missed Ball</div>
               </div>
               <div class="w-1/3 items-center">
                 <div class="text-center btn-undo square-button-rb" data-phase="teleop">Undo Click</div>
@@ -115,37 +101,35 @@ op<!DOCTYPE html>
             <br><br>
             <div class="flex mb-4 items-center">
               <div class="w-1/4">
-                <div class="text-center" id="rotation-successful">Rotation Control Successful</div>
+                <div class="text-center square-button-rb" id="rotation-successful">Rotation Control Successful</div>
               </div>
               <div class="w-1/4">
-                <div class="text-center" id="rotation-failed">Rotation Control Failed</div>
+                <div class="text-center square-button-rb" id="rotation-failed">Rotation Control Failed</div>
               </div>
               <div class="w-1/4">
-                <div class="text-center" id="position-successful">Position Control Successful</div>
+                <div class="text-center square-button-rb" id="position-successful">Position Control Successful</div>
               </div>
               <div class="w-1/4">
-                <div class="text-center" id="position-failed">Position Control Failed</div>
+                <div class="text-center square-button-rb" id="position-failed">Position Control Failed</div>
               </div>
             </div>
-            <div id="tab-endgame" class="tab-container hidden">
-              <div><h1></h1></div>
-              <br><br>
-              <div class="flex mb-4 items-justify">
-                <div class="w-1/2">
-                  <div class="text-center" id="rotation-successful">Successfully Climbed</div>
-                </div>
-                <div class="w-1/2">
-                  <div class="text-center" id="rotation-failed">Climbed and Fell</div>
-                </div>
+          </div>
+          <div id="tab-endgame" class="tab-container hidden">
+            <div class="flex mb-4 items-justify">
+              <div class="w-1/2">
+                <div class="text-center square-button-rb" id="climb-successful">Successfully Climbed</div>
               </div>
-              <div class="flex mb-4 items-justify">
-                <div class="w-1/2">
-                  <div class="text-center" id="position-successful">Climbed with Auto-balance</div>
-                </div>
-                <div class="w-1/2">
-                  <div class="text-center" id="position-failed">Successfully Parked</div>
-                </div> 
+              <div class="w-1/2">
+                <div class="text-center square-button-rb" id="climb-fall">Climbed and Fell</div>
               </div>
+            </div>
+            <div class="flex mb-4 items-justify">
+              <div class="w-1/2">
+                <div class="text-center square-button-rb" id="climb-autobalance">Climbed with Auto-balance</div>
+              </div>
+              <div class="w-1/2">
+                <div class="text-center square-button-rb" id="park-successful">Successfully Parked</div>
+              </div> 
             </div>
           </div>
         </div>

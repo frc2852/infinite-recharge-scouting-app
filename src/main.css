@@ -47,10 +47,11 @@
       margin: none;
       @apply bg-green-200;
       @apply p-12;
+      @apply rounded;
 }
 
 .auto-yes:hover {
-      @apply bg-green-400;
+      @apply bg-green-600;
 }
 
 .auto-no {
@@ -58,22 +59,33 @@
       margin: none;
       @apply bg-red-200;
       @apply p-12;
+      @apply rounded;
 }
 
 .auto-no:hover {
-      @apply bg-red-400;
+      @apply bg-red-500;
 }
 
-.auto-active {
+.active-red {
       display: inline-block;
       margin: none;
-      @apply bg-blue-500;
+      @apply bg-red-500;
       @apply p-12;
       border: 4px;
+      @apply rounded;
+}
+
+.active-green {
+      display: inline-block;
+      margin: none;
+      @apply bg-green-500;
+      @apply p-12;
+      border: 4px;
+      @apply rounded;
 }
 
 .auto-active:hover {
-      @apply bg-blue-600;
+      @apply bg-blue-500;
 }
 
 .preload-button-rb {
@@ -111,4 +123,7 @@ img {
       font-size: 96px;
       margin: 50px 200px;
 }
-    
+
+.alert {
+      @apply bg-red-200;
+}

@@ -1,4 +1,4 @@
-op<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -54,15 +54,15 @@ op<!DOCTYPE html>
           </div>
           <div id="tab-auto" class="tab-container hidden">
             <div class="flex mb-4 items-center">
-              <div class="w-1/4 items-center">
+              <div class="w-2/4 items-center">
                 <div>
                   <h1>Does the robot have an autonomous phase?</h1>
                 </div>
               </div>
-              <div class="w-1/3 items-center">
+              <div class="w-1/4 items-center">
                 <div class="text-center auto-choice auto-yes" id="auto-yes" data-active-colour="active-green">YES</div>
               </div>
-              <div class="w-1/3 items-center">
+              <div class="w-1/4 items-center">
                 <div class="text-center auto-choice auto-no" id="auto-no" data-active-colour="active-red">NO</div>
               </div>
             </div>
@@ -100,35 +100,37 @@ op<!DOCTYPE html>
             </div>
             <br><br>
             <div class="flex mb-4 items-center">
-              <div class="w-1/4">
-                <div class="text-center square-button-rb" id="rotation-successful">Rotation Control Successful</div>
+              <div class="w-1/2">
+                <div class="text-center square-button-rb rotation-toggle" id="rotation-successful">Rotation Control Successful</div>
               </div>
-              <div class="w-1/4">
-                <div class="text-center square-button-rb" id="rotation-failed">Rotation Control Failed</div>
-              </div>
-              <div class="w-1/4">
-                <div class="text-center square-button-rb" id="position-successful">Position Control Successful</div>
-              </div>
-              <div class="w-1/4">
-                <div class="text-center square-button-rb" id="position-failed">Position Control Failed</div>
+              <div class="w-1/2">
+                <div class="text-center square-button-rb position-toggle" id="position-successful">Position Control Successful</div>
+              </div> 
+            </div>
+            <div class="flex mb-4 items-center">
+              <div class="w-1/2">
+              <div class="text-center square-button-rb rotation-toggle" id="rotation-failed">Rotation Control Failed</div>
+            </div>
+              <div class="w-1/2">
+                <div class="text-center square-button-rb position-toggle" id="position-failed">Position Control Failed</div>
               </div>
             </div>
           </div>
           <div id="tab-endgame" class="tab-container hidden">
             <div class="flex mb-4 items-justify">
               <div class="w-1/2">
-                <div class="text-center square-button-rb" id="climb-successful">Successfully Climbed</div>
+                <div class="text-center square-button-rb endgame-toggle" id="climb-successful">Successfully Climbed</div>
               </div>
               <div class="w-1/2">
-                <div class="text-center square-button-rb" id="climb-fall">Climbed and Fell</div>
+                <div class="text-center square-button-rb endgame-toggle" id="climb-fall">Climbed and Fell</div>
               </div>
             </div>
             <div class="flex mb-4 items-justify">
               <div class="w-1/2">
-                <div class="text-center square-button-rb" id="climb-autobalance">Climbed with Auto-balance</div>
+                <div class="text-center square-button-rb endgame-toggle" id="climb-autobalance">Climbed with Auto-balance</div>
               </div>
               <div class="w-1/2">
-                <div class="text-center square-button-rb" id="park-successful">Successfully Parked</div>
+                <div class="text-center square-button-rb endgame-toggle" id="park-successful">Successfully Parked</div>
               </div> 
             </div>
           </div>

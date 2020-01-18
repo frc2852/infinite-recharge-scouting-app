@@ -29,10 +29,19 @@
 }
 
 .square-button-rb {
+      @apply border;
+      @apply border-transparent;
       display: inline-block;
       margin: auto;
       @apply bg-gray-300;
       @apply p-12;
+}
+
+.button-active {
+      @apply border;
+      @apply border-black;
+      @apply bg-gray-500;
+      @apply text-black;
 }
 
 .rect-button-rb {
@@ -45,7 +54,7 @@
 .auto-yes {
       display: inline-block;
       margin: none;
-      @apply bg-green-200;
+      @apply bg-gray-200;
       @apply p-12;
       @apply rounded;
 }
@@ -57,7 +66,7 @@
 .auto-no {
       display: inline-block;
       margin: none;
-      @apply bg-red-200;
+      @apply bg-gray-200;
       @apply p-12;
       @apply rounded;
 }

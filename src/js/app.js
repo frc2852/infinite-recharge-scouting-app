@@ -7,10 +7,19 @@ $(document).ready(function(){    // forces jquery to wait until the site is read
       let rawRotationFailureStatus = 0;
       let rawPositionSuccessStatus = 0;
       let rawPositionFailureStatus = 0;
-      let RotationSuccessStatus = rawRotationSuccessStatus % 2;
-      let RotationFailureStatus = rawRotationFailureStatus % 2;
-      let PositionSuccessStatus = rawPositionSuccessStatus % 2;
-      let PositionFailureStatus = rawPositionFailureStatus % 2;
+      let rotationSuccessStatus = rawRotationSuccessStatus % 2;
+      let rotationFailureStatus = rawRotationFailureStatus % 2;
+      let positionSuccessStatus = rawPositionSuccessStatus % 2;
+      let positionFailureStatus = rawPositionFailureStatus % 2;
+
+      let rawClimbStatus = 0;
+      let rawFallStatus = 0;
+      let rawAutoBalanceStatus = 0;
+      let rawParkStatus = 0;
+      let climbStatus = rawClimbStatus % 2;
+      let fallStatus = rawFallStatus % 2;
+      let autoBalanceStatus = rawAutoBalanceStatus % 2;
+      let parkStatus = rawParkStatus % 2;
 
       const robot = {
             matchStartTime: 0,
@@ -25,14 +34,20 @@ $(document).ready(function(){    // forces jquery to wait until the site is read
             },
             wheel: {
                   rotation: {
-                        success: RotationSuccessStatus,
-                        fail: RotationFailureStatus
+                        success: rotationSuccessStatus,
+                        fail: rotationFailureStatus
                   },
                   position: {
-                        success: PositionSuccessStatus,
-                        fail: PositionFailureStatus
+                        success: positionSuccessStatus,
+                        fail: positionFailureStatus
                   }
-            }
+            },
+            climb: {
+                  success: climbStatus,
+                  fall: fallStatus,
+                  autobalance: autoBalanceStatus,
+                  park: parkStatus
+            },
       }
       
       $("#ball-count-display").text(robot.balls.current);
@@ -43,11 +58,6 @@ $(document).ready(function(){    // forces jquery to wait until the site is read
       function robotStatus(robot){
             console.log(robot);
       }
-
-
-      $('#rotation-successful').click(function(){
-            alert('hello button');
-      })
 
       $('.start-button').click(function(){          /*MATCH START*/
             robot.matchStartTime = Date.now();
@@ -131,23 +141,71 @@ $(document).ready(function(){    // forces jquery to wait until the site is read
             $preload.addClass('preload-button-rb-active');
       })
 
+      /* Pizza Time Logic */
+
       $('#rotation-successful').click(function(){
-            rotationSuccessStatus++;
+            rawRotationSuccessStatus++;
             robotStatus(robot);
       })
 
       $('#rotation-failed').click(function(){
-            rotationFailureStatus++;
+            rawRotationFailureStatus++;
             robotStatus(robot);
       })
 
       $('#position-successful').click(function(){
-            positionSuccessStatus++;
+            rawPositionSuccessStatus++;
             robotStatus(robot);
       })
 
       $('#position-failed').click(function(){
-            positionFailureStatus++;
+            rawPositionFailureStatus++;
             robotStatus(robot);
       })
-});
+      
+      /* Monkey Bar Logic */
+
+      $('#climb-successful').click(function(){
+            rawClimbStatus++;
+            robotStatus(robot);
+      })
+
+      $('#climb-fall').click(function(){
+            rawFallStatus++;
+            robotStatus(robot);
+      })
+
+      $('#climb-autobalance').click(function(){
+            rawAutoBalanceStatus++;
+            robotStatus(robot);
+      })
+
+      $('#park-successful').click(function(){
+            rawParkStatus++;
+            robotStatus(robot);
+      })
+
+      /* Toggle Logic */
+
+      $('.rotation-toggle').click(function(){
+            const $rotationState = $(this);
+
+            $('.rotation-toggle').removeClass('button-active');
+            $rotationState.addClass('button-active');
+      })      
+      
+      $('.position-toggle').click(function(){
+            const $positionState = $(this);
+
+            $('.position-toggle').removeClass('button-active');
+            $positionState.addClass('button-active');
+      })      
+      
+      $('.endgame-toggle').click(function(){
+            const $endgameState = $(this);
+
+            $('.endgame-toggle').removeClass('button-active');
+            $endgameState.addClass('button-active');
+      })
+
+})

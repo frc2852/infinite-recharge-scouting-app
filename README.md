@@ -26,12 +26,13 @@ Host github.com
 
 2. Add your private key in the .ssh folder and name it `github`
 
-3. Run the following command `bash deploy.sh`
-
-4. You should see your changes on https://frc2852.github.io/infinite-recharge-scouting-app/
+3. Run the following command
 ```
 bash deploy.sh
 ```
+
+4. You should see your changes on https://frc2852.github.io/infinite-recharge-scouting-app/
+
 
 ## LICENSE
 

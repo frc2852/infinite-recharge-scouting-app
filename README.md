@@ -24,7 +24,7 @@ Host github.com
     IdentityFile ~/.ssh/github
 ```
 
-2. Add your private key in the .ssh fodler and name it `github`
+2. Add your private key in the .ssh folder and name it `github`
 
 3. Run the following command `bash deploy.sh`
 

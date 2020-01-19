@@ -2,13 +2,36 @@
 
 This project will be use for students to scout robots at FRC complitions
 
-## Setting up project
+## Dev server setup
 
 1. Install libraries 
 ```npm install```
 
 2. Start Server
 ```npm run dev-server```
+
+3. Then in your browser to go http://localhost:8080
+
+## Deploying to github pages
+
+**This meathod requires your git repo to be setup with ssh git clone/remote**
+
+1. Add `.ssh/config` to the project with the following
+
+```
+Host github.com
+    User git
+    IdentityFile ~/.ssh/github
+```
+
+2. Add your private key in the .ssh and name it `github`
+
+3. Run the following command
+
+4. You should see your changes on https://frc2852.github.io/infinite-recharge-scouting-app/
+```
+bash deploy.sh
+```
 
 ## LICENSE
 

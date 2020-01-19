@@ -21,7 +21,7 @@ $(document).ready(function() {
             current: 0,
         },
         points: {
-            high: 0,
+            high: -10,
             low: 0,
             miss: 0,
         },
@@ -121,10 +121,35 @@ $(document).ready(function() {
             robot.balls.current = 0;
         }
         if (robot.balls.current > 5) {
-            $('#ball-count-display').addClass('.alert-red');
+            $('#ball-count-display').addClass('alert');
         }
         if (robot.balls.current < 5) {
-            $('#ball-count-display').removeClass('.alert-red');
+            $('#ball-count-display').removeClass('alert');
+        }
+        if (robot.points.high < 0) {
+            $('#high-ball-display').addClass('alert');
+        }
+        if (robot.points.high > -1) {
+            $('#high-ball-display').removeClass('alert');
+        }
+        if (robot.points.low < 0) {
+            $('#low-ball-display').addClass('alert');
+        }
+        if (robot.points.low > -1) {
+            $('#low-ball-display').removeClass('alert');
+        }
+        if (robot.points.miss < 0) {
+            $('#miss-display').addClass('alert');
+        }
+        if (robot.points.miss > -1) {
+            $('#miss-display').removeClass('alert');
+        }
+        if ((robot.events.length = 0)) {
+            robot.balls.current = 0;
+            robot.points.high = 0;
+            robot.points.low = 0;
+            robot.points.miss = 0;
+            console.log('Reset.');
         }
         $('#ball-count-display').text(robot.balls.current);
         $('#high-ball-display').text(robot.points.high);
@@ -189,8 +214,8 @@ $(document).ready(function() {
         return false;
     }
 
-    function removeCount(event) {
-        switch (event.eventType) {
+    function removeCount(events) {
+        switch (events.eventType) {
             case 'pickup':
                 robot.balls.current--;
                 break;
@@ -224,14 +249,14 @@ $(document).ready(function() {
     });
 
     $('#position-successful').click(function() {
-        rositionSuccessStatus = 1;
-        rositionFailureStatus = 0;
+        positionSuccessStatus = 1;
+        positionFailureStatus = 0;
         robotStatus(robot);
     });
 
     $('#position-failed').click(function() {
-        rositionFailureStatus = 1;
-        rositionSuccessStatus = 0;
+        positionFailureStatus = 1;
+        positionSuccessStatus = 0;
         robotStatus(robot);
     });
 
@@ -246,26 +271,26 @@ $(document).ready(function() {
     });
 
     $('#climb-fall').click(function() {
-        fallStatus = 1;
         climbStatus = 0;
+        fallStatus = 1;
         autoBalanceStatus = 0;
         parkStatus = 0;
         robotStatus(robot);
     });
 
     $('#climb-autobalance').click(function() {
-        autoBalanceStatus = 1;
-        fallStatus = 0;
         climbStatus = 0;
+        fallStatus = 0;
+        autoBalanceStatus = 1;
         parkStatus = 0;
         robotStatus(robot);
     });
 
     $('#park-successful').click(function() {
-        parkStatus = 1;
+        climbStatus = 0;
         fallStatus = 0;
         autoBalanceStatus = 0;
-        climbStatus = 0;
+        parkStatus = 1;
         robotStatus(robot);
     });
 

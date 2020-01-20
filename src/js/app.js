@@ -49,14 +49,12 @@ $(document).ready(function() {
     $('#low-ball-display').text(robot.points.low);
     $('#miss-display').text(robot.points.miss);
 
-    function robotStatus(robot) {
-        console.log(robot);
-    }
+    function robotStatus(robot) {}
 
     $('.start-button').click(function() {
         /*MATCH START*/
         robot.matchStartTime = Date.now();
-        console.log('Match Start Triggered at ', robot.matchStartTime);
+
         $('#matchTriggerAuto').trigger('click');
         $('.phase-tab').removeClass('hidden');
         $('.hud').removeClass('hidden');
@@ -73,8 +71,6 @@ $(document).ready(function() {
         $('.auto-choice').removeClass('active-red');
         $('.auto-choice').removeClass('active-green');
         $autoChosen.addClass(activeColour);
-
-        console.log('Selected ' + $autoChosen + '.');
     });
 
     /*$('.pregame').click(function(){
@@ -165,34 +161,31 @@ $(document).ready(function() {
             eventType: $btnEvent.data('event-type'),
             eventPhase: $btnEvent.data('event-phase'),
         });
-        console.log(robot);
     });
 
     /* Undo Logic */
 
     $('.undo').click(function() {
-        console.log('all points before', robot.points);
         if (robot.events.length > 0) {
             const $btnEvent = $(this);
             const eventPhase = $btnEvent.data('event-phase');
-            const lastEventIndex = robot.events.reduce(function(lastEventIndex, currentEvent, index) {
-                console.log(currentEvent === lastEventIndex);
-                lastEventIndex = currentEvent === lastEventIndex ? undefined : lastEventIndex;
-                if (isEventValid(currentEvent, eventPhase)) {
-                    return index;
+
+            let lastEventIndex = undefined;
+            robot.events.forEach(function(event, index) {
+                if (isEventValid(event, eventPhase)) {
+                    lastEventIndex = index;
                 }
-                return lastEventIndex;
             });
+
             if (lastEventIndex != undefined) {
-                console.log(lastEventIndex);
                 const event = robot.events[lastEventIndex];
                 robot.events.splice(lastEventIndex, 1);
-                console.log('remove count event', event);
+
                 removeCount(event);
             }
         }
+
         updateDisplay();
-        console.log('all points after', robot.balls);
     });
 
     function isEventValid(currentEvent, eventPhase) {

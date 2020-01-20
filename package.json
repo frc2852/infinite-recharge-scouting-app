@@ -6,7 +6,7 @@
     "scripts": {
         "build": "node_modules/.bin/webpack",
         "deploy": "node_modules/.bin/gh-pages -d dist",
-        "dev-server": "node_modules/.bin/webpack-dev-server --host 0.0.0.0 --watch"
+        "dev-server": "node_modules/.bin/webpack-dev-server --host 0.0.0.0 --watch --https"
     },
     "author": "",
     "license": "ISC",

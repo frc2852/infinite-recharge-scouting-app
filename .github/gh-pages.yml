@@ -1,0 +1,19 @@
+name: Deploy script for github pages
+
+on: 
+  push:
+    branches: 
+      - master
+
+jobs:
+  push:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Install Dependencies
+      run: npm install
+    - name: Build for production
+      run: npm build
+    - name: Push to gh-pages branch
+      run: npm deploy

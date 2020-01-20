@@ -21,7 +21,7 @@ $(document).ready(function() {
             current: 0,
         },
         points: {
-            high: -10,
+            high: 0,
             low: 0,
             miss: 0,
         },
@@ -144,13 +144,7 @@ $(document).ready(function() {
         if (robot.points.miss > -1) {
             $('#miss-display').removeClass('alert');
         }
-        if ((robot.events.length = 0)) {
-            robot.balls.current = 0;
-            robot.points.high = 0;
-            robot.points.low = 0;
-            robot.points.miss = 0;
-            console.log('Reset.');
-        }
+
         $('#ball-count-display').text(robot.balls.current);
         $('#high-ball-display').text(robot.points.high);
         $('#low-ball-display').text(robot.points.low);

@@ -114,13 +114,28 @@ $(document).ready(function() {
 
     function updateDisplay() {
         if (robot.balls.current < 0) {
-            robot.balls.current = 0;
+            $('#ball-count-display').addClass('alert');
+        }
+        if (robot.balls.current == 0) {
+            $('#ball-count-display').removeClass('alert');
+        }
+        if (robot.balls.current == 1) {
+            $('#ball-count-display').removeClass('alert');
+        }
+        if (robot.balls.current == 2) {
+            $('#ball-count-display').removeClass('alert');
+        }
+        if (robot.balls.current == 3) {
+            $('#ball-count-display').removeClass('alert');
+        }
+        if (robot.balls.current == 4) {
+            $('#ball-count-display').removeClass('alert');
+        }
+        if (robot.balls.current == 5) {
+            $('#ball-count-display').removeClass('alert');
         }
         if (robot.balls.current > 5) {
             $('#ball-count-display').addClass('alert');
-        }
-        if (robot.balls.current < 5) {
-            $('#ball-count-display').removeClass('alert');
         }
         if (robot.points.high < 0) {
             $('#high-ball-display').addClass('alert');

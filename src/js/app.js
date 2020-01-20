@@ -21,7 +21,7 @@ $(document).ready(function() {
             current: 0,
         },
         points: {
-            high: -10,
+            high: 0,
             low: 0,
             miss: 0,
         },

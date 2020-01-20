@@ -60,7 +60,7 @@
 }
 
 .auto-yes:hover {
-    @apply bg-green-600;
+    @apply bg-green-300;
 }
 
 .auto-no {
@@ -72,7 +72,7 @@
 }
 
 .auto-no:hover {
-    @apply bg-red-500;
+    @apply bg-red-300;
 }
 
 .active-red {

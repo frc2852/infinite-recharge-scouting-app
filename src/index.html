@@ -1,145 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="shortcut icon" type="image/jpg" href="images/joof.jpg"/>
-    <title>2852 Scouting App</title>
-  </head>
-  <body>
-    <div class="container">
-      <div class="flex absolute inset-0">
-        <div class="w-1/3 bg-blue-700">
-          placeholder - top of team pane
-          <br><br><br>
-          <div class="text-center text-5xl">2852</div>
-          <br>
-          <div>
-            <a href="https://www.instagram.com/jeffwu05/"></a><img src="images/joof.jpg">
-          </div>
-        </div>
-        <div class="w-2/3">
-          <ul class="flex">           <!--tabs-->
-            <li class="flex-2 mr-1">
-              <a class="phase-tab hidden pregame" data-tab-id="tab-pregame" href="#">Back to Pre-game</a>
-            </li>
-            <li class="flex-1 mr-1">
-              <a class="phase-tab hidden" data-tab-id="tab-auto" id="matchTriggerAuto" href="#">Autonomous</a>
-            </li>
-            <li class="flex-1 mr-1">
-              <a class="phase-tab hidden" data-tab-id="tab-teleop" href="#">Teleoperated</a>
-            </li> 
-            <li class="flex-1 mr-1">
-              <a class="phase-tab hidden" data-tab-id="tab-endgame" href="#">Endgame</a>
-            </li>
-          </ul>
-          <div class="hud hidden">
-            <hr>
-            <br>
-            <div>
-              <div class="flex mb=4 text-center">
-                <div class="w-1/4">Ball Count: <div id="ball-count-display"></div></div>
-                <div class="w-1/4">High Goals: <div id="high-ball-display"></div></div>
-                <div class="w-1/4">Low Goals: <div id="low-ball-display"></div></div>
-                <div class="w-1/4">Misses: <div id="miss-display"></div></div>
-             </div>
-            </div>
-            <br>
-            <hr>
-            <br>
-          </div>
-          <div id="tab-pregame" class="tab-container">
-            <div class="items-center">
-              <div class="start-button items-center" id="start" data-event-phase="pre">Start</div>
-            </div>
-          </div>
-          <div id="tab-auto" class="tab-container hidden">
-            <div class="flex mb-4 items-center">
-              <div class="w-2/4 items-center">
-                <div>
-                  <h1>Does the robot have an autonomous phase?</h1>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link rel="shortcut icon" type="image/jpg" href="images/joof.jpg" />
+        <title>2852 Scouting App</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="flex absolute inset-0">
+                <div class="w-1/3 bg-blue-700">
+                    placeholder - top of team pane
+                    <br /><br /><br />
+                    <div class="text-center text-5xl">2852</div>
+                    <br />
+                    <div>
+                        <img src="images/chezy.png" />
+                    </div>
                 </div>
-              </div>
-              <div class="w-1/4 items-center">
-                <div class="text-center auto-choice auto-yes" id="auto-yes" data-active-colour="active-green">YES</div>
-              </div>
-              <div class="w-1/4 items-center">
-                <div class="text-center auto-choice auto-no" id="auto-no" data-active-colour="active-red">NO</div>
-              </div>
-              <hr>
+                <div class="w-2/3">
+                    <ul class="flex">
+                        <!--tabs-->
+                        <li class="flex-2 mr-1">
+                            <a class="phase-tab hidden pregame" data-tab-id="tab-pregame" href="#">Back to Pre-game</a>
+                        </li>
+                        <li class="flex-1 mr-1">
+                            <a class="phase-tab hidden" data-tab-id="tab-auto" id="matchTriggerAuto" href="#"
+                                >Autonomous</a
+                            >
+                        </li>
+                        <li class="flex-1 mr-1">
+                            <a class="phase-tab hidden" data-tab-id="tab-teleop" href="#">Teleoperated</a>
+                        </li>
+                        <li class="flex-1 mr-1">
+                            <a class="phase-tab hidden" data-tab-id="tab-endgame" href="#">Endgame</a>
+                        </li>
+                    </ul>
+                    <div class="hud hidden">
+                        <hr />
+                        <br />
+                        <div>
+                            <div class="flex mb=4 text-center">
+                                <div class="w-1/4">
+                                    Ball Count:
+                                    <div id="ball-count-display"></div>
+                                </div>
+                                <div class="w-1/4">
+                                    High Goals:
+                                    <div id="high-ball-display"></div>
+                                </div>
+                                <div class="w-1/4">
+                                    Low Goals:
+                                    <div id="low-ball-display"></div>
+                                </div>
+                                <div class="w-1/4">
+                                    Misses:
+                                    <div id="miss-display"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <hr />
+                        <br />
+                    </div>
+                    <div id="tab-pregame" class="tab-container">
+                        <div class="items-center">
+                            <div class="start-button items-center" id="start" data-event-phase="pre">Start</div>
+                        </div>
+                    </div>
+                    <div id="tab-auto" class="tab-container hidden">
+                        <div class="flex mb-4 items-center">
+                            <div class="w-2/4 items-center">
+                                <div>
+                                    <h1>Does the robot have an autonomous phase?</h1>
+                                </div>
+                            </div>
+                            <div class="w-1/4 items-center">
+                                <div
+                                    class="text-center auto-choice auto-yes"
+                                    id="auto-yes"
+                                    data-active-colour="active-green"
+                                >
+                                    YES
+                                </div>
+                            </div>
+                            <div class="w-1/4 items-center">
+                                <div
+                                    class="text-center auto-choice auto-no"
+                                    id="auto-no"
+                                    data-active-colour="active-red"
+                                >
+                                    NO
+                                </div>
+                            </div>
+                            <hr />
+                        </div>
+                        <div class="flex mb-4 items-center">
+                            <div class="w-1/3 items-center">
+                                <div
+                                    class="text-center btn-pickup square-button-rb button-event"
+                                    data-event-type="pickup"
+                                    data-event-phase="auto"
+                                >
+                                    Pickup Ball
+                                </div>
+                            </div>
+                            <div class="w-1/3 items-center">
+                                <div
+                                    class="text-center btn-high-goal rect-button-rb button-event"
+                                    data-event-type="high"
+                                    data-event-phase="auto"
+                                >
+                                    High Goal
+                                </div>
+                                <br />
+                                <div
+                                    class="text-center btn-low-goal rect-button-rb button-event"
+                                    data-event-type=""
+                                    data-event-phase="auto"
+                                >
+                                    Low Goal
+                                </div>
+                                <br />
+                                <div
+                                    class="text-center btn-miss rect-button-rb button-event"
+                                    data-event-type="miss"
+                                    data-event-phase="auto"
+                                >
+                                    Missed Ball
+                                </div>
+                            </div>
+                            <div class="w-1/3 items-center">
+                                <div class="text-center btn-undo square-button-rb undo">Undo Last Entry</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab-teleop" class="tab-container hidden">
+                        <div class="flex mb-4 items-center">
+                            <div class="w-1/3 items-center">
+                                <div
+                                    class="text-center btn-pickup square-button-rb button-event"
+                                    data-event-type="pickup"
+                                    data-event-phase="teleop"
+                                >
+                                    Pickup Ball
+                                </div>
+                            </div>
+                            <div class="w-1/3 items-center">
+                                <div
+                                    class="text-center btn-high-goal rect-button-rb button-event"
+                                    data-event-type="high"
+                                    data-event-phase="teleop"
+                                >
+                                    High Goal
+                                </div>
+                                <br />
+                                <div
+                                    class="text-center btn-low-goal rect-button-rb button-event"
+                                    data-event-type="low"
+                                    data-event-phase="teleop"
+                                >
+                                    Low Goal
+                                </div>
+                                <br />
+                                <div
+                                    class="text-center btn-miss rect-button-rb button-event"
+                                    data-event-type="miss"
+                                    data-event-phase="teleop"
+                                >
+                                    Missed Ball
+                                </div>
+                            </div>
+                            <div class="w-1/3 items-center">
+                                <div class="text-center btn-undo square-button-rb undo" data-event-phase="teleop">
+                                    Undo Last Entry
+                                </div>
+                            </div>
+                            <hr />
+                        </div>
+                        <br /><br />
+                        <div class="flex mb-4 items-center">
+                            <div class="w-1/2">
+                                <div
+                                    class="text-center square-button-rb rotation-toggle button-event"
+                                    id="rotation-successful"
+                                >
+                                    Rotation Control Successful
+                                </div>
+                            </div>
+                            <div class="w-1/2">
+                                <div
+                                    class="text-center square-button-rb position-toggle button-event"
+                                    id="position-successful"
+                                >
+                                    Position Control Successful
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex mb-4 items-center">
+                            <div class="w-1/2">
+                                <div
+                                    class="text-center square-button-rb rotation-toggle button-event"
+                                    id="rotation-failed"
+                                >
+                                    Rotation Control Failed
+                                </div>
+                            </div>
+                            <div class="w-1/2">
+                                <div
+                                    class="text-center square-button-rb position-toggle button-event"
+                                    id="position-failed"
+                                >
+                                    Position Control Failed
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab-endgame" class="tab-container hidden">
+                        <div class="flex mb-4 items-justify">
+                            <div class="w-1/2">
+                                <div
+                                    class="text-center square-button-rb endgame-toggle button-event"
+                                    id="climb-successful"
+                                >
+                                    Successfully Climbed
+                                </div>
+                            </div>
+                            <div class="w-1/2">
+                                <div class="text-center square-button-rb endgame-toggle button-event" id="climb-fall">
+                                    Climbed and Fell
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex mb-4 items-justify">
+                            <div class="w-1/2">
+                                <div
+                                    class="text-center square-button-rb endgame-toggle button-event"
+                                    id="climb-autobalance"
+                                >
+                                    Climbed with Auto-balance
+                                </div>
+                            </div>
+                            <div class="w-1/2">
+                                <div
+                                    class="text-center square-button-rb endgame-toggle button-event"
+                                    id="park-successful"
+                                >
+                                    Successfully Parked
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="flex mb-4 items-center">
-              <div class="w-1/3 items-center">
-                <div class="text-center btn-pickup square-button-rb button-event" data-event-type="pickup" data-event-phase="auto">Pickup Ball</div>
-              </div>
-              <div class="w-1/3 items-center">
-                <div class="text-center btn-high-goal rect-button-rb button-event" data-event-type="high" data-event-phase="auto">High Goal</div>
-                <br>
-                <div class="text-center btn-low-goal rect-button-rb button-event" data-event-type="" data-event-phase="auto">Low Goal</div>
-                <br>
-                <div class="text-center btn-miss rect-button-rb button-event" data-event-type="miss" data-event-phase="auto">Missed Ball</div>
-              </div>
-              <div class="w-1/3 items-center">
-                <div class="text-center btn-undo square-button-rb undo">Undo Last Entry</div>
-              </div>
-            </div>
-          </div>
-          <div id="tab-teleop" class="tab-container hidden">
-            <div class="flex mb-4 items-center">
-              <div class="w-1/3 items-center">
-                <div class="text-center btn-pickup square-button-rb button-event" data-event-type="pickup" data-event-phase="teleop">Pickup Ball</div>
-              </div>
-              <div class="w-1/3 items-center">
-                <div class="text-center btn-high-goal rect-button-rb button-event" data-event-type="high" data-event-phase="teleop">High Goal</div>
-                <br>
-                <div class="text-center btn-low-goal rect-button-rb button-event" data-event-type="low" data-event-phase="teleop">Low Goal</div>
-                <br>
-                <div class="text-center btn-miss rect-button-rb button-event" data-event-type="miss" data-event-phase="teleop">Missed Ball</div>
-              </div>
-              <div class="w-1/3 items-center">
-                <div class="text-center btn-undo square-button-rb undo" data-event-phase="teleop">Undo Last Entry</div>
-              </div>
-              <hr>
-            </div>
-            <br><br>
-            <div class="flex mb-4 items-center">
-              <div class="w-1/2">
-                <div class="text-center square-button-rb rotation-toggle button-event" id="rotation-successful">Rotation Control Successful</div>
-              </div>
-              <div class="w-1/2">
-                <div class="text-center square-button-rb position-toggle button-event" id="position-successful">Position Control Successful</div>
-              </div> 
-            </div>
-            <div class="flex mb-4 items-center">
-              <div class="w-1/2">
-              <div class="text-center square-button-rb rotation-toggle button-event" id="rotation-failed">Rotation Control Failed</div>
-            </div>
-              <div class="w-1/2">
-                <div class="text-center square-button-rb position-toggle button-event" id="position-failed">Position Control Failed</div>
-              </div>
-            </div>
-          </div>
-          <div id="tab-endgame" class="tab-container hidden">
-            <div class="flex mb-4 items-justify">
-              <div class="w-1/2">
-                <div class="text-center square-button-rb endgame-toggle button-event" id="climb-successful">Successfully Climbed</div>
-              </div>
-              <div class="w-1/2">
-                <div class="text-center square-button-rb endgame-toggle button-event" id="climb-fall">Climbed and Fell</div>
-              </div>
-            </div>
-            <div class="flex mb-4 items-justify">
-              <div class="w-1/2">
-                <div class="text-center square-button-rb endgame-toggle button-event" id="climb-autobalance">Climbed with Auto-balance</div>
-              </div>
-              <div class="w-1/2">
-                <div class="text-center square-button-rb endgame-toggle button-event" id="park-successful">Successfully Parked</div>
-              </div> 
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </body>
+    </body>
 </html>

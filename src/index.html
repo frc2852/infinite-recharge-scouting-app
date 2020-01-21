@@ -1,86 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="shortcut icon" type="image/jpg" href="images/2019bot.jpg" />
-    <title>
-      2852 Scouting App
-    </title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="shortcut icon" type="image/jpg" href="images/2019bot.jpg" />
+  <title>
+    2852 Scouting App
+  </title>
   </head>
   <body>
+  <div>
+    <ul class="flex fixed objects-top w-full items-center">
+    <div class="w-1/2">
+      <li class="flex-1 mr-2 text-center block border border-blue-500 rounded py-2 px-4 bg-blue-500 text-white">
+      Active Team Number
+      </li>
+    </div>
+    <div class="w-1/2 justify-between">
+      <li class="mr-3 submenu">
+      I
+      </li>
+      <li class="mr-3 submenu">
+      S
+      </li>
+      <li class="mr-3 submenu">
+      R
+      </li>
+      <li class="mr-3 submenu">
+      C
+      </li>
+    </div>
+    </ul>
+  </div>
+
+  <!--
+  <div class="main-tab" tab-id="information">
     <div>
-      <ul class="flex fixed objects-top w-full items-center">
-        <div class="w-1/2">
-          <li class="flex-1 mr-2 text-center block border border-blue-500 rounded py-2 px-4 bg-blue-500 text-white">
-            Active Team Number
-          </li>
-        </div>
-        <div class="w-1/2 justify-between">
-          <li class="mr-3 submenu">
-            I
-          </li>
-          <li class="mr-3 submenu">
-            S
-          </li>
-          <li class="mr-3 submenu">
-            R
-          </li>
-          <li class="mr-3 submenu">
-            C
-          </li>
-        </div>
-      </ul>
+    <br /><br />
+    <div class="text-xl">Information Tab</div>
     </div>
+  </div> -->
 
-    <!--
-    <div class="main-tab" tab-id="information">
-      <div>
-        <br /><br />
-        <div class="text-xl">Information Tab</div>
-      </div>
-    </div> -->
-
-    <div class="main-tab" tab-id="offense">
-      <div>
-        <br /><br />
-        <div class="text-xl">Offense Tab</div>
-      </div>
-    </div>
-
-    <!--
-    <div class="main-tab" tab-id="defense">
-      <div>
-        <br /><br />
-        <div class="text-xl">Defence Tab</div>
-      </div>
-    </div>
-
-    <div class="main-tab" tab-id="climbing">
-      <div>
-        <br /><br />
-        <div class="text-xl">Climbing Tab</div>
-      </div>
-    </div>
-    -->
-
+  <div class="main-tab" tab-id="offense">
     <div>
-      <ul class="flex fixed w-full object-bottom bottom-0 objects-center">
-          <li class="mr-3 status-menu">
-            1
-          </li>
-          <li class="mr-3 status-menu">
-            2
-          </li>
-          <li class="mr-3 status-menu">
-            3
-          </li>
-          <li class="mr-3 status-menu">
-            4
-          </li>
-        </div>
-      </ul>
+    <br /><br />
+    <div class="text-xl">Offense Tab</div>
     </div>
+    <div class="flex mb-4 items-center">
+    <div class="w-1/3 items-center">
+      <div
+        class="text-center btn-pickup square-button-rb button-event"
+        data-event-type="pickup"
+        data-event-phase="teleop"
+      >
+        Pickup Ball
+      </div>
+    </div>
+    <div class="w-1/3 items-center">
+      <div
+        class="text-center btn-high-goal rect-button-rb button-event"
+        data-event-type="high"
+        data-event-phase="teleop"
+      >
+        High Goal
+      </div>
+      <br />
+      <div
+        class="text-center btn-low-goal rect-button-rb button-event"
+        data-event-type="low"
+        data-event-phase="teleop"
+      >
+        Low Goal
+      </div>
+      <br />
+      <div
+        class="text-center btn-miss rect-button-rb button-event"
+        data-event-type="miss"
+        data-event-phase="teleop"
+      >
+        Missed Ball
+      </div>
+    </div>
+    <div class="w-1/3 items-center">
+      <div class="text-center btn-undo square-button-rb undo" data-event-phase="teleop">
+        Undo Last Entry
+      </div>
+    </div>
+    <hr />
+  </div>
+  <br />
+  </div>
+
+  <!--
+  <div class="main-tab" tab-id="defense">
+    <div>
+    <br /><br />
+    <div class="text-xl">Defence Tab</div>
+    </div>
+  </div>
+
+  <div class="main-tab" tab-id="climbing">
+    <div>
+    <br /><br />
+    <div class="text-xl">Climbing Tab</div>
+    </div>
+  </div>
+  -->
+
+  <div>
+    <ul class="flex fixed w-full object-bottom bottom-0 objects-center">
+      <li class="mr-3 status-menu">
+      1
+      </li>
+      <li class="mr-3 status-menu">
+      2
+      </li>
+      <li class="mr-3 status-menu">
+      3
+      </li>
+      <li class="mr-3 status-menu">
+      4
+      </li>
+    </div>
+    </ul>
+  </div>
   </body>
 </html>

@@ -54,23 +54,22 @@ $(document).ready(function() {
     $('.start-button').click(function() {
         /*MATCH START*/
         robot.matchStartTime = Date.now();
-
-        $('#matchTriggerAuto').trigger('click');
-        $('.phase-tab').removeClass('hidden');
+        $('#match-start-trigger').trigger('click');
         $('.hud').removeClass('hidden');
+        $('.phase-tab').removeClass('hidden');
     });
 
-    /* $('#tab-pregame').click(function(){
-            $('.hud').addClass('hidden')
-      }) */
+    /* $('#tab-pregame').click(function() {
+        $('.hud').addClass('hidden');
+    }); */
 
-    $('.auto-choice').click(function() {
-        const $autoChosen = $(this);
-        const activeColour = $autoChosen.data('active-colour');
+    $('.phase-choice').click(function() {
+        const $phaseChosen = $(this);
+        const activeColour = $phaseChosen.data('active-colour');
 
-        $('.auto-choice').removeClass('active-red');
-        $('.auto-choice').removeClass('active-green');
-        $autoChosen.addClass(activeColour);
+        $('.phase-choice').removeClass('active-green');
+        $('.phase-choice').removeClass('active-blue');
+        $phaseChosen.addClass(activeColour);
     });
 
     /*$('.pregame').click(function(){
@@ -96,64 +95,70 @@ $(document).ready(function() {
 
     $('.btn-high-goal').click(function() {
         robot.points.high++;
-        robot.balls.current--;
+        if (robot.balls.current > 0) {
+            robot.balls.current--;
+        }
         updateDisplay();
     });
 
     $('.btn-low-goal').click(function() {
         robot.points.low++;
-        robot.balls.current--;
+        if (robot.balls.current > 0) {
+            robot.balls.current--;
+        }
         updateDisplay();
     });
 
     $('.btn-miss').click(function() {
         robot.points.miss++;
-        robot.balls.current--;
+        if (robot.balls.current > 0) {
+            robot.balls.current--;
+        }
         updateDisplay();
     });
 
     function updateDisplay() {
         if (robot.balls.current < 0) {
-            $('#ball-count-display').addClass('alert');
+            $('#ball-count-box').addClass('alert');
         }
         if (robot.balls.current == 0) {
-            $('#ball-count-display').removeClass('alert');
+            $('#ball-count-box').removeClass('alert');
         }
         if (robot.balls.current == 1) {
-            $('#ball-count-display').removeClass('alert');
+            $('#ball-count-box').removeClass('alert');
         }
         if (robot.balls.current == 2) {
-            $('#ball-count-display').removeClass('alert');
+            $('#ball-count-box').removeClass('alert');
         }
         if (robot.balls.current == 3) {
-            $('#ball-count-display').removeClass('alert');
+            $('#ball-count-box').removeClass('alert');
         }
         if (robot.balls.current == 4) {
-            $('#ball-count-display').removeClass('alert');
+            $('#ball-count-box').removeClass('alert');
         }
         if (robot.balls.current == 5) {
-            $('#ball-count-display').removeClass('alert');
+            $('#ball-count-box').removeClass('alert');
         }
         if (robot.balls.current > 5) {
-            $('#ball-count-display').addClass('alert');
+            $('#ball-count-box').addClass('alert');
         }
         if (robot.points.high < 0) {
-            $('#high-ball-display').addClass('alert');
+            $('#high-ball-box').addClass('alert');
         }
         if (robot.points.high > -1) {
-            $('#high-ball-display').removeClass('alert');
+            $('#high-ball-box').removeClass('alert');
         }
         if (robot.points.low < 0) {
-            $('#low-ball-display').addClass('alert');
+            $('#low-ball-box').addClass('alert');
         }
         if (robot.points.low > -1) {
-            $('#low-ball-display').removeClass('alert');
+            $('#low-ball-box').removeClass('alert');
         }
         if (robot.points.miss < 0) {
-            $('#miss-display').addClass('alert');
+            $('#miss-box').addClass('alert');
         }
         if (robot.points.miss > -1) {
-            $('#miss-display').removeClass('alert');
+            $('#miss-box').removeClass('alert');
         }
 
         $('#ball-count-display').text(robot.balls.current);

@@ -37,6 +37,15 @@
     @apply p-12;
 }
 
+.square-button-rb:hover {
+    @apply border;
+    @apply border-transparent;
+    display: inline-block;
+    margin: auto;
+    @apply bg-gray-500;
+    @apply p-12;
+}
+
 .button-active {
     @apply border;
     @apply border-black;
@@ -51,7 +60,14 @@
     @apply p-2;
 }
 
-.auto-yes {
+.rect-button-rb:hover {
+    display: inline-block;
+    margin: 5px;
+    @apply bg-gray-500;
+    @apply p-2;
+}
+
+.auto-mode {
     display: inline-block;
     margin: none;
     @apply bg-gray-200;
@@ -59,11 +75,11 @@
     @apply rounded;
 }
 
-.auto-yes:hover {
+.auto-mode:hover {
     @apply bg-green-300;
 }
 
-.auto-no {
+.teleop-mode {
     display: inline-block;
     margin: none;
     @apply bg-gray-200;
@@ -71,23 +87,23 @@
     @apply rounded;
 }
 
-.auto-no:hover {
-    @apply bg-red-300;
-}
-
-.active-red {
-    display: inline-block;
-    margin: none;
-    @apply bg-red-500;
-    @apply p-12;
-    border: 4px;
-    @apply rounded;
+.teleop-mode:hover {
+    @apply bg-blue-300;
 }
 
 .active-green {
     display: inline-block;
     margin: none;
     @apply bg-green-500;
+    @apply p-12;
+    border: 4px;
+    @apply rounded;
+}
+
+.active-blue {
+    display: inline-block;
+    margin: none;
+    @apply bg-blue-500;
     @apply p-12;
     border: 4px;
     @apply rounded;

@@ -16,3 +16,18 @@
   @apply border-gray-200;
   @apply bg-gray-200;
 }
+
+.status-menu {
+  @apply inline-block;
+  @apply border;
+  @apply border-white;
+  @apply rounded;
+  @apply text-blue-500;
+  @apply py-1;
+  @apply px-3;
+}
+
+.status-menu:hover {
+  @apply border-gray-200;
+  @apply bg-gray-200;
+}

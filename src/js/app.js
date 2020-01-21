@@ -55,8 +55,7 @@ $(document).ready(function() {
     /*MATCH START*/
     robot.matchStartTime = Date.now();
     $('#match-start-trigger').trigger('click');
-    $('.hud').removeClass('hidden');
-    $('.phase-tab').removeClass('hidden');
+    $('#offense').removeClass('hidden');
   });
 
   /* $('#tab-pregame').click(function() {
@@ -76,10 +75,10 @@ $(document).ready(function() {
             $('.phase-tab').addClass('hidden');
       })  */
 
-  $('.phase-tab').click(function() {
+  $('.submenu-tab').click(function() {
     const $tab = $(this);
 
-    $('.phase-tab').removeClass('tab-active');
+    $('.submenu-tab').removeClass('tab-active');
     $tab.addClass('tab-active');
 
     const tabId = $tab.data('tab-id');
@@ -170,9 +169,7 @@ $(document).ready(function() {
   $('.btn-preload').click(function() {
     const $preload = $(this);
 
-    $('.btn-preload').removeClass(
-      'preload-button-rb-active'
-    );
+    $('.btn-preload').removeClass('preload-button-rb-active');
     $preload.addClass('preload-button-rb-active');
   });
 
@@ -211,13 +208,7 @@ $(document).ready(function() {
   });
 
   function isEventValid(currentEvent, eventPhase) {
-    if (
-      (currentEvent.eventType == 'pickup' ||
-        currentEvent.eventType == 'high' ||
-        currentEvent.eventType == 'low' ||
-        currentEvent.eventType == 'miss') &&
-      (eventPhase == 'auto' || eventPhase == 'teleop')
-    ) {
+    if ((currentEvent.eventType == 'pickup' || currentEvent.eventType == 'high' || currentEvent.eventType == 'low' || currentEvent.eventType == 'miss') && (eventPhase == 'auto' || eventPhase == 'teleop')) {
       return true;
     }
     return false;

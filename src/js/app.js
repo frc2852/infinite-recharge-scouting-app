@@ -2,325 +2,327 @@ import '../main.css';
 import $ from 'jquery'; // uses $ as a variable for jquery (this file is js by default)
 
 $(document).ready(function() {
-    // forces jquery to wait until the site is ready
+  // forces jquery to wait until the site is ready
 
-    let rotationSuccessStatus = 0;
-    let rotationFailureStatus = 0;
-    let positionSuccessStatus = 0;
-    let positionFailureStatus = 0;
+  let rotationSuccessStatus = 0;
+  let rotationFailureStatus = 0;
+  let positionSuccessStatus = 0;
+  let positionFailureStatus = 0;
 
-    let climbStatus = 0;
-    let fallStatus = 0;
-    let autoBalanceStatus = 0;
-    let parkStatus = 0;
+  let climbStatus = 0;
+  let fallStatus = 0;
+  let autoBalanceStatus = 0;
+  let parkStatus = 0;
 
-    const robot = {
-        matchStartTime: 0,
-        hasAuto: 0,
-        balls: {
-            current: 0,
-        },
-        points: {
-            high: 0,
-            low: 0,
-            miss: 0,
-        },
-        wheel: {
-            rotation: {
-                success: rotationSuccessStatus,
-                fail: rotationFailureStatus,
-            },
-            position: {
-                success: positionSuccessStatus,
-                fail: positionFailureStatus,
-            },
-        },
-        climb: {
-            success: climbStatus,
-            fall: fallStatus,
-            autobalance: autoBalanceStatus,
-            park: parkStatus,
-        },
-        events: [],
-    };
+  const robot = {
+    matchStartTime: 0,
+    hasAuto: 0,
+    balls: {
+      current: 0,
+    },
+    points: {
+      high: 0,
+      low: 0,
+      miss: 0,
+    },
+    wheel: {
+      rotation: {
+        success: rotationSuccessStatus,
+        fail: rotationFailureStatus,
+      },
+      position: {
+        success: positionSuccessStatus,
+        fail: positionFailureStatus,
+      },
+    },
+    climb: {
+      success: climbStatus,
+      fall: fallStatus,
+      autobalance: autoBalanceStatus,
+      park: parkStatus,
+    },
+    events: [],
+  };
+
+  $('#ball-count-display').text(robot.balls.current);
+  $('#high-ball-display').text(robot.points.high);
+  $('#low-ball-display').text(robot.points.low);
+  $('#miss-display').text(robot.points.miss);
+
+  function robotStatus(robot) {}
+
+  $('.start-button').click(function() {
+    /*MATCH START*/
+    robot.matchStartTime = Date.now();
+    $('#match-start-trigger').trigger('click');
+    $('.hud').removeClass('hidden');
+    $('.phase-tab').removeClass('hidden');
+  });
+
+  /* $('#tab-pregame').click(function() {
+        $('.hud').addClass('hidden');
+    }); */
+
+  $('.phase-choice').click(function() {
+    const $phaseChosen = $(this);
+    const activeColour = $phaseChosen.data('active-colour');
+
+    $('.phase-choice').removeClass('active-green');
+    $('.phase-choice').removeClass('active-blue');
+    $phaseChosen.addClass(activeColour);
+  });
+
+  /*$('.pregame').click(function(){
+            $('.phase-tab').addClass('hidden');
+      })  */
+
+  $('.phase-tab').click(function() {
+    const $tab = $(this);
+
+    $('.phase-tab').removeClass('tab-active');
+    $tab.addClass('tab-active');
+
+    const tabId = $tab.data('tab-id');
+
+    $('.tab-container').addClass('hidden');
+    $('#' + tabId).removeClass('hidden');
+  });
+
+  $('.btn-pickup').click(function() {
+    robot.balls.current++;
+    updateDisplay();
+  });
+
+  $('.btn-high-goal').click(function() {
+    robot.points.high++;
+    if (robot.balls.current > 0) {
+      robot.balls.current--;
+    }
+    updateDisplay();
+  });
+
+  $('.btn-low-goal').click(function() {
+    robot.points.low++;
+    if (robot.balls.current > 0) {
+      robot.balls.current--;
+    }
+    updateDisplay();
+  });
+
+  $('.btn-miss').click(function() {
+    robot.points.miss++;
+    if (robot.balls.current > 0) {
+      robot.balls.current--;
+    }
+    updateDisplay();
+  });
+
+  function updateDisplay() {
+    if (robot.balls.current < 0) {
+      $('#ball-count-box').addClass('alert');
+    }
+    if (robot.balls.current == 0) {
+      $('#ball-count-box').removeClass('alert');
+    }
+    if (robot.balls.current == 1) {
+      $('#ball-count-box').removeClass('alert');
+    }
+    if (robot.balls.current == 2) {
+      $('#ball-count-box').removeClass('alert');
+    }
+    if (robot.balls.current == 3) {
+      $('#ball-count-box').removeClass('alert');
+    }
+    if (robot.balls.current == 4) {
+      $('#ball-count-box').removeClass('alert');
+    }
+    if (robot.balls.current == 5) {
+      $('#ball-count-box').removeClass('alert');
+    }
+    if (robot.balls.current > 5) {
+      $('#ball-count-box').addClass('alert');
+    }
+    if (robot.points.high < 0) {
+      $('#high-ball-box').addClass('alert');
+    }
+    if (robot.points.high > -1) {
+      $('#high-ball-box').removeClass('alert');
+    }
+    if (robot.points.low < 0) {
+      $('#low-ball-box').addClass('alert');
+    }
+    if (robot.points.low > -1) {
+      $('#low-ball-box').removeClass('alert');
+    }
+    if (robot.points.miss < 0) {
+      $('#miss-box').addClass('alert');
+    }
+    if (robot.points.miss > -1) {
+      $('#miss-box').removeClass('alert');
+    }
 
     $('#ball-count-display').text(robot.balls.current);
     $('#high-ball-display').text(robot.points.high);
     $('#low-ball-display').text(robot.points.low);
     $('#miss-display').text(robot.points.miss);
+  }
 
-    function robotStatus(robot) {}
+  $('.btn-preload').click(function() {
+    const $preload = $(this);
 
-    $('.start-button').click(function() {
-        /*MATCH START*/
-        robot.matchStartTime = Date.now();
-        $('#match-start-trigger').trigger('click');
-        $('.hud').removeClass('hidden');
-        $('.phase-tab').removeClass('hidden');
+    $('.btn-preload').removeClass(
+      'preload-button-rb-active'
+    );
+    $preload.addClass('preload-button-rb-active');
+  });
+
+  $('.button-event').click(function() {
+    const $btnEvent = $(this);
+    robot.events.push({
+      timestamp: Date.now(),
+      eventType: $btnEvent.data('event-type'),
+      eventPhase: $btnEvent.data('event-phase'),
     });
+  });
 
-    /* $('#tab-pregame').click(function() {
-        $('.hud').addClass('hidden');
-    }); */
+  /* Undo Logic */
 
-    $('.phase-choice').click(function() {
-        const $phaseChosen = $(this);
-        const activeColour = $phaseChosen.data('active-colour');
+  $('.undo').click(function() {
+    if (robot.events.length > 0) {
+      const $btnEvent = $(this);
+      const eventPhase = $btnEvent.data('event-phase');
 
-        $('.phase-choice').removeClass('active-green');
-        $('.phase-choice').removeClass('active-blue');
-        $phaseChosen.addClass(activeColour);
-    });
+      let lastEventIndex = undefined;
+      robot.events.forEach(function(event, index) {
+        if (isEventValid(event, eventPhase)) {
+          lastEventIndex = index;
+        }
+      });
 
-    /*$('.pregame').click(function(){
-            $('.phase-tab').addClass('hidden');
-      })  */
+      if (lastEventIndex != undefined) {
+        const event = robot.events[lastEventIndex];
+        robot.events.splice(lastEventIndex, 1);
 
-    $('.phase-tab').click(function() {
-        const $tab = $(this);
+        removeCount(event);
+      }
+    }
 
-        $('.phase-tab').removeClass('tab-active');
-        $tab.addClass('tab-active');
+    updateDisplay();
+  });
 
-        const tabId = $tab.data('tab-id');
+  function isEventValid(currentEvent, eventPhase) {
+    if (
+      (currentEvent.eventType == 'pickup' ||
+        currentEvent.eventType == 'high' ||
+        currentEvent.eventType == 'low' ||
+        currentEvent.eventType == 'miss') &&
+      (eventPhase == 'auto' || eventPhase == 'teleop')
+    ) {
+      return true;
+    }
+    return false;
+  }
 
-        $('.tab-container').addClass('hidden');
-        $('#' + tabId).removeClass('hidden');
-    });
-
-    $('.btn-pickup').click(function() {
+  function removeCount(events) {
+    switch (events.eventType) {
+      case 'pickup':
+        robot.balls.current--;
+        break;
+      case 'high':
+        robot.points.high--;
         robot.balls.current++;
-        updateDisplay();
-    });
-
-    $('.btn-high-goal').click(function() {
-        robot.points.high++;
-        if (robot.balls.current > 0) {
-            robot.balls.current--;
-        }
-        updateDisplay();
-    });
-
-    $('.btn-low-goal').click(function() {
-        robot.points.low++;
-        if (robot.balls.current > 0) {
-            robot.balls.current--;
-        }
-        updateDisplay();
-    });
-
-    $('.btn-miss').click(function() {
-        robot.points.miss++;
-        if (robot.balls.current > 0) {
-            robot.balls.current--;
-        }
-        updateDisplay();
-    });
-
-    function updateDisplay() {
-        if (robot.balls.current < 0) {
-            $('#ball-count-box').addClass('alert');
-        }
-        if (robot.balls.current == 0) {
-            $('#ball-count-box').removeClass('alert');
-        }
-        if (robot.balls.current == 1) {
-            $('#ball-count-box').removeClass('alert');
-        }
-        if (robot.balls.current == 2) {
-            $('#ball-count-box').removeClass('alert');
-        }
-        if (robot.balls.current == 3) {
-            $('#ball-count-box').removeClass('alert');
-        }
-        if (robot.balls.current == 4) {
-            $('#ball-count-box').removeClass('alert');
-        }
-        if (robot.balls.current == 5) {
-            $('#ball-count-box').removeClass('alert');
-        }
-        if (robot.balls.current > 5) {
-            $('#ball-count-box').addClass('alert');
-        }
-        if (robot.points.high < 0) {
-            $('#high-ball-box').addClass('alert');
-        }
-        if (robot.points.high > -1) {
-            $('#high-ball-box').removeClass('alert');
-        }
-        if (robot.points.low < 0) {
-            $('#low-ball-box').addClass('alert');
-        }
-        if (robot.points.low > -1) {
-            $('#low-ball-box').removeClass('alert');
-        }
-        if (robot.points.miss < 0) {
-            $('#miss-box').addClass('alert');
-        }
-        if (robot.points.miss > -1) {
-            $('#miss-box').removeClass('alert');
-        }
-
-        $('#ball-count-display').text(robot.balls.current);
-        $('#high-ball-display').text(robot.points.high);
-        $('#low-ball-display').text(robot.points.low);
-        $('#miss-display').text(robot.points.miss);
+        break;
+      case 'low':
+        robot.points.low--;
+        robot.balls.current++;
+        break;
+      case 'miss':
+        robot.points.miss--;
+        robot.balls.current++;
+        break;
     }
+  }
 
-    $('.btn-preload').click(function() {
-        const $preload = $(this);
+  /* Pizza Time Logic */
 
-        $('.btn-preload').removeClass('preload-button-rb-active');
-        $preload.addClass('preload-button-rb-active');
-    });
+  $('#rotation-successful').click(function() {
+    rotationSuccessStatus = 1;
+    rotationFailureStatus = 0;
+    robotStatus(robot);
+  });
 
-    $('.button-event').click(function() {
-        const $btnEvent = $(this);
-        robot.events.push({
-            timestamp: Date.now(),
-            eventType: $btnEvent.data('event-type'),
-            eventPhase: $btnEvent.data('event-phase'),
-        });
-    });
+  $('#rotation-failed').click(function() {
+    rotationFailureStatus = 1;
+    rotationSuccessStatus = 0;
+    robotStatus(robot);
+  });
 
-    /* Undo Logic */
+  $('#position-successful').click(function() {
+    positionSuccessStatus = 1;
+    positionFailureStatus = 0;
+    robotStatus(robot);
+  });
 
-    $('.undo').click(function() {
-        if (robot.events.length > 0) {
-            const $btnEvent = $(this);
-            const eventPhase = $btnEvent.data('event-phase');
+  $('#position-failed').click(function() {
+    positionFailureStatus = 1;
+    positionSuccessStatus = 0;
+    robotStatus(robot);
+  });
 
-            let lastEventIndex = undefined;
-            robot.events.forEach(function(event, index) {
-                if (isEventValid(event, eventPhase)) {
-                    lastEventIndex = index;
-                }
-            });
+  /* Monkey Bar Logic */
 
-            if (lastEventIndex != undefined) {
-                const event = robot.events[lastEventIndex];
-                robot.events.splice(lastEventIndex, 1);
+  $('#climb-successful').click(function() {
+    climbStatus = 1;
+    fallStatus = 0;
+    autoBalanceStatus = 0;
+    parkStatus = 0;
+    robotStatus(robot);
+  });
 
-                removeCount(event);
-            }
-        }
+  $('#climb-fall').click(function() {
+    climbStatus = 0;
+    fallStatus = 1;
+    autoBalanceStatus = 0;
+    parkStatus = 0;
+    robotStatus(robot);
+  });
 
-        updateDisplay();
-    });
+  $('#climb-autobalance').click(function() {
+    climbStatus = 0;
+    fallStatus = 0;
+    autoBalanceStatus = 1;
+    parkStatus = 0;
+    robotStatus(robot);
+  });
 
-    function isEventValid(currentEvent, eventPhase) {
-        if (
-            (currentEvent.eventType == 'pickup' ||
-                currentEvent.eventType == 'high' ||
-                currentEvent.eventType == 'low' ||
-                currentEvent.eventType == 'miss') &&
-            (eventPhase == 'auto' || eventPhase == 'teleop')
-        ) {
-            return true;
-        }
-        return false;
-    }
+  $('#park-successful').click(function() {
+    climbStatus = 0;
+    fallStatus = 0;
+    autoBalanceStatus = 0;
+    parkStatus = 1;
+    robotStatus(robot);
+  });
 
-    function removeCount(events) {
-        switch (events.eventType) {
-            case 'pickup':
-                robot.balls.current--;
-                break;
-            case 'high':
-                robot.points.high--;
-                robot.balls.current++;
-                break;
-            case 'low':
-                robot.points.low--;
-                robot.balls.current++;
-                break;
-            case 'miss':
-                robot.points.miss--;
-                robot.balls.current++;
-                break;
-        }
-    }
+  /* Toggle Logic */
 
-    /* Pizza Time Logic */
+  $('.rotation-toggle').click(function() {
+    const $rotationState = $(this);
 
-    $('#rotation-successful').click(function() {
-        rotationSuccessStatus = 1;
-        rotationFailureStatus = 0;
-        robotStatus(robot);
-    });
+    $('.rotation-toggle').removeClass('button-active');
+    $rotationState.addClass('button-active');
+  });
 
-    $('#rotation-failed').click(function() {
-        rotationFailureStatus = 1;
-        rotationSuccessStatus = 0;
-        robotStatus(robot);
-    });
+  $('.position-toggle').click(function() {
+    const $positionState = $(this);
 
-    $('#position-successful').click(function() {
-        positionSuccessStatus = 1;
-        positionFailureStatus = 0;
-        robotStatus(robot);
-    });
+    $('.position-toggle').removeClass('button-active');
+    $positionState.addClass('button-active');
+  });
 
-    $('#position-failed').click(function() {
-        positionFailureStatus = 1;
-        positionSuccessStatus = 0;
-        robotStatus(robot);
-    });
+  $('.endgame-toggle').click(function() {
+    const $endgameState = $(this);
 
-    /* Monkey Bar Logic */
-
-    $('#climb-successful').click(function() {
-        climbStatus = 1;
-        fallStatus = 0;
-        autoBalanceStatus = 0;
-        parkStatus = 0;
-        robotStatus(robot);
-    });
-
-    $('#climb-fall').click(function() {
-        climbStatus = 0;
-        fallStatus = 1;
-        autoBalanceStatus = 0;
-        parkStatus = 0;
-        robotStatus(robot);
-    });
-
-    $('#climb-autobalance').click(function() {
-        climbStatus = 0;
-        fallStatus = 0;
-        autoBalanceStatus = 1;
-        parkStatus = 0;
-        robotStatus(robot);
-    });
-
-    $('#park-successful').click(function() {
-        climbStatus = 0;
-        fallStatus = 0;
-        autoBalanceStatus = 0;
-        parkStatus = 1;
-        robotStatus(robot);
-    });
-
-    /* Toggle Logic */
-
-    $('.rotation-toggle').click(function() {
-        const $rotationState = $(this);
-
-        $('.rotation-toggle').removeClass('button-active');
-        $rotationState.addClass('button-active');
-    });
-
-    $('.position-toggle').click(function() {
-        const $positionState = $(this);
-
-        $('.position-toggle').removeClass('button-active');
-        $positionState.addClass('button-active');
-    });
-
-    $('.endgame-toggle').click(function() {
-        const $endgameState = $(this);
-
-        $('.endgame-toggle').removeClass('button-active');
-        $endgameState.addClass('button-active');
-    });
+    $('.endgame-toggle').removeClass('button-active');
+    $endgameState.addClass('button-active');
+  });
 });

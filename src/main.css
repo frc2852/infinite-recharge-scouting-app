@@ -1,169 +1,18 @@
 @tailwind base;
 @tailwind components;
-
-.phase-tab {
-    @apply text-center;
-    @apply block;
-    @apply border-white;
-    @apply text-blue-500;
-    @apply py-2;
-    @apply px-4;
-    @apply m-1;
-    @apply rounded;
-}
-
-.phase-tab:hover {
-    @apply bg-blue-300;
-    @apply text-white;
-}
-
-.tab-active {
-    @apply bg-blue-600;
-    @apply text-white;
-}
-
 @tailwind utilities;
 
-.container {
-    padding: 100px;
+.submenu {
+  @apply inline-block;
+  @apply border;
+  @apply border-white;
+  @apply rounded;
+  @apply text-blue-500;
+  @apply py-1;
+  @apply px-3;
 }
 
-.square-button-rb {
-    @apply border;
-    @apply border-transparent;
-    display: inline-block;
-    margin: auto;
-    @apply bg-gray-300;
-    @apply p-12;
-}
-
-.square-button-rb:hover {
-    @apply border;
-    @apply border-transparent;
-    display: inline-block;
-    margin: auto;
-    @apply bg-gray-500;
-    @apply p-12;
-}
-
-.button-active {
-    @apply border;
-    @apply border-black;
-    @apply bg-gray-500;
-    @apply text-black;
-}
-
-.rect-button-rb {
-    display: inline-block;
-    margin: 5px;
-    @apply bg-gray-300;
-    @apply p-2;
-}
-
-.rect-button-rb:hover {
-    display: inline-block;
-    margin: 5px;
-    @apply bg-gray-500;
-    @apply p-2;
-}
-
-.auto-mode {
-    display: inline-block;
-    margin: none;
-    @apply bg-gray-200;
-    @apply p-12;
-    @apply rounded;
-}
-
-.auto-mode:hover {
-    @apply bg-green-300;
-}
-
-.teleop-mode {
-    display: inline-block;
-    margin: none;
-    @apply bg-gray-200;
-    @apply p-12;
-    @apply rounded;
-}
-
-.teleop-mode:hover {
-    @apply bg-blue-300;
-}
-
-.active-green {
-    display: inline-block;
-    margin: none;
-    @apply bg-green-500;
-    @apply p-12;
-    border: 4px;
-    @apply rounded;
-}
-
-.active-blue {
-    display: inline-block;
-    margin: none;
-    @apply bg-blue-500;
-    @apply p-12;
-    border: 4px;
-    @apply rounded;
-}
-
-.auto-active:hover {
-    @apply bg-blue-500;
-}
-
-.preload-button-rb {
-    display: inline-block;
-    margin: auto;
-    @apply bg-gray-300;
-    @apply p-12;
-}
-
-.preload-button-rb:hover {
-    @apply bg-gray-400;
-}
-
-.preload-button-rb-active {
-    @apply bg-blue-600;
-    @apply text-white;
-}
-
-img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
-}
-
-.start-button {
-    background-image: linear-gradient(to bottom right, cyan, rgb(0, 89, 255), cyan, rgb(0, 89, 255), cyan);
-    border: none;
-    border-radius: 50%;
-    color: white;
-    padding: 150px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 96px;
-    margin: 50px 200px;
-}
-
-.alert {
-    background-color: white;
-    animation-name: alert-animation;
-    animation-duration: 2s;
-    animation-iteration-count: infinite;
-}
-
-@keyframes alert-animation {
-    0% {
-        background-color: red;
-    }
-    50% {
-        background-color: transparent;
-    }
-    100% {
-        background-color: red;
-    }
+.submenu:hover {
+  @apply border-gray-200;
+  @apply bg-gray-200;
 }

@@ -47,48 +47,52 @@
     <br /><br />
     <div class="text-xl">Offense Tab</div>
     </div>
+    <br><br>
     <div class="flex mb-4 items-center">
-    <div class="w-1/3 items-center">
-      <div
-        class="text-center btn-pickup square-button-rb button-event"
-        data-event-type="pickup"
-        data-event-phase="teleop"
-      >
-        Pickup Ball
+      <div class="w-1/3 items-center">
+        <div
+          class="text-center btn-pickup button-square button-event"
+          data-event-type="pickup"
+          data-event-phase="teleop"
+        >
+          Pickup Ball
+        </div>
       </div>
-    </div>
-    <div class="w-1/3 items-center">
-      <div
-        class="text-center btn-high-goal rect-button-rb button-event"
-        data-event-type="high"
-        data-event-phase="teleop"
-      >
-        High Goal
+      <div class="w-1/3 items-center">
+        <div
+          class="text-center btn-high-goal button-rectangle button-event"
+          data-event-type="high"
+          data-event-phase="teleop"
+        >
+          High Goal
+        </div>
+        <br />
+        <div
+          class="text-center btn-low-goal button-rectangle button-event"
+          data-event-type="low"
+          data-event-phase="teleop"
+        >
+          Low Goal
+        </div>
+        <br />
+        <div
+          class="text-center btn-miss button-rectangle button-event"
+          data-event-type="miss"
+          data-event-phase="teleop"
+        >
+          Missed Ball
+        </div>
       </div>
-      <br />
-      <div
-        class="text-center btn-low-goal rect-button-rb button-event"
-        data-event-type="low"
-        data-event-phase="teleop"
-      >
-        Low Goal
+      <div class="w-1/3 items-center">
+        <div class="text-center btn-undo button-square undo" data-event-phase="teleop">
+          Undo Last Entry
+        </div>
       </div>
-      <br />
-      <div
-        class="text-center btn-miss rect-button-rb button-event"
-        data-event-type="miss"
-        data-event-phase="teleop"
-      >
-        Missed Ball
-      </div>
-    </div>
-    <div class="w-1/3 items-center">
-      <div class="text-center btn-undo square-button-rb undo" data-event-phase="teleop">
-        Undo Last Entry
-      </div>
-    </div>
     <hr />
-  </div>
+    </div>
+    <div>
+
+    </div>
   <br />
   </div>
 
@@ -110,16 +114,16 @@
 
   <div>
     <ul class="flex fixed w-full object-bottom bottom-0 objects-center">
-      <li class="mr-3 status-menu">
+      <li class="mr-3 status-menu submenu">
       1
       </li>
-      <li class="mr-3 status-menu">
+      <li class="mr-3 status-menu submenu">
       2
       </li>
-      <li class="mr-3 status-menu">
+      <li class="mr-3 status-menu submenu">
       3
       </li>
-      <li class="mr-3 status-menu">
+      <li class="mr-3 status-menu submenu">
       4
       </li>
     </div>

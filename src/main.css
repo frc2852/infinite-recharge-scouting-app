@@ -31,3 +31,31 @@
   @apply border-gray-200;
   @apply bg-gray-200;
 }
+
+.button-square {
+  @apply border;
+  @apply border-transparent;
+  @apply border-2;
+  display: inline-block;
+  margin: auto;
+  @apply bg-gray-300;
+  @apply p-12;
+}
+
+.button-square:hover {
+  @apply border-black;
+}
+
+.button-rectangle {
+  @apply border;
+  @apply border-transparent;
+  @apply border-2;
+  display: inline-block;
+  margin: 5px;
+  @apply bg-gray-300;
+  @apply p-2;
+}
+
+.button-rectangle:hover {
+  @apply border-black;
+}

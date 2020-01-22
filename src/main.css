@@ -77,3 +77,23 @@
   height: 300px;
   width: 300px;
 }
+
+.button-emoji {
+  @apply border;
+  @apply border-transparent;
+  @apply border-2;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 200px;
+  width: 200px;
+  padding-left: 150px;
+  padding-right: 150px;
+  @apply bg-gray-300;
+}
+
+.button-emoji:hover {
+  @apply border-black;
+}

@@ -22,14 +22,18 @@
   @apply border;
   @apply border-white;
   @apply rounded;
-  @apply text-blue-500;
+  @apply text-black;
   @apply py-1;
   @apply px-3;
+  @apply bg-grey-200;
+  @apply text-center;
+  @apply my-4;
 }
 
 .status-menu:hover {
-  @apply border-gray-200;
-  @apply bg-gray-200;
+  @apply border-gray-400;
+  @apply bg-blue-500;
+  @apply text-black;
 }
 
 .button-square {
@@ -37,7 +41,7 @@
   @apply border-transparent;
   @apply border-2;
   display: inline-block;
-  margin: auto;
+  margin: 12px;
   @apply bg-gray-300;
   @apply p-12;
 }

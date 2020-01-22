@@ -75,10 +75,10 @@ $(document).ready(function() {
             $('.phase-tab').addClass('hidden');
       })  */
 
-  $('.submenu-tab').click(function() {
+  $('.tab-container').click(function() {
     const $tab = $(this);
 
-    $('.submenu-tab').removeClass('tab-active');
+    $('.tab-container').removeClass('tab-active');
     $tab.addClass('tab-active');
 
     const tabId = $tab.data('tab-id');

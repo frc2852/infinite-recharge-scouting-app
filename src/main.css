@@ -25,7 +25,7 @@
   @apply text-black;
   @apply py-1;
   @apply px-3;
-  @apply bg-grey-200;
+  @apply bg-gray-200;
   @apply text-center;
   @apply my-4;
 }
@@ -41,7 +41,7 @@
   @apply border-transparent;
   @apply border-2;
   display: inline-block;
-  margin: 12px;
+  margin: 14px;
   @apply bg-gray-300;
   @apply p-12;
 }

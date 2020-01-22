@@ -63,3 +63,8 @@
 .button-rectangle:hover {
   @apply border-black;
 }
+
+.title {
+  @apply text-4xl;
+  /* font-family: tbd; */
+}

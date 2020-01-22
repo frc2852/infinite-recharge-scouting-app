@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <link rel="shortcut icon" type="image/jpg" href="images/2019bot.jpg" />
+  <link href="https://fonts.googleapis.com/css?family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
   <title>
     2852 Scouting App
   </title>
@@ -18,34 +19,38 @@
       </li>
     </div>
     <div class="w-1/2 justify-between">
-      <li class="mr-3 submenu">
+      <li class="mr-3 submenu" data-tab-id="information">
       I
       </li>
-      <li class="mr-3 submenu">
+      <li class="mr-3 submenu" data-tab-id="offense">
       S
       </li>
-      <li class="mr-3 submenu">
+      <li class="mr-3 submenu" data-tab-id="defense">
       R
       </li>
-      <li class="mr-3 submenu">
+      <li class="mr-3 submenu" data-tab-id="climb">
       C
       </li>
     </div>
     </ul>
   </div>
 
-  <!--
-  <div class="tab-container" data-tab-id="information">
-    <div>
-    <br /><br />
-    <div class="text-xl">Information Tab</div>
-    </div>
-  </div> -->
 
-  <div class="tab-container" data-tab-id="offense">
+  <div class="tab-container" id="information">
     <div>
       <br><br><br>
-      <div class="text-4xl">
+      <div class="title">
+        Information Tab
+      </div>
+      <br><br>
+    </div>
+    <img class="robot-photo" src="images/2019bot.jpeg" alt="Robot Photo">
+  </div>
+
+  <div class="tab-container hidden" id="offense">
+    <div>
+      <br><br><br>
+      <div class="title">
           Offense Tab
       </div>
       <br><br>
@@ -105,14 +110,14 @@
   </div>
 
   <!--
-  <div class="tab-container" data-tab-id="defense">
+  <div class="tab-container" id="defense">
     <div>
     <br /><br />
     <div class="text-xl">Defence Tab</div>
     </div>
   </div>
 
-  <div class="tab-container" data-tab-id="climbing">
+  <div class="tab-container" id="climbing">
     <div>
     <br /><br />
     <div class="text-xl">Climbing Tab</div>

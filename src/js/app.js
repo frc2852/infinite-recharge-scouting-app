@@ -75,7 +75,7 @@ $(document).ready(function() {
             $('.phase-tab').addClass('hidden');
       })  */
 
-  $('.tab-container').click(function() {
+  $('.submenu').click(function() {
     const $tab = $(this);
 
     $('.tab-container').removeClass('tab-active');

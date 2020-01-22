@@ -51,7 +51,7 @@
   @apply border-transparent;
   @apply border-2;
   display: inline-block;
-  margin: 5px;
+  margin: 2px;
   @apply bg-gray-300;
   @apply p-2;
 }

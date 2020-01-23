@@ -78,6 +78,12 @@
   width: 300px;
 }
 
+/* .emoji-container {
+  background-color: transparent;
+  padding-top: 0px;
+  padding-bottom: 0px;
+} */
+
 .button-emoji {
   @apply border;
   @apply border-transparent;
@@ -87,11 +93,10 @@
   margin-right: auto;
   margin-top: 10px;
   margin-bottom: 10px;
-  height: 200px;
-  width: 200px;
-  padding-left: 150px;
-  padding-right: 150px;
+  height: 60%;
+  width: 60%;
   @apply bg-gray-300;
+  @apply px-16;
 }
 
 .button-emoji:hover {

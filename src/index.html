@@ -15,21 +15,21 @@
     <ul class="flex fixed objects-top w-full items-center">
     <div class="w-1/2">
       <li class="flex-1 mr-2 text-center block border border-blue-500 rounded py-2 px-4 bg-blue-500 text-white">
-      Active Team Number
+        Active Team Number
       </li>
     </div>
     <div class="w-1/2 justify-between">
       <li class="mr-3 submenu" data-tab-id="information">
-      I
+      Info
       </li>
       <li class="mr-3 submenu" data-tab-id="offense">
-      S
+      Offense
       </li>
       <li class="mr-3 submenu" data-tab-id="defense">
-      D
+      Defence
       </li>
-      <li class="mr-3 submenu" data-tab-id="climb">
-      C
+      <li class="mr-3 submenu" data-tab-id="postgame">
+      Postgame
       </li>
     </div>
     </ul>
@@ -46,7 +46,9 @@
     </div>
     <img class="robot-photo" src="images/2019bot.jpg" alt="Robot Photo">
     <br><br>
-    More Information
+    <div class="start-button">
+      Start Match
+    </div>
   </div>
 
   <div class="tab-container hidden" id="offense">
@@ -113,7 +115,7 @@
 
   <div class="tab-container " id="defense">
     <div>
-    <br><br>
+    <br><br><br>
     <div class="title">
       Defence Tab
     </div>
@@ -131,17 +133,65 @@
     </div>
     <div class="emoji-container">
       <div class="button-emoji">
-        <img src="images/flushed.png" alt="good">
+        <img src="images/fire.png" alt="good">
       </div>
     </div>
   </div>
 
   <!-- <div class="tab-container hidden" id="climbing">
     <div>
-    <br /><br />
-    <div class="title">Climbing Tab</div>
+    <br><br>
+      <div class="title">
+        Climbing Tab
+      </div>
+    </div>
+    <div class="flex mb-4 items-center">
+      <div class="width 1/2 button-square">
+        Climbed
+      </div>
+      <div class="width 1/2 button-square">
+        Climbed Level
+      </div>
+    </div>
+    <div class="flex mb-4 items-center">
+      <div class="width 1/2 button-square">
+        Climbed but Fell
+      </div>
+      <div class="width 1/2 button-square">
+        Parked (replace for buddy bar?)
+      </div>
     </div>
   </div> -->
+
+  <div class="tab-container hidden" id="postgame">
+    <div>
+    <br><br>
+      <div class="title">
+        Postgame Status Tab
+      </div>
+    </div>
+    <div class="flex mb-4 items-center">
+      <div class="w-1/2 button-square">
+        <img src="images/disconnect.png" alt="Disconnect">
+      </div>
+      <div class="w-1/2 button-square">
+        <img src="images/mechanical_failure.png" alt="Mechanical Failure">
+      </div>
+    </div>
+    <div class="flex mb-4 items-center">
+      <div class="w-1/2 button-square">
+        <img src="images/yellow_card.png" alt="Yellow or Upgraded Card">
+      </div>
+      <div class="w-1/2 button-square">
+        <img src="images/red_card.png" alt="Red Card or Disqualification">
+      </div>
+    </div>
+    <div class="flex mb-4 items-center">
+      <div class="w-1/2 button-square">
+        <img src="images/estop.png" alt="E-Stopped">
+      </div>
+    </div>
+  </div>
 
   <div>
     <ul class="flex fixed w-full object-bottom bottom-0 objects-justify">

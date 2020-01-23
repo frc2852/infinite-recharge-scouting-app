@@ -10,6 +10,7 @@
   @apply text-blue-500;
   @apply py-1;
   @apply px-3;
+  @apply text-sm;
 }
 
 .submenu:hover {
@@ -44,6 +45,7 @@
   margin: 14px;
   @apply bg-gray-300;
   @apply p-12;
+  @apply text-2xl;
 }
 
 .button-square:hover {
@@ -58,6 +60,7 @@
   margin: 2px;
   @apply bg-gray-300;
   @apply p-2;
+  @apply text-2xl;
 }
 
 .button-rectangle:hover {
@@ -93,12 +96,21 @@
   margin-right: auto;
   margin-top: 10px;
   margin-bottom: 10px;
-  height: 60%;
-  width: 60%;
+  height: 70%;
+  width: 70%;
   @apply bg-gray-300;
   @apply px-16;
 }
 
 .button-emoji:hover {
   @apply border-black;
+}
+
+.start-button {
+  border-color: transparent;
+  background-image: linear-gradient(to right, red, orange, yellow, green, blue);
+  border-radius: 50%;
+  @apply text-6xl;
+  height: 50%;
+  width: 50%;
 }

@@ -6,7 +6,7 @@
   @apply inline-block;
   @apply border;
   @apply border-white;
-  @apply rounded;
+  @apply rounded-lg;
   @apply text-blue-500;
   @apply py-1;
   @apply px-3;
@@ -22,7 +22,7 @@
   @apply inline-block;
   @apply border;
   @apply border-white;
-  @apply rounded;
+  @apply rounded-lg;
   @apply text-black;
   @apply py-1;
   @apply px-3;
@@ -41,6 +41,7 @@
   @apply border;
   @apply border-transparent;
   @apply border-4;
+  @apply rounded-lg;
   display: inline-block;
   margin: 14px;
   @apply bg-gray-300;
@@ -49,13 +50,14 @@
 }
 
 .button-square:hover {
-  @apply border-black;
+  @apply border-gray-700;
 }
 
 .button-rectangle {
   @apply border;
   @apply border-transparent;
   @apply border-4;
+  @apply rounded-lg;
   display: inline-block;
   margin: 2px;
   @apply bg-gray-300;
@@ -64,13 +66,14 @@
 }
 
 .button-rectangle:hover {
-  @apply border-black;
+  @apply border-gray-700;
 }
 
 .button-endgame {
   @apply border;
   @apply border-transparent;
   @apply border-4;
+  @apply rounded-lg;
   display: block;
   margin-left: 4px;
   margin-right: 4px;
@@ -83,13 +86,14 @@
 }
 
 .button-endgame:hover {
-  @apply border-black;
+  @apply border-gray-700;
 }
 
 .button-estop {
   @apply border;
   @apply border-transparent;
   @apply border-4;
+  @apply rounded-lg;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -102,7 +106,7 @@
 }
 
 .button-estop:hover {
-  @apply border-black;
+  @apply border-gray-700;
 }
 
 .title {
@@ -129,6 +133,7 @@
   @apply border;
   @apply border-transparent;
   @apply border-4;
+  @apply rounded-lg;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -141,7 +146,7 @@
 }
 
 .button-emoji:hover {
-  @apply border-black;
+  @apply border-gray-700;
 }
 
 .toggle-active {
@@ -160,5 +165,5 @@
   border-radius: 50%;
   @apply text-6xl;
   height: 50%;
-  width: 50%;
+  width: 100%;
 }

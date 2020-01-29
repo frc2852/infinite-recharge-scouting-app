@@ -52,9 +52,10 @@ $(document).ready(function() {
   function robotStatus(robot) {}
 
   $('.start-button').click(function() {
-    /*MATCH START*/
+    // MATCH START
     robot.matchStartTime = Date.now();
-    $('#match-start-trigger').trigger('click');
+    // $('#match-start-trigger').trigger('click');
+    $('#information').addClass('hidden');
     $('#offense').removeClass('hidden');
   });
 

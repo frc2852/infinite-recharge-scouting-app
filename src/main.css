@@ -167,3 +167,13 @@
   height: 50%;
   width: 100%;
 }
+
+.reset {
+  @apply rounded-lg;
+  position: absolute;
+  bottom: 4;
+  left: 1;
+  margin-bottom: 4px;
+  margin-left: 4px;
+  @apply bg-red-700;
+}

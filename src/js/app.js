@@ -76,6 +76,17 @@ $(document).ready(function() {
             $('.phase-tab').addClass('hidden');
       })  */
 
+  $('.toggle').click(function() {
+    const $toggled = $(this);
+    $toggled.toggleClass('toggle-active');
+  });
+
+  $('.emoji-toggle').click(function() {
+    const $emojiToggled = $(this);
+    $('.emoji-toggle').removeClass('emoji-toggle-active');
+    $emojiToggled.addClass('emoji-toggle-active');
+  });
+
   $('.submenu').click(function() {
     const $tab = $(this);
 

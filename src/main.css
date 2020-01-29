@@ -40,7 +40,7 @@
 .button-square {
   @apply border;
   @apply border-transparent;
-  @apply border-2;
+  @apply border-4;
   display: inline-block;
   margin: 14px;
   @apply bg-gray-300;
@@ -55,7 +55,7 @@
 .button-rectangle {
   @apply border;
   @apply border-transparent;
-  @apply border-2;
+  @apply border-4;
   display: inline-block;
   margin: 2px;
   @apply bg-gray-300;
@@ -70,7 +70,7 @@
 .button-endgame {
   @apply border;
   @apply border-transparent;
-  @apply border-2;
+  @apply border-4;
   display: block;
   margin-left: 4px;
   margin-right: 4px;
@@ -89,7 +89,7 @@
 .button-estop {
   @apply border;
   @apply border-transparent;
-  @apply border-2;
+  @apply border-4;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -128,7 +128,7 @@
 .button-emoji {
   @apply border;
   @apply border-transparent;
-  @apply border-2;
+  @apply border-4;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -142,6 +142,16 @@
 
 .button-emoji:hover {
   @apply border-black;
+}
+
+.toggle-active {
+  @apply bg-gray-500;
+  @apply border-green-500;
+}
+
+.emoji-toggle-active {
+  @apply bg-gray-500;
+  @apply border-green-500;
 }
 
 .start-button {

@@ -67,6 +67,26 @@
   @apply border-black;
 }
 
+.button-estop {
+  @apply border;
+  @apply border-transparent;
+  @apply border-2;
+  display: inline-block;
+  height: 100px;
+  width: auto;
+  padding-left: auto;
+  padding-right: auto;
+  margin: 14px;
+  @apply bg-gray-300;
+  @apply p-12;
+  @apply text-2xl;
+  @apply w-full;
+}
+
+.button-estop:hover {
+  @apply border-black;
+}
+
 .title {
   @apply text-4xl;
   text-align: center;
@@ -96,8 +116,8 @@
   margin-right: auto;
   margin-top: 10px;
   margin-bottom: 10px;
-  height: 70%;
-  width: 70%;
+  height: 60%;
+  width: 60%;
   @apply bg-gray-300;
   @apply px-16;
 }

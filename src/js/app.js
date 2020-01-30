@@ -23,12 +23,6 @@ $(document).ready(function() {
       rotation: rotationSuccessStatusRaw % 2,
       position: positionSuccessStatusRaw % 2,
     },
-    climb: {
-      success: climbStatus,
-      fall: fallStatus,
-      autobalance: autoBalanceStatus,
-      park: parkStatus,
-    },
     events: [],
   };
   // robot object, will hold all of a robot's numbers and events
@@ -116,7 +110,7 @@ $(document).ready(function() {
   });
   // reset button logic, sets all values to 0
 
-  function updateDisplay() {
+  function checkIfInvalidNumbers() {
     if (robot.balls.current < 0) {
       $('#ball-count-box').addClass('alert');
     }
@@ -169,16 +163,24 @@ $(document).ready(function() {
     if (robot.points.miss > -1) {
       $('#miss-box').removeClass('alert');
     }
+  }
+  // checks if numbers are invalid for each value, and assigns/removes warning classes based on results
+
+  function updateDisplay() {
+    checkIfInvalidNumbers();
+
+    robot.balls.currrent = forEach(countEvents(robot.events, pickup));
+    robot.points.high = forEach(countEvents(robot.events, high));
+    robot.points.low = forEach(countEvents(robot.events, low));
+    robot.points.miss = forEach(countEvents(robot.events, miss));
 
     $('#ball-count-display').text(robot.balls.current);
     $('#high-ball-display').text(robot.points.high);
     $('#low-ball-display').text(robot.points.low);
     $('#miss-display').text(robot.points.miss);
   }
-  // first checks for inadmissible values
-  // negative numbers are given a less important warning immediately
-  // having 6 balls held gives a lesser warning, alerting the user to watch their data
-  // 7 or more balls gives an annoying warning, letting the user know they or the robot have made a mistake
+  // checks for inadmissible values
+  // updates robot values for the count of each event
   // finally, refreshes all values to the HUD
 
   $('.button-event').click(function() {
@@ -186,21 +188,50 @@ $(document).ready(function() {
     robot.events.push({
       timestamp: Date.now(),
       eventType: $btnEvent.data('event-type'),
-      eventPhase: $btnEvent.data('event-phase'),
     });
+    console.log(robot);
   });
   // upon logging a button event (such as a pickup or score), adds the event to the robot's array of events
+
+  function countEvents(array, type) {
+    let count = 0;
+    for (var i = 0; i < array.length; ++i) {
+      if (type == pickup) {
+        if (array[i].eventType == pickup) {
+          count++;
+        }
+        return count;
+      }
+      if (type == high) {
+        if (array[i].eventType == high) {
+          count++;
+        }
+        return count;
+      }
+      if (type == low) {
+        if (array[i].eventType == low) {
+          count++;
+        }
+        return count;
+      }
+      if (type == miss) {
+        if (array[i].eventType == miss) {
+          count++;
+        }
+        return count;
+      }
+    }
+  }
 
   /* Undo Logic */
 
   $('.undo').click(function() {
     if (robot.events.length > 0) {
       const $btnEvent = $(this);
-      const eventPhase = $btnEvent.data('event-phase');
 
       let lastEventIndex = undefined;
       robot.events.forEach(function(event, index) {
-        if (isEventValid(event, eventPhase)) {
+        if (isEventValid(event)) {
           lastEventIndex = index;
         }
       });
@@ -208,45 +239,23 @@ $(document).ready(function() {
       if (lastEventIndex != undefined) {
         const event = robot.events[lastEventIndex];
         robot.events.splice(lastEventIndex, 1);
-
         removeCount(event);
       }
     }
     updateDisplay();
+    console.log(robot);
   });
   // undo button function, checks if the button event is one that allows undo (such as a pickup or score)
   // if valid, removes that event from the robot's array, calling removeCount to fix the values
 
-  function isEventValid(currentEvent, eventPhase) {
-    if ((currentEvent.eventType == 'pickup' || currentEvent.eventType == 'high' || currentEvent.eventType == 'low' || currentEvent.eventType == 'miss') && (eventPhase == 'auto' || eventPhase == 'teleop')) {
+  function isEventValid(currentEvent) {
+    if (currentEvent.eventType == 'pickup' || currentEvent.eventType == 'high' || currentEvent.eventType == 'low' || currentEvent.eventType == 'miss') {
       return true;
     }
     return false;
   }
   // tests if the previous event was undoable, checking its id against the four undoable actions
   // these actions are pickup, high score, low score, miss
-
-  function removeCount(events) {
-    switch (events.eventType) {
-      case 'pickup':
-        robot.balls.current--;
-        break;
-      case 'high':
-        robot.points.high--;
-        robot.balls.current++;
-        break;
-      case 'low':
-        robot.points.low--;
-        robot.balls.current++;
-        break;
-      case 'miss':
-        robot.points.miss--;
-        robot.balls.current++;
-        break;
-    }
-  }
-  // depending on the event, increments or decrements values to counteract the event
-  // values are actually independent of events - they are only incremented and decremented upon event logging
 
   $('#rotation-successful').click(function() {
     rotationSuccessStatusRaw++;

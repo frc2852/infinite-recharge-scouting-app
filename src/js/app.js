@@ -4,15 +4,12 @@ import $ from 'jquery'; // uses $ as a variable for jquery (this file is js by d
 $(document).ready(function() {
   // forces jquery to wait until the site is ready
 
-  let rotationSuccessStatus = 0;
-  let rotationFailureStatus = 0;
-  let positionSuccessStatus = 0;
-  let positionFailureStatus = 0;
-
-  let climbStatus = 0;
-  let fallStatus = 0;
-  let autoBalanceStatus = 0;
-  let parkStatus = 0;
+  let rotationSuccessStatusRaw = 0;
+  let positionSuccessStatusRaw = 0;
+  // creates raw variables for pizza wheel
+  let rotationSuccessStatus = rotationSuccessStatusRaw % 2;
+  let positionSuccessStatus = positionSuccessStatusRaw % 2;
+  // interpret raw variables by finding if they are even or odd
 
   const robot = {
     matchStartTime: 0,
@@ -26,14 +23,8 @@ $(document).ready(function() {
       miss: 0,
     },
     wheel: {
-      rotation: {
-        success: rotationSuccessStatus,
-        fail: rotationFailureStatus,
-      },
-      position: {
-        success: positionSuccessStatus,
-        fail: positionFailureStatus,
-      },
+      rotation: false,
+      position: false,
     },
     climb: {
       success: climbStatus,
@@ -43,41 +34,33 @@ $(document).ready(function() {
     },
     events: [],
   };
+  // robot object, will hold all of a robot's numbers and events
 
   $('#ball-count-display').text(robot.balls.current);
   $('#high-ball-display').text(robot.points.high);
   $('#low-ball-display').text(robot.points.low);
   $('#miss-display').text(robot.points.miss);
-
-  function robotStatus(robot) {}
+  // set the HUD displays to reference the robot object.
 
   $('.start-button').click(function() {
-    // MATCH START
     robot.matchStartTime = Date.now();
-    // $('#match-start-trigger').trigger('click');
     $('#information').addClass('hidden');
     $('#offense').removeClass('hidden');
   });
-
-  $('.phase-choice').click(function() {
-    const $phaseChosen = $(this);
-    const activeColour = $phaseChosen.data('active-colour');
-
-    $('.phase-choice').removeClass('active-green');
-    $('.phase-choice').removeClass('active-blue');
-    $phaseChosen.addClass(activeColour);
-  });
+  // triggers match to begin, moves to offense tab
 
   $('.toggle').click(function() {
     const $toggled = $(this);
     $toggled.toggleClass('toggle-active');
   });
+  // general toggle logic (on/off without reliance on other buttons)
 
   $('.emoji-toggle').click(function() {
     const $emojiToggled = $(this);
     $('.emoji-toggle').removeClass('emoji-toggle-active');
     $emojiToggled.addClass('emoji-toggle-active');
   });
+  // emoji toggle logic, only allows one to be active.
 
   $('.submenu').click(function() {
     const $tab = $(this);
@@ -90,11 +73,13 @@ $(document).ready(function() {
     $('.tab-container').addClass('hidden');
     $('#' + tabId).removeClass('hidden');
   });
+  // tab select logic, shows and hides respective tab containers
 
   $('.btn-pickup').click(function() {
     robot.balls.current++;
     updateDisplay();
   });
+  // pickup button then update (all proceeding buttons update display)
 
   $('.btn-high-goal').click(function() {
     robot.points.high++;
@@ -103,6 +88,7 @@ $(document).ready(function() {
     }
     updateDisplay();
   });
+  // high goal button, uses picked up ball
 
   $('.btn-low-goal').click(function() {
     robot.points.low++;
@@ -111,6 +97,7 @@ $(document).ready(function() {
     }
     updateDisplay();
   });
+  // low goal button, uses picked up ball
 
   $('.btn-miss').click(function() {
     robot.points.miss++;
@@ -119,6 +106,9 @@ $(document).ready(function() {
     }
     updateDisplay();
   });
+  // missed ball button, uses picked up ball
+
+  // the preceeding three functions will still work without a ball, leaving the value at zero
 
   $('.btn-reset').click(function() {
     robot.points.high = 0;
@@ -127,6 +117,7 @@ $(document).ready(function() {
     robot.balls.current = 0;
     updateDisplay();
   });
+  // reset button logic, sets all values to 0
 
   function updateDisplay() {
     if (robot.balls.current < 0) {
@@ -182,11 +173,27 @@ $(document).ready(function() {
       $('#miss-box').removeClass('alert');
     }
 
+    robot.rotation = false;
+    robot.position = true;
+
+    if (rotationSuccessStatus == 1) {
+      robot.rotation = true;
+    }
+    if (positionSuccessStatus == 1) {
+      robot.position = true;
+    }
+
     $('#ball-count-display').text(robot.balls.current);
     $('#high-ball-display').text(robot.points.high);
     $('#low-ball-display').text(robot.points.low);
     $('#miss-display').text(robot.points.miss);
   }
+  // first checks for inadmissible values
+  // negative numbers are given a fast warning immediately
+  // having 6 balls held gives a slow warning, alerting the user to watch their data
+  // 7 or more balls gives a fast warning, letting the user know they or the robot have made a mistake
+  // sets pizza wheel values to false, making them true if they have been tapped an odd number of times
+  // finally, refreshes all values to the HUD
 
   $('.button-event').click(function() {
     const $btnEvent = $(this);
@@ -196,6 +203,7 @@ $(document).ready(function() {
       eventPhase: $btnEvent.data('event-phase'),
     });
   });
+  // upon logging a button event (such as a pickup or score), adds the event to the robot's array of events
 
   /* Undo Logic */
 
@@ -218,9 +226,10 @@ $(document).ready(function() {
         removeCount(event);
       }
     }
-
     updateDisplay();
   });
+  // undo button function, checks if the button event is one that allows undo (such as a pickup or score)
+  // if valid, removes that event from the robot's array, calling removeCount to fix the values
 
   function isEventValid(currentEvent, eventPhase) {
     if ((currentEvent.eventType == 'pickup' || currentEvent.eventType == 'high' || currentEvent.eventType == 'low' || currentEvent.eventType == 'miss') && (eventPhase == 'auto' || eventPhase == 'teleop')) {
@@ -228,6 +237,8 @@ $(document).ready(function() {
     }
     return false;
   }
+  // tests if the previous event was undoable, checking its id against the four undoable actions.
+  // these actions are pickup, high score, low score, miss
 
   function removeCount(events) {
     switch (events.eventType) {
@@ -248,17 +259,17 @@ $(document).ready(function() {
         break;
     }
   }
-
-  /* Pizza Time Logic */
+  // depending on the event, increments or decrements values to counteract the event
+  // values are actually independent of events - they are only incremented and decremented upon event logging
 
   $('#rotation-successful').click(function() {
-    rotationSuccessStatus = 1;
-    rotationFailureStatus = 0;
+    rotationSuccessStatusRaw++;
     robotStatus(robot);
   });
+  // overrides rotation success to true
 
   $('#position-successful').click(function() {
-    positionSuccessStatus = 1;
-    positionFailureStatus = 0;
+    positionSuccessStatusRaw++;
     robotStatus(robot);
   });
+});

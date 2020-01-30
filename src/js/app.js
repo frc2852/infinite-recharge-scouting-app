@@ -7,9 +7,6 @@ $(document).ready(function() {
   let rotationSuccessStatusRaw = 0;
   let positionSuccessStatusRaw = 0;
   // creates raw variables for pizza wheel
-  let rotationSuccessStatus = rotationSuccessStatusRaw % 2;
-  let positionSuccessStatus = positionSuccessStatusRaw % 2;
-  // interpret raw variables by finding if they are even or odd
 
   const robot = {
     matchStartTime: 0,
@@ -23,8 +20,8 @@ $(document).ready(function() {
       miss: 0,
     },
     wheel: {
-      rotation: false,
-      position: false,
+      rotation: rotationSuccessStatusRaw % 2,
+      position: positionSuccessStatusRaw % 2,
     },
     climb: {
       success: climbStatus,
@@ -173,26 +170,15 @@ $(document).ready(function() {
       $('#miss-box').removeClass('alert');
     }
 
-    robot.rotation = false;
-    robot.position = true;
-
-    if (rotationSuccessStatus == 1) {
-      robot.rotation = true;
-    }
-    if (positionSuccessStatus == 1) {
-      robot.position = true;
-    }
-
     $('#ball-count-display').text(robot.balls.current);
     $('#high-ball-display').text(robot.points.high);
     $('#low-ball-display').text(robot.points.low);
     $('#miss-display').text(robot.points.miss);
   }
   // first checks for inadmissible values
-  // negative numbers are given a fast warning immediately
-  // having 6 balls held gives a slow warning, alerting the user to watch their data
-  // 7 or more balls gives a fast warning, letting the user know they or the robot have made a mistake
-  // sets pizza wheel values to false, making them true if they have been tapped an odd number of times
+  // negative numbers are given a less important warning immediately
+  // having 6 balls held gives a lesser warning, alerting the user to watch their data
+  // 7 or more balls gives an annoying warning, letting the user know they or the robot have made a mistake
   // finally, refreshes all values to the HUD
 
   $('.button-event').click(function() {
@@ -237,7 +223,7 @@ $(document).ready(function() {
     }
     return false;
   }
-  // tests if the previous event was undoable, checking its id against the four undoable actions.
+  // tests if the previous event was undoable, checking its id against the four undoable actions
   // these actions are pickup, high score, low score, miss
 
   function removeCount(events) {
@@ -266,10 +252,11 @@ $(document).ready(function() {
     rotationSuccessStatusRaw++;
     robotStatus(robot);
   });
-  // overrides rotation success to true
+  // toggles rotation success
 
   $('#position-successful').click(function() {
     positionSuccessStatusRaw++;
     robotStatus(robot);
   });
+  // toggles position success
 });

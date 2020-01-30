@@ -59,10 +59,6 @@ $(document).ready(function() {
     $('#offense').removeClass('hidden');
   });
 
-  /* $('#tab-pregame').click(function() {
-        $('.hud').addClass('hidden');
-    }); */
-
   $('.phase-choice').click(function() {
     const $phaseChosen = $(this);
     const activeColour = $phaseChosen.data('active-colour');
@@ -71,10 +67,6 @@ $(document).ready(function() {
     $('.phase-choice').removeClass('active-blue');
     $phaseChosen.addClass(activeColour);
   });
-
-  /*$('.pregame').click(function(){
-            $('.phase-tab').addClass('hidden');
-      })  */
 
   $('.toggle').click(function() {
     const $toggled = $(this);
@@ -196,9 +188,6 @@ $(document).ready(function() {
     $('#miss-display').text(robot.points.miss);
   }
 
-  $('.btn-preload').click(function() {
-    const $preload = $(this);
-
   $('.button-event').click(function() {
     const $btnEvent = $(this);
     robot.events.push({
@@ -268,78 +257,8 @@ $(document).ready(function() {
     robotStatus(robot);
   });
 
-  $('#rotation-failed').click(function() {
-    rotationFailureStatus = 1;
-    rotationSuccessStatus = 0;
-    robotStatus(robot);
-  });
-
   $('#position-successful').click(function() {
     positionSuccessStatus = 1;
     positionFailureStatus = 0;
     robotStatus(robot);
   });
-
-  $('#position-failed').click(function() {
-    positionFailureStatus = 1;
-    positionSuccessStatus = 0;
-    robotStatus(robot);
-  });
-
-  /* Monkey Bar Logic */
-
-  $('#climb-successful').click(function() {
-    climbStatus = 1;
-    fallStatus = 0;
-    autoBalanceStatus = 0;
-    parkStatus = 0;
-    robotStatus(robot);
-  });
-
-  $('#climb-fall').click(function() {
-    climbStatus = 0;
-    fallStatus = 1;
-    autoBalanceStatus = 0;
-    parkStatus = 0;
-    robotStatus(robot);
-  });
-
-  $('#climb-autobalance').click(function() {
-    climbStatus = 0;
-    fallStatus = 0;
-    autoBalanceStatus = 1;
-    parkStatus = 0;
-    robotStatus(robot);
-  });
-
-  $('#park-successful').click(function() {
-    climbStatus = 0;
-    fallStatus = 0;
-    autoBalanceStatus = 0;
-    parkStatus = 1;
-    robotStatus(robot);
-  });
-
-  /* Toggle Logic */
-
-  $('.rotation-toggle').click(function() {
-    const $rotationState = $(this);
-
-    $('.rotation-toggle').removeClass('button-active');
-    $rotationState.addClass('button-active');
-  });
-
-  $('.position-toggle').click(function() {
-    const $positionState = $(this);
-
-    $('.position-toggle').removeClass('button-active');
-    $positionState.addClass('button-active');
-  });
-
-  $('.endgame-toggle').click(function() {
-    const $endgameState = $(this);
-
-    $('.endgame-toggle').removeClass('button-active');
-    $endgameState.addClass('button-active');
-  });
-});

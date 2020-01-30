@@ -11,9 +11,7 @@ $(document).ready(function() {
   const robot = {
     matchStartTime: 0,
     hasAuto: 0,
-    balls: {
-      current: 0,
-    },
+    balls: 0,
     points: {
       high: 0,
       low: 0,
@@ -23,11 +21,14 @@ $(document).ready(function() {
       rotation: rotationSuccessStatusRaw % 2,
       position: positionSuccessStatusRaw % 2,
     },
+    defence: {
+      rating = undefined;
+    }
     events: [],
   };
-  // robot object, will hold all of a robot's numbers and events
+  // robot object, contains all of a robot's numbers and events
 
-  $('#ball-count-display').text(robot.balls.current);
+  $('#ball-count-display').text(robot.balls);
   $('#high-ball-display').text(robot.points.high);
   $('#low-ball-display').text(robot.points.low);
   $('#miss-display').text(robot.points.miss);
@@ -66,84 +67,74 @@ $(document).ready(function() {
   });
   // tab select logic, shows and hides respective tab containers
 
-  $('.btn-pickup').click(function() {
-    robot.balls.current++;
-    updateDisplay();
-  });
-  // pickup button then update (all proceeding buttons update display)
-
-  $('.btn-high-goal').click(function() {
-    robot.points.high++;
-    if (robot.balls.current > 0) {
-      robot.balls.current--;
-    }
-    updateDisplay();
-  });
-  // high goal button, uses picked up ball
-
-  $('.btn-low-goal').click(function() {
-    robot.points.low++;
-    if (robot.balls.current > 0) {
-      robot.balls.current--;
-    }
-    updateDisplay();
-  });
-  // low goal button, uses picked up ball
-
-  $('.btn-miss').click(function() {
-    robot.points.miss++;
-    if (robot.balls.current > 0) {
-      robot.balls.current--;
-    }
-    updateDisplay();
-  });
-  // missed ball button, uses picked up ball
+  $('.scoring-button').click(function() {});
+  // all scoring buttons force the HUD to refresh
 
   // the preceeding three functions will still work without a ball, leaving the value at zero
 
-  $('.btn-reset').click(function() {
-    robot.points.high = 0;
-    robot.points.low = 0;
-    robot.points.miss = 0;
-    robot.balls.current = 0;
-    updateDisplay();
-  });
+  // $('.btn-reset').click(function() {
+  //   while (robot.events.length > 0) {
+  //     robot.events.pop();
+  //   }
+  // });
   // reset button logic, sets all values to 0
 
-  function checkIfInvalidNumbers() {
-    if (robot.balls.current < 0) {
+  $('.btn-reset').click(function() {
+    alert('Data saved. Press OK to view raw data.');
+    alert(JSON.stringify(robot));
+  });
+  // TEMPORARY reset button code that instead displays a fake alert stating the data was saved
+
+  function checkForInvalidNumbers() {
+    if (robot.balls < 0) {
       $('#ball-count-box').addClass('alert');
+      $('.btn-undo').addClass('pre-alert');
     }
-    if (robot.balls.current == 0) {
+    if (robot.balls == 0) {
       $('#ball-count-box').removeClass('alert');
       $('#ball-count-box').removeClass('pre-alert');
+      $('.btn-undo').removeClass('alert');
+      $('.btn-undo').removeClass('pre-alert');
     }
-    if (robot.balls.current == 1) {
+    if (robot.balls == 1) {
       $('#ball-count-box').removeClass('alert');
       $('#ball-count-box').removeClass('pre-alert');
+      $('.btn-undo').removeClass('alert');
+      $('.btn-undo').removeClass('pre-alert');
     }
-    if (robot.balls.current == 2) {
+    if (robot.balls == 2) {
       $('#ball-count-box').removeClass('alert');
       $('#ball-count-box').removeClass('pre-alert');
+      $('.btn-undo').removeClass('alert');
+      $('.btn-undo').removeClass('pre-alert');
     }
-    if (robot.balls.current == 3) {
+    if (robot.balls == 3) {
       $('#ball-count-box').removeClass('alert');
       $('#ball-count-box').removeClass('pre-alert');
+      $('.btn-undo').removeClass('alert');
+      $('.btn-undo').removeClass('pre-alert');
     }
-    if (robot.balls.current == 4) {
+    if (robot.balls == 4) {
       $('#ball-count-box').removeClass('alert');
       $('#ball-count-box').removeClass('pre-alert');
+      $('.btn-undo').removeClass('alert');
+      $('.btn-undo').removeClass('pre-alert');
     }
-    if (robot.balls.current == 5) {
+    if (robot.balls == 5) {
       $('#ball-count-box').removeClass('alert');
       $('#ball-count-box').removeClass('pre-alert');
+      $('.btn-undo').removeClass('alert');
+      $('.btn-undo').removeClass('pre-alert');
     }
-    if (robot.balls.current == 6) {
+    if (robot.balls == 6) {
       $('#ball-count-box').removeClass('alert');
       $('#ball-count-box').addClass('pre-alert');
+      $('.btn-undo').removeClass('alert');
+      $('.btn-undo').addClass('pre-alert');
     }
-    if (robot.balls.current > 6) {
+    if (robot.balls > 6) {
       $('#ball-count-box').addClass('alert');
+      $('.btn-undo').addClass('alert');
     }
     if (robot.points.high < 0) {
       $('#high-ball-box').addClass('alert');
@@ -167,17 +158,26 @@ $(document).ready(function() {
   // checks if numbers are invalid for each value, and assigns/removes warning classes based on results
 
   function updateDisplay() {
-    checkIfInvalidNumbers();
+    robot.balls = 0;
+    robot.points.high = 0;
+    robot.points.low = 0;
+    robot.points.miss = 0;
 
-    robot.balls.currrent = forEach(countEvents(robot.events, pickup));
-    robot.points.high = forEach(countEvents(robot.events, high));
-    robot.points.low = forEach(countEvents(robot.events, low));
-    robot.points.miss = forEach(countEvents(robot.events, miss));
+    robot.balls = countEvents(robot.events, 'pickup');
+    robot.points.high = countEvents(robot.events, 'high');
+    robot.points.low = countEvents(robot.events, 'low');
+    robot.points.miss = countEvents(robot.events, 'miss');
 
-    $('#ball-count-display').text(robot.balls.current);
+    if (robot.balls < 0) {
+      robot.balls = 0;
+    }
+
+    $('#ball-count-display').text(robot.balls);
     $('#high-ball-display').text(robot.points.high);
     $('#low-ball-display').text(robot.points.low);
     $('#miss-display').text(robot.points.miss);
+
+    checkForInvalidNumbers();
   }
   // checks for inadmissible values
   // updates robot values for the count of each event
@@ -190,36 +190,59 @@ $(document).ready(function() {
       eventType: $btnEvent.data('event-type'),
     });
     console.log(robot);
+    updateDisplay();
   });
   // upon logging a button event (such as a pickup or score), adds the event to the robot's array of events
 
   function countEvents(array, type) {
     let count = 0;
-    for (var i = 0; i < array.length; ++i) {
-      if (type == pickup) {
-        if (array[i].eventType == pickup) {
+    if (type == 'pickup') {
+      for (var i = 0; i < array.length; i++) {
+        if (array[i].eventType == 'pickup') {
           count++;
         }
-        return count;
+        if (array[i].eventType == 'high') {
+          count--;
+        }
+        if (array[i].eventType == 'low') {
+          count--;
+        }
+        if (array[i].eventType == 'miss') {
+          count--;
+        }
       }
-      if (type == high) {
-        if (array[i].eventType == high) {
+      console.log(count);
+      return count;
+    }
+
+    if (type == 'high') {
+      for (var i = 0; i < array.length; ++i) {
+        if (array[i].eventType == 'high') {
           count++;
         }
-        return count;
       }
-      if (type == low) {
-        if (array[i].eventType == low) {
+      console.log(count);
+      return count;
+    }
+
+    if (type == 'low') {
+      for (var i = 0; i < array.length; ++i) {
+        if (array[i].eventType == 'low') {
           count++;
         }
-        return count;
       }
-      if (type == miss) {
-        if (array[i].eventType == miss) {
+      console.log(count);
+      return count;
+    }
+
+    if (type == 'miss') {
+      for (var i = 0; i < array.length; ++i) {
+        if (array[i].eventType == 'miss') {
           count++;
         }
-        return count;
       }
+      console.log(count);
+      return count;
     }
   }
 
@@ -239,14 +262,13 @@ $(document).ready(function() {
       if (lastEventIndex != undefined) {
         const event = robot.events[lastEventIndex];
         robot.events.splice(lastEventIndex, 1);
-        removeCount(event);
       }
     }
     updateDisplay();
     console.log(robot);
   });
   // undo button function, checks if the button event is one that allows undo (such as a pickup or score)
-  // if valid, removes that event from the robot's array, calling removeCount to fix the values
+  // if valid, removes that event from the robot's array
 
   function isEventValid(currentEvent) {
     if (currentEvent.eventType == 'pickup' || currentEvent.eventType == 'high' || currentEvent.eventType == 'low' || currentEvent.eventType == 'miss') {
@@ -268,4 +290,17 @@ $(document).ready(function() {
     robotStatus(robot);
   });
   // toggles position success
+
+  $('#fire').click(function() {
+    robot.defense.rating = 2
+  });
+
+  $('#ok').click(function() {
+    robot.defense.rating = 1
+  });
+
+  $('#bad').click(function() {
+    robot.defense.rating = 0
+  });
+  //set defense values to a number representing the chosen emoji
 });

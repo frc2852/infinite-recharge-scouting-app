@@ -128,29 +128,47 @@ $(document).ready(function() {
     updateDisplay();
   });
 
+  $('.btn-reset').click(function() {
+    robot.points.high = 0;
+    robot.points.low = 0;
+    robot.points.miss = 0;
+    robot.balls.current = 0;
+    updateDisplay();
+  });
+
   function updateDisplay() {
     if (robot.balls.current < 0) {
       $('#ball-count-box').addClass('alert');
     }
     if (robot.balls.current == 0) {
       $('#ball-count-box').removeClass('alert');
+      $('#ball-count-box').removeClass('pre-alert');
     }
     if (robot.balls.current == 1) {
       $('#ball-count-box').removeClass('alert');
+      $('#ball-count-box').removeClass('pre-alert');
     }
     if (robot.balls.current == 2) {
       $('#ball-count-box').removeClass('alert');
+      $('#ball-count-box').removeClass('pre-alert');
     }
     if (robot.balls.current == 3) {
       $('#ball-count-box').removeClass('alert');
+      $('#ball-count-box').removeClass('pre-alert');
     }
     if (robot.balls.current == 4) {
       $('#ball-count-box').removeClass('alert');
+      $('#ball-count-box').removeClass('pre-alert');
     }
     if (robot.balls.current == 5) {
       $('#ball-count-box').removeClass('alert');
+      $('#ball-count-box').removeClass('pre-alert');
     }
-    if (robot.balls.current > 5) {
+    if (robot.balls.current == 6) {
+      $('#ball-count-box').removeClass('alert');
+      $('#ball-count-box').addClass('pre-alert');
+    }
+    if (robot.balls.current > 6) {
       $('#ball-count-box').addClass('alert');
     }
     if (robot.points.high < 0) {
@@ -180,10 +198,6 @@ $(document).ready(function() {
 
   $('.btn-preload').click(function() {
     const $preload = $(this);
-
-    $('.btn-preload').removeClass('preload-button-rb-active');
-    $preload.addClass('preload-button-rb-active');
-  });
 
   $('.button-event').click(function() {
     const $btnEvent = $(this);

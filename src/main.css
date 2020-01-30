@@ -168,7 +168,7 @@
   width: 100%;
 }
 
-.reset {
+.btn-reset {
   @apply rounded-lg;
   position: absolute;
   bottom: 4;
@@ -176,4 +176,45 @@
   margin-bottom: 4px;
   margin-left: 4px;
   @apply bg-red-700;
+}
+
+.pre-alert {
+  background-color: white;
+  animation-name: pre-alert-animation;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes pre-alert-animation {
+  0% {
+    background-color: red;
+  }
+  50% {
+    background-color: transparent;
+  }
+  100% {
+    background-color: red;
+  }
+}
+
+.alert {
+  background-color: white;
+  animation-name: alert-animation;
+  animation-duration: 0.2s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes alert-animation {
+  0% {
+    background-color: red;
+  }
+  50% {
+    background-color: transparent;
+  }
+  80% {
+    background-color: transparent;
+  }
+  100% {
+    background-color: red;
+  }
 }

@@ -17,6 +17,7 @@
   @apply border-gray-200;
   @apply bg-gray-200;
 }
+/* set for the top-row menu */
 
 .status-menu {
   @apply inline-block;
@@ -36,6 +37,7 @@
   @apply bg-blue-500;
   @apply text-black;
 }
+/* set for the bottom-row menu */
 
 .button-square {
   @apply border;
@@ -52,6 +54,7 @@
 .button-square:hover {
   @apply border-gray-700;
 }
+/* set for standard square buttons */
 
 .button-rectangle {
   @apply border;
@@ -68,6 +71,7 @@
 .button-rectangle:hover {
   @apply border-gray-700;
 }
+/* set for standard rectangle (short) buttons */
 
 .button-endgame {
   @apply border;
@@ -88,6 +92,7 @@
 .button-endgame:hover {
   @apply border-gray-700;
 }
+/* set for endgame status buttons */
 
 .button-estop {
   @apply border;
@@ -108,12 +113,14 @@
 .button-estop:hover {
   @apply border-gray-700;
 }
+/* special case set for the wider estop button */
 
 .title {
   @apply text-4xl;
   text-align: center;
   /* font-family: tbd; */
 }
+/* the title line for each tab */
 
 .robot-photo {
   display: block;
@@ -122,12 +129,7 @@
   height: 300px;
   width: 300px;
 }
-
-/* .emoji-container {
-  background-color: transparent;
-  padding-top: 0px;
-  padding-bottom: 0px;
-} */
+/* robot photo on info page */
 
 .button-emoji {
   @apply border;
@@ -148,16 +150,19 @@
 .button-emoji:hover {
   @apply border-gray-700;
 }
+/* set for emoji buttons */
 
 .toggle-active {
   @apply bg-gray-500;
   @apply border-green-500;
 }
+/* button is toggled on */
 
 .emoji-toggle-active {
   @apply bg-gray-500;
   @apply border-green-500;
 }
+/* emoji button is toggled on */
 
 .start-button {
   border-color: transparent;
@@ -167,6 +172,7 @@
   height: 50%;
   width: 100%;
 }
+/* the start button */
 
 .btn-reset {
   @apply rounded-lg;
@@ -177,6 +183,7 @@
   margin-left: 4px;
   @apply bg-red-700;
 }
+/* reset button */
 
 .pre-alert {
   background-color: white;
@@ -196,6 +203,7 @@
     background-color: red;
   }
 }
+/* a slower alert for non-vital issues */
 
 .alert {
   background-color: white;
@@ -211,10 +219,8 @@
   50% {
     background-color: transparent;
   }
-  80% {
-    background-color: transparent;
-  }
   100% {
     background-color: red;
   }
 }
+/* a fast alert for issues requiring immediate action */

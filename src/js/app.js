@@ -338,5 +338,5 @@ $(document).ready(function() {
   $('#estop').click(function() {
     estopRaw++;
   });
-  // toggle endgame statuses
+  // toggle endgame status values
 });

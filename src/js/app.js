@@ -6,7 +6,15 @@ $(document).ready(function() {
 
   let rotationSuccessStatusRaw = 0;
   let positionSuccessStatusRaw = 0;
-  // creates raw variables for pizza wheel
+
+  let disconnectStatusRaw = 0;
+  let failureStatusRaw = 0;
+  let yellowRaw = 0;
+  let redRaw = 0;
+  let estopRaw = 0;
+  // creates raw variables
+  // a raw variable is one that another variable filters to get a refined amount
+  // for example, modulus of 2 to find if it is even or odd and return that value
 
   const robot = {
     matchStartTime: 0,
@@ -22,7 +30,14 @@ $(document).ready(function() {
       position: positionSuccessStatusRaw % 2,
     },
     defence: {
-      rating = undefined,
+      rating: undefined,
+    },
+    status: {
+      disconnect: disconnectStatusRaw % 2,
+      failure: failureStatusRaw % 2,
+      yellow: yellowRaw % 2,
+      red: redRaw % 2,
+      estop: estopRaw % 2,
     },
     events: [],
   };
@@ -292,29 +307,36 @@ $(document).ready(function() {
   // toggles position success
 
   $('#fire').click(function() {
-    robot.defense.rating = 2
+    robot.defense.rating = 2;
   });
 
   $('#ok').click(function() {
-    robot.defense.rating = 1
+    robot.defense.rating = 1;
   });
 
   $('#bad').click(function() {
-    robot.defense.rating = 0
+    robot.defense.rating = 0;
   });
-  //set defense values to a number representing the chosen emoji
+  // set defense values to a number representing the chosen emoji
 
-  $('#disconnect').click(function(){
+  $('#disconnect').click(function() {
     disconnectStatusRaw++;
-  })
-
-  $('#failure').click(function(){
-    failiureStatusRaw++;
-  })
-
-  $('.card').click(function() {
-    const $cardChosen = $(this);
-    $('.card').removeClass('toggle-active')
-    $cardChosen.addClass('toggle-active');
   });
+
+  $('#failure').click(function() {
+    failureStatusRaw++;
+  });
+
+  $('#yellow').click(function() {
+    yellowRaw++;
+  });
+
+  $('#red').click(function() {
+    redRaw++;
+  });
+
+  $('#estop').click(function() {
+    estopRaw++;
+  });
+  // toggle endgame statuses
 });

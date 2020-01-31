@@ -22,8 +22,8 @@ $(document).ready(function() {
       position: positionSuccessStatusRaw % 2,
     },
     defence: {
-      rating = undefined;
-    }
+      rating = undefined,
+    },
     events: [],
   };
   // robot object, contains all of a robot's numbers and events
@@ -303,4 +303,18 @@ $(document).ready(function() {
     robot.defense.rating = 0
   });
   //set defense values to a number representing the chosen emoji
+
+  $('#disconnect').click(function(){
+    disconnectStatusRaw++;
+  })
+
+  $('#failure').click(function(){
+    failiureStatusRaw++;
+  })
+
+  $('.card').click(function() {
+    const $cardChosen = $(this);
+    $('.card').removeClass('toggle-active')
+    $cardChosen.addClass('toggle-active');
+  });
 });

@@ -24,6 +24,24 @@ module.exports = {
                 exclude: /node_modules/,
                 loader: 'babel-loader',
             },
+            {
+                test: /\.html$/,
+                use: ['html-loader']
+            },
+            {
+                test: /\.(svg|jpg|png|gif)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            esModule: false,
+                            name: '[name].[ext]',
+                            outputPath: 'assets/',
+                            publicPath: 'assets/'
+                        }
+                    }
+                ]
+            }
         ],
     },
     plugins: htmlLoader(srcPath + 'pages', [

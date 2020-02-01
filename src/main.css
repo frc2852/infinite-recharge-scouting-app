@@ -11,6 +11,7 @@
   @apply py-1;
   @apply px-3;
   @apply text-sm;
+  @apply bg-gray-100;
 }
 
 .submenu:hover {

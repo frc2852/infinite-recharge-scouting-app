@@ -244,6 +244,7 @@
 }
 
 .pit-bg {
+  @apply leading-relaxed;
   background-image: repeating-linear-gradient(to right, rgb(164, 223, 146), rgb(217, 221, 149));
 }
 
@@ -257,4 +258,41 @@
 .submit-button {
   @apply text-3xl;
   @apply m-4;
+}
+
+.index-bg {
+  @apply bg-gray-100;
+}
+
+.app-select-button {
+  @apply rounded-lg;
+  @apply border-2;
+  @apply text-4xl;
+  @apply font-bold;
+  @apply text-center;
+  @apply border-gray-500;
+  @apply bg-gray-200;
+  padding-top: 75px;
+  padding-bottom: 75px;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 10px;
+  margin-right: 10px;
+  vertical-align: center;
+}
+
+.app-select-button:hover {
+  @apply border-gray-700;
+}
+
+.index-header {
+  @apply text-6xl;
+  text-align: center;
+  @apply font-bold;
+}
+
+.index-welcome {
+  @apply text-3xl;
+  text-align: center;
+  @apply text-blue-500;
 }

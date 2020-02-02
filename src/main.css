@@ -244,15 +244,16 @@
 }
 
 .pit-bg {
-  @apply leading-relaxed;
+  @apply leading-loose;
+  @apply text-xl;
   background-image: repeating-linear-gradient(to right, rgb(164, 223, 146), rgb(217, 221, 149));
 }
 
 .pit-title {
   @apply text-6xl;
-  @apply font-black;
+  @apply font-semibold;
   text-align: center;
-  @apply bg-red-600;
+  background-image: linear-gradient(to right, rgb(235, 124, 124), rgb(217, 221, 149));
 }
 
 .submit-button {
@@ -261,17 +262,17 @@
 }
 
 .index-bg {
-  @apply bg-gray-100;
+  @apply bg-gray-200;
 }
 
 .app-select-button {
   @apply rounded-lg;
-  @apply border-2;
-  @apply text-4xl;
+  @apply border-4;
+  @apply text-5xl;
   @apply font-bold;
   @apply text-center;
   @apply border-gray-500;
-  @apply bg-gray-200;
+  @apply bg-gray-300;
   padding-top: 75px;
   padding-bottom: 75px;
   margin-top: auto;

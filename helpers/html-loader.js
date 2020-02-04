@@ -12,7 +12,14 @@ module.exports = (folder, plugins) => {
     .filter(file => file.indexOf('.html') > 1)
     .map(file => {
       const fileName = file.split('.')[0];
-      return new HtmlWebpackPlugin({ template: folder + file, filename: file, chucks: ['js/' + fileName, 'js/app'] });
+
+      return new HtmlWebpackPlugin({
+        template: folder + file,
+        filename: file,
+        chucks: [
+          'js/' + fileName
+        ]
+      });
     })
     .concat(plugins);
 };

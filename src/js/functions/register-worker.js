@@ -5,5 +5,5 @@ module.exports = () => {
         return;
     }
 
-    navigator.serviceWorker.register('/service-worker.js');
+    navigator.serviceWorker.register('service-worker.js');
 }

@@ -1,3 +1,237 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.submenu {
+  @apply inline-block;
+  @apply border;
+  @apply border-white;
+  @apply rounded-lg;
+  @apply text-blue-500;
+  @apply py-1;
+  @apply px-3;
+  @apply text-sm;
+  @apply bg-gray-100;
+}
+
+.submenu:hover {
+  @apply border-gray-200;
+  @apply bg-gray-200;
+}
+/* set for the top-row menu */
+
+.status-menu {
+  @apply inline-block;
+  @apply border;
+  @apply border-white;
+  @apply rounded-lg;
+  @apply text-black;
+  @apply py-1;
+  @apply px-3;
+  @apply bg-gray-200;
+  @apply text-center;
+  @apply my-4;
+}
+
+.status-menu:hover {
+  @apply border-gray-400;
+  @apply bg-blue-500;
+  @apply text-black;
+}
+/* set for the bottom-row menu */
+
+.button-square {
+  @apply border;
+  @apply border-transparent;
+  @apply border-4;
+  @apply rounded-lg;
+  display: inline-block;
+  margin: 14px;
+  @apply bg-gray-300;
+  @apply p-12;
+  @apply text-2xl;
+}
+
+.button-square:hover {
+  @apply border-gray-700;
+}
+/* set for standard square buttons */
+
+.button-rectangle {
+  @apply border;
+  @apply border-transparent;
+  @apply border-4;
+  @apply rounded-lg;
+  display: inline-block;
+  margin: 2px;
+  @apply bg-gray-300;
+  @apply p-2;
+  @apply text-2xl;
+}
+
+.button-rectangle:hover {
+  @apply border-gray-700;
+}
+/* set for standard rectangle (short) buttons */
+
+.button-endgame {
+  @apply border;
+  @apply border-transparent;
+  @apply border-4;
+  @apply rounded-lg;
+  display: block;
+  margin-left: 4px;
+  margin-right: 4px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  height: 60%;
+  width: 60%;
+  @apply bg-gray-300;
+  @apply px-16;
+}
+
+.button-endgame:hover {
+  @apply border-gray-700;
+}
+/* set for endgame status buttons */
+
+.button-estop {
+  @apply border;
+  @apply border-transparent;
+  @apply border-4;
+  @apply rounded-lg;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 60%;
+  width: 60%;
+  @apply bg-gray-300;
+  @apply px-16;
+}
+
+.button-estop:hover {
+  @apply border-gray-700;
+}
+/* special case set for the wider estop button */
+
+.title {
+  @apply text-4xl;
+  text-align: center;
+  /* font-family: tbd; */
+}
+/* the title line for each tab */
+
+.robot-photo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 300px;
+  width: 300px;
+}
+/* robot photo on info page */
+
+.button-emoji {
+  @apply border;
+  @apply border-transparent;
+  @apply border-4;
+  @apply rounded-lg;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 60%;
+  @apply bg-gray-300;
+  @apply px-16;
+}
+
+.button-emoji:hover {
+  @apply border-gray-700;
+}
+/* set for emoji buttons */
+
+.toggle-active {
+  @apply bg-gray-500;
+  @apply border-green-500;
+}
+/* button is toggled on */
+
+.emoji-toggle-active {
+  @apply bg-gray-500;
+  @apply border-green-500;
+}
+/* emoji button is toggled on */
+
+.start-button {
+  border-color: transparent;
+  background-image: linear-gradient(to right, red, orange, yellow, green, blue);
+  border-radius: 50%;
+  @apply text-6xl;
+  text-align: center;
+}
+/* the start button */
+
+.btn-reset {
+  @apply rounded-lg;
+  position: absolute;
+  bottom: 4;
+  left: 1;
+  margin-bottom: 4px;
+  margin-left: 4px;
+  @apply bg-red-700;
+}
+/* reset button */
+
+.btn-reset {
+  @apply rounded-lg;
+  @apply text-2xl;
+  position: absolute;
+  bottom: 4;
+  left: 1;
+  margin-bottom: 4px;
+  margin-left: 4px;
+  @apply bg-blue-700;
+}
+/* TEMPORARY reset button, used as a save button*/
+
+.pre-alert {
+  background-color: white;
+  animation-name: pre-alert-animation;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes pre-alert-animation {
+  0% {
+    background-color: red;
+  }
+  50% {
+    background-color: transparent;
+  }
+  100% {
+    background-color: red;
+  }
+}
+/* a slower alert for non-vital issues */
+
+.alert {
+  background-color: white;
+  animation-name: alert-animation;
+  animation-duration: 0.2s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes alert-animation {
+  0% {
+    background-color: red;
+  }
+  50% {
+    background-color: transparent;
+  }
+  100% {
+    background-color: red;
+  }
+}
+/* a fast alert for issues requiring immediate action */

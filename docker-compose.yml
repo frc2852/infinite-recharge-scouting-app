@@ -10,3 +10,12 @@ services:
     volumes:
       - .:/app
     network_mode: "bridge"
+  engine-secure:
+    image: node:12.13.0-alpine
+    command: npm run dev-server-secure
+    working_dir: /app
+    ports:
+      - "8083:8083"
+    volumes:
+      - .:/app
+    network_mode: "bridge"

@@ -8,13 +8,16 @@ self.addEventListener('fetch', event => {
             try {
                 const response = await fetch(event.request);
                 if (validResponse(response)) {
-                    const responseToCache = response.clone();
-                    caches.open(OFFLINE_PAGES).then(cache => cache.put(event.request, responseToCache))
+
+                    if (event.request.method === "GET") {
+                        const responseToCache = response.clone();
+                        await caches.open(OFFLINE_PAGES).then(cache => cache.put(event.request, responseToCache))
+                    }
 
                     return response;
                 }
             } catch (e) {
-                console.error(e);
+                console.log(e);
             }
         }
 

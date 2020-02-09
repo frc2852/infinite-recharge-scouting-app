@@ -314,6 +314,14 @@
 
 .wipe:hover {
   @apply border-red-700;
-  @apply bg-red-400;
+  background-image: radial-gradient(transparent, rgb(255, 0, 0));
   @apply text-black;
+}
+
+.colour-toggled {
+  @apply bg-gray-500;
+}
+
+.station-toggled {
+  @apply bg-gray-500;
 }

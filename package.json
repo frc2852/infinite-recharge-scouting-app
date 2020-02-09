@@ -6,7 +6,8 @@
     "scripts": {
         "build": "node_modules/.bin/webpack",
         "deploy": "node_modules/.bin/gh-pages -d dist",
-        "dev-server": "node_modules/.bin/webpack-dev-server --host 0.0.0.0 --watch"
+        "dev-server": "node_modules/.bin/webpack-dev-server --host 0.0.0.0 --watch",
+        "dev-server-secure": "node_modules/.bin/webpack-dev-server --host 0.0.0.0 --watch --https --port 8083 --inline=false"
     },
     "author": "",
     "license": "ISC",
@@ -26,6 +27,8 @@
         "webpack-dev-server": "^3.10.1"
     },
     "dependencies": {
+        "firebase": "^7.8.0",
+        "idb": "^5.0.1",
         "jquery": "^3.4.1",
         "tailwindcss": "^1.1.4"
     }

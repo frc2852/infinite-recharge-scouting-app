@@ -3,3 +3,4 @@ dist
 .vscode
 .ssh
 reference.js
+firebase-config.js

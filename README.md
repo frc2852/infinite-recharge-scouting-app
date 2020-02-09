@@ -4,13 +4,29 @@ This project will be use for students to scout robots at FRC complitions
 
 ## Dev server setup
 
-1. Install libraries 
-```npm install```
+1. Install libraries
+```
+npm install
+```
 
 2. Start Server
-```npm run dev-server```
+```
+npm run dev-server
+```
 
 3. Then in your browser to go http://localhost:8080
+
+## Run dev server with service workers
+
+1. Start HTTPS server
+```
+npm run dev-server-secure
+```
+
+2. Start chrome to allow insecure origin
+```
+.\chrome.exe --user-data-dir=/tmp/foo --ignore-certificate-errors --unsafely-treat-insecure-origin-as-secure=https://127.0.0.1/
+```
 
 ## Deploying to github pages
 

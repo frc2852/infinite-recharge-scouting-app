@@ -11,6 +11,8 @@ module.exports = {
   entry: {
     'js/app': srcPath + 'js/app.js',
     'js/field-app': srcPath + 'js/field-app.js',
+    'js/download-schedule': srcPath + 'js/download-schedule.js',
+    'service-worker': srcPath + 'js/service-worker.js',
   },
   output: {
     path: outputFolder,

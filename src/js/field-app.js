@@ -39,6 +39,7 @@ $(document).ready(function() {
       estop: estopRaw % 2,
     },
     climb: 0,
+    comments: '',
     events: [],
   };
   // robot object, contains all of a robot's numbers and events
@@ -103,6 +104,7 @@ $(document).ready(function() {
 
   $('.btn-reset').click(function() {
     alert('Data saved. Press OK to view raw data.');
+    robot.comments = $('#comments').val();
     alert(JSON.stringify(robot));
   });
   // TEMPORARY reset button code that instead displays a fake alert stating the data was saved

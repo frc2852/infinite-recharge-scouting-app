@@ -235,3 +235,42 @@
   }
 }
 /* a fast alert for issues requiring immediate action */
+
+.endgame-container {
+  text-align: center;
+}
+.button-endgame {
+  @apply border;
+  @apply border-transparent;
+  @apply border-4;
+  @apply rounded-lg;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 294.8px;
+  height: 233.8px;
+  vertical-align: middle;
+  @apply text-6xl;
+  @apply bg-gray-300;
+  @apply px-16;
+  @apply text-center;
+}
+
+.button-endgame:hover {
+  @apply border-gray-700;
+}
+
+.endgame-toggle-active {
+  @apply bg-gray-500;
+  @apply border-green-500;
+}
+
+.comments {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  @apply border-gray-500;
+  @apply border-4;
+}

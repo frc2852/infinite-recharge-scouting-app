@@ -28,7 +28,7 @@ $(document).ready(function() {
       rotation: rotationSuccessStatusRaw % 2,
       position: positionSuccessStatusRaw % 2,
     },
-    defence: {
+    defense: {
       rating: undefined,
     },
     status: {
@@ -38,6 +38,7 @@ $(document).ready(function() {
       red: redRaw % 2,
       estop: estopRaw % 2,
     },
+    climb: 0,
     events: [],
   };
   // robot object, contains all of a robot's numbers and events
@@ -67,6 +68,13 @@ $(document).ready(function() {
     $emojiToggled.addClass('emoji-toggle-active');
   });
   // emoji toggle logic, only allows one to be active.
+
+  $('.endgame-toggle').click(function() {
+    const $endgameToggled = $(this);
+    $('.endgame-toggle').removeClass('endgame-toggle-active');
+    $endgameToggled.addClass('endgame-toggle-active');
+  });
+  // endgame toggle logic, only allows one to be active.
 
   $('.submenu').click(function() {
     const $tab = $(this);
@@ -316,7 +324,20 @@ $(document).ready(function() {
   $('#bad').click(function() {
     robot.defense.rating = 0;
   });
-  // set defense values to a number representing the chosen emoji
+  //sets defense values corresponding to the emoji chosen
+
+  $('#balanced').click(function() {
+    robot.climb = 3;
+  });
+
+  $('#climbed').click(function() {
+    robot.climb = 2;
+  });
+
+  $('#failed').click(function() {
+    robot.climb = 1;
+  });
+  // set climb values corresponding to the chosen button (0 = no data)
 
   $('#disconnect').click(function() {
     disconnectStatusRaw++;

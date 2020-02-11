@@ -1,5 +1,5 @@
 import $ from 'jquery'; // uses $ as a variable for jquery (this file is js by default)
-import { getSettings, getFirstCollectionKey } from './functions/index-db';
+import { getSettings, getFirstCollectionKey, getTotalLocalCollections } from './functions/index-db';
 
 $(document).ready(async function() {
   // forces jquery to wait until the site is ready
@@ -18,6 +18,14 @@ $(document).ready(async function() {
 
   const settings = await getSettings();
   // pulls the settings object from the object created in the settings page
+
+  let match = undefined;
+  let fieldAppState = undefined;
+  // defining variables that allow the site to interact with others and data
+
+  if ((fieldAppState = undefined)) {
+    await getTotalLocalCollections();
+  }
 
   const robot = {
     matchStartTime: 0,
@@ -45,10 +53,10 @@ $(document).ready(async function() {
     scout: settings.scout,
     events: [],
   };
-
-  const currentMatch = await getFirstCollectionKey();
-  console.log(currentMatch);
   // robot object, contains all of a robot's numbers and events
+
+  // const currentMatch = await getFirstCollectionKey();
+  // console.log(currentMatch);
 
   $('#ball-count-display').text(robot.balls);
   $('#high-ball-display').text(robot.points.high);

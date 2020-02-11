@@ -1,6 +1,7 @@
 import $ from 'jquery'; // uses $ as a variable for jquery (this file is js by default)
+import { getSettings, getFirstCollectionKey } from './functions/index-db';
 
-$(document).ready(function() {
+$(document).ready(async function() {
   // forces jquery to wait until the site is ready
 
   let rotationSuccessStatusRaw = 0;
@@ -14,6 +15,9 @@ $(document).ready(function() {
   // creates raw variables
   // a raw variable is one that another variable filters to get a refined amount
   // for example, modulus of 2 to find if it is even or odd and return that value
+
+  const settings = await getSettings();
+  // pulls the settings object from the object created in the settings page
 
   const robot = {
     matchStartTime: 0,
@@ -38,8 +42,12 @@ $(document).ready(function() {
       red: redRaw % 2,
       estop: estopRaw % 2,
     },
+    scout: settings.scout,
     events: [],
   };
+
+  const currentMatch = await getFirstCollectionKey();
+  console.log(currentMatch);
   // robot object, contains all of a robot's numbers and events
 
   $('#ball-count-display').text(robot.balls);

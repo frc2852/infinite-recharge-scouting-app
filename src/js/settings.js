@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import { saveSettings } from './functions/index-db';
 
 $(document).ready(function() {
   const settings = {
@@ -23,9 +24,10 @@ $(document).ready(function() {
     settings.station = $stationID;
   });
 
-  $('.save-settings').click(function() {
+  $('.save-settings').click(async function() {
     var name = $('#scouter').val();
     settings.scout = name;
-    alert(JSON.stringify(settings));
+    await saveSettings(settings);
+    window.location = './field-app.html';
   });
 });

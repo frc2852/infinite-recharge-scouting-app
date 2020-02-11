@@ -45,3 +45,18 @@ export const getTotalLocalCollections = async () => {
   const db = await openDB('firecache', '1.0');
   return db.getAllKeys('collections');
 };
+
+export async function saveSettings(settingsData) {
+  const db = await getDB();
+  return db.put('state', settingsData, 'settings');
+}
+
+export async function getSettings() {
+  const db = await getDB();
+  return db.get('state', 'settings');
+}
+
+export async function getFirstCollectionKey() {
+  const db = await getDB();
+  return db.getFromIndex('collections', 0);
+}

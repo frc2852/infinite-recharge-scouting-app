@@ -44,6 +44,8 @@ export const getAllDocumentsInCollection = async collectionPath => {
   return await Promise.all(
     snapshot.docs.map(async doc => {
       const data = doc.data();
+      data.id = doc.id;
+      data.collectionPath = collectionPath;
       await saveDocumentLocally(collectionPath, doc.id, data);
       return data;
     })

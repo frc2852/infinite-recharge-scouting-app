@@ -11412,6 +11412,7 @@ video {
   padding-left: 0.75rem;
   padding-right: 0.75rem;
   font-size: 0.875rem;
+  background-color: #f7fafc;
 }
 
 .submenu:hover {
@@ -11555,7 +11556,6 @@ video {
   margin-right: auto;
   margin-top: 10px;
   margin-bottom: 10px;
-  height: 60%;
   width: 60%;
   background-color: #e2e8f0;
   padding-left: 4rem;
@@ -11588,14 +11588,14 @@ video {
   background-image: linear-gradient(to right, red, orange, yellow, green, blue);
   border-radius: 50%;
   font-size: 4rem;
-  height: 50%;
-  width: 100%;
+  text-align: center;
 }
 
 /* the start button */
 
 .btn-reset {
   border-radius: 0.5rem;
+  font-size: 1.5rem;
   position: absolute;
   bottom: 4;
   left: 1;
@@ -11606,18 +11606,18 @@ video {
 
 /* reset button */
 
-.btn-reset {
+.btn-save {
   border-radius: 0.5rem;
   font-size: 1.5rem;
   position: absolute;
   bottom: 4;
-  left: 1;
+  right: 1;
   margin-bottom: 4px;
   margin-left: 4px;
   background-color: #2b6cb0;
 }
 
-/* TEMPORARY reset button, used as a save button*/
+/*save button*/
 
 .pre-alert {
   background-color: white;
@@ -11698,6 +11698,138 @@ video {
 }
 
 /* a fast alert for issues requiring immediate action */
+
+.endgame-container {
+  text-align: center;
+}
+
+.button-endgame {
+  border-width: 1px;
+  border-color: transparent;
+  border-width: 4px;
+  border-radius: 0.5rem;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 294.8px;
+  height: 233.8px;
+  vertical-align: middle;
+  font-size: 4rem;
+  background-color: #e2e8f0;
+  padding-left: 4rem;
+  padding-right: 4rem;
+  text-align: center;
+}
+
+.button-endgame:hover {
+  border-color: #4a5568;
+}
+
+.endgame-toggle-active {
+  background-color: #a0aec0;
+  border-color: #48bb78;
+}
+
+.comments {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-color: #a0aec0;
+  border-width: 4px;
+}
+
+.section-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  background-color: #bee3f8;
+  opacity: 0.5;
+}
+
+.pit-bg {
+  line-height: 2;
+  font-size: 1.25rem;
+  background-image: repeating-linear-gradient(to right, rgb(164, 223, 146), rgb(217, 221, 149));
+}
+
+.pit-title {
+  font-size: 4rem;
+  font-weight: 600;
+  text-align: center;
+  background-image: -webkit-gradient(linear, left top, right top, from(rgb(235, 124, 124)), to(rgb(217, 221, 149)));
+  background-image: linear-gradient(to right, rgb(235, 124, 124), rgb(217, 221, 149));
+}
+
+.submit-button {
+  font-size: 1.875rem;
+  margin: 1rem;
+}
+
+.index-bg {
+  background-color: #edf2f7;
+}
+
+.app-select-button {
+  border-radius: 0.5rem;
+  border-width: 4px;
+  font-size: 4rem;
+  font-weight: 700;
+  text-align: center;
+  border-color: #a0aec0;
+  background-color: #edf2f7;
+  margin-left: 32rem;
+  margin-right: 32rem;
+  padding-top: 75px;
+  padding-bottom: 75px;
+  vertical-align: center;
+}
+
+.app-select-button:hover {
+  border-color: #4a5568;
+}
+
+.index-header {
+  font-size: 4rem;
+  text-align: center;
+  font-weight: 700;
+}
+
+.index-welcome {
+  font-size: 1.875rem;
+  text-align: center;
+  color: #4299e1;
+}
+
+.wipe {
+  border-radius: 0.5rem;
+  border-width: 4px;
+  font-size: 4rem;
+  font-weight: 700;
+  text-align: center;
+  border-color: #fc8181;
+  background-color: #fed7d7;
+  color: #9b2c2c;
+  margin-left: 32rem;
+  margin-right: 32rem;
+  padding-top: 75px;
+  padding-bottom: 75px;
+  vertical-align: center;
+}
+
+.wipe:hover {
+  border-color: #c53030;
+  background-image: radial-gradient(transparent, rgb(255, 0, 0));
+  color: #000;
+}
+
+.colour-toggled {
+  background-color: #a0aec0;
+}
+
+.station-toggled {
+  background-color: #a0aec0;
+}
 
 @media (min-width: 640px) {
   .sm\:sr-only {

@@ -1,5 +1,5 @@
 import $ from 'jquery'; // uses $ as a variable for jquery (this file is js by default)
-import { getSettings, getFirstCollectionKey, getTotalLocalCollections } from './functions/index-db';
+import { getSettings, getFirstCollectionKey, getTotalLocalCollections, getDocumentLocally, saveSettings, saveFieldAppState, getFieldAppState } from './functions/index-db';
 
 $(document).ready(async function() {
   // forces jquery to wait until the site is ready
@@ -20,16 +20,23 @@ $(document).ready(async function() {
   // pulls the settings object from the object created in the settings page
 
   let match = undefined;
-  let fieldAppState = undefined;
+  let fieldAppState = await getFieldAppState();
   // defining variables that allow the site to interact with others and data
+  // if values exist loads them into the page to avoid data loss
 
-  if ((fieldAppState = undefined)) {
-    await getTotalLocalCollections();
+  if (fieldAppState == undefined) {
+    const matchKeys = await getTotalLocalCollections();
+    fieldAppState = {
+      currentMatch: await getDocumentLocally(matchKeys[0]),
+    };
   }
 
-  const robot = {
+  console.log(fieldAppState);
+
+  let robot = {
     matchStartTime: 0,
-    hasAuto: 0,
+    team: undefined,
+    colour: undefined,
     balls: 0,
     points: {
       high: 0,
@@ -55,8 +62,22 @@ $(document).ready(async function() {
   };
   // robot object, contains all of a robot's numbers and events
 
-  // const currentMatch = await getFirstCollectionKey();
-  // console.log(currentMatch);
+  if (fieldAppState != undefined) {
+    robot = fieldAppState.robot;
+    match = fieldAppState.match;
+  }
+
+  function setupRobot() {
+    robot.team = fieldAppState.currentMatch[settings.alliance][settings.station].teamKey;
+    robot.colour = settings.teamColour;
+    robot.image = fieldAppState.currentMatch[settings.alliance][settings.station].imageURLs;
+  }
+
+  setupRobot();
+  // sets data inside of the robot object to data from settings and TBA
+
+  fieldAppState.robot = robot;
+  saveFieldAppState(fieldAppState);
 
   $('#ball-count-display').text(robot.balls);
   $('#high-ball-display').text(robot.points.high);
@@ -68,12 +89,16 @@ $(document).ready(async function() {
     robot.matchStartTime = Date.now();
     $('#information').addClass('hidden');
     $('#offense').removeClass('hidden');
+    fieldAppState.robot = robot;
+    saveFieldAppState(fieldAppState);
   });
   // triggers match to begin, moves to offense tab
 
   $('.toggle').click(function() {
     const $toggled = $(this);
     $toggled.toggleClass('toggle-active');
+    fieldAppState.robot = robot;
+    saveFieldAppState(fieldAppState);
   });
   // general toggle logic (on/off without reliance on other buttons)
 
@@ -81,6 +106,8 @@ $(document).ready(async function() {
     const $emojiToggled = $(this);
     $('.emoji-toggle').removeClass('emoji-toggle-active');
     $emojiToggled.addClass('emoji-toggle-active');
+    fieldAppState.robot = robot;
+    saveFieldAppState(fieldAppState);
   });
   // emoji toggle logic, only allows one to be active.
 
@@ -97,23 +124,23 @@ $(document).ready(async function() {
   });
   // tab select logic, shows and hides respective tab containers
 
-  $('.scoring-button').click(function() {});
+  // $('.scoring-button').click(function() {});
   // all scoring buttons force the HUD to refresh
 
   // the preceeding three functions will still work without a ball, leaving the value at zero
 
-  // $('.btn-reset').click(function() {
-  //   while (robot.events.length > 0) {
-  //     robot.events.pop();
-  //   }
-  // });
-  // reset button logic, sets all values to 0
-
   $('.btn-reset').click(function() {
+    robot.events = [];
+    updateDisplay();
+    alert('Data cleared. Refresh the page to resture data.');
+  });
+  //reset button logic, sets all values to 0
+
+  $('.btn-save').click(function() {
     alert('Data saved. Press OK to view raw data.');
     alert(JSON.stringify(robot));
   });
-  // TEMPORARY reset button code that instead displays a fake alert stating the data was saved
+  // displays a fake alert stating the data was saved
 
   function checkForInvalidNumbers() {
     if (robot.balls < 0) {
@@ -209,9 +236,10 @@ $(document).ready(async function() {
 
     checkForInvalidNumbers();
   }
-  // checks for inadmissible values
   // updates robot values for the count of each event
-  // finally, refreshes all values to the HUD
+  // refreshes all values to the HUD
+  // checks for inadmissible values
+  //
 
   $('.button-event').click(function() {
     const $btnEvent = $(this);
@@ -221,6 +249,8 @@ $(document).ready(async function() {
     });
     console.log(robot);
     updateDisplay();
+    fieldAppState.robot = robot;
+    saveFieldAppState(fieldAppState);
   });
   // upon logging a button event (such as a pickup or score), adds the event to the robot's array of events
 
@@ -286,16 +316,22 @@ $(document).ready(async function() {
       robot.events.forEach(function(event, index) {
         if (isEventValid(event)) {
           lastEventIndex = index;
+          fieldAppState.robot = robot;
+          saveFieldAppState(fieldAppState);
         }
       });
 
       if (lastEventIndex != undefined) {
         const event = robot.events[lastEventIndex];
         robot.events.splice(lastEventIndex, 1);
+        fieldAppState.robot = robot;
+        saveFieldAppState(fieldAppState);
       }
     }
     updateDisplay();
     console.log(robot);
+    fieldAppState.robot = robot;
+    saveFieldAppState(fieldAppState);
   });
   // undo button function, checks if the button event is one that allows undo (such as a pickup or score)
   // if valid, removes that event from the robot's array
@@ -318,40 +354,63 @@ $(document).ready(async function() {
   $('#position-successful').click(function() {
     positionSuccessStatusRaw++;
     robotStatus(robot);
+    fieldAppState.robot = robot;
+    saveFieldAppState(fieldAppState);
   });
   // toggles position success
 
   $('#fire').click(function() {
     robot.defense.rating = 2;
+    fieldAppState.robot = robot;
+    saveFieldAppState(fieldAppState);
   });
 
   $('#ok').click(function() {
     robot.defense.rating = 1;
+    fieldAppState.robot = robot;
+    saveFieldAppState(fieldAppState);
   });
 
   $('#bad').click(function() {
     robot.defense.rating = 0;
+    fieldAppState.robot = robot;
+    saveFieldAppState(fieldAppState);
   });
   // set defense values to a number representing the chosen emoji
 
   $('#disconnect').click(function() {
     disconnectStatusRaw++;
+    fieldAppState.robot = robot;
+    saveFieldAppState(fieldAppState);
   });
 
   $('#failure').click(function() {
     failureStatusRaw++;
+    fieldAppState.robot = robot;
+    saveFieldAppState(fieldAppState);
   });
 
   $('#yellow').click(function() {
     yellowRaw++;
+    fieldAppState.robot = robot;
+    saveFieldAppState(fieldAppState);
   });
 
   $('#red').click(function() {
     redRaw++;
+    fieldAppState.robot = robot;
+    saveFieldAppState(fieldAppState);
   });
 
   $('#estop').click(function() {
     estopRaw++;
+    fieldAppState.robot = robot;
+    saveFieldAppState(fieldAppState);
   });
   // toggle endgame status values
 });
+
+// make a function that does both
+// fieldAppState.robot = robot;
+// saveFieldAppState(fieldAppState);
+// to save space

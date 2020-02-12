@@ -175,6 +175,7 @@
 
 .btn-reset {
   @apply rounded-lg;
+  @apply text-2xl;
   position: absolute;
   bottom: 4;
   left: 1;
@@ -184,17 +185,17 @@
 }
 /* reset button */
 
-.btn-reset {
+.btn-save {
   @apply rounded-lg;
   @apply text-2xl;
   position: absolute;
   bottom: 4;
-  left: 1;
+  right: 1;
   margin-bottom: 4px;
   margin-left: 4px;
   @apply bg-blue-700;
 }
-/* TEMPORARY reset button, used as a save button*/
+/*save button*/
 
 .pre-alert {
   background-color: white;

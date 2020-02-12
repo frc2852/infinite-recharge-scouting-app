@@ -2,10 +2,10 @@ import $ from 'jquery';
 import { saveSettings } from './functions/index-db';
 
 $(document).ready(function() {
-  const settings = {
-    alliance: 0,
-    station: 0,
-    scout: 0,
+  let settings = {
+    alliance: undefined,
+    station: undefined,
+    scout: undefined,
   };
 
   $('.alliance-colour').click(function() {

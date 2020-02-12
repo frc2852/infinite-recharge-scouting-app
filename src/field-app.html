@@ -1,192 +1,220 @@
-<!DOCTYPE>
+<!DOCTYPE >
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <link rel="shortcut icon" type="image/jpg" href="assets/2019bot.jpg" />
-  <link href="https://fonts.googleapis.com/css?family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
-  <title>
-    2852 Scouting App
-  </title>
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="shortcut icon" type="image/jpg" href="assets/2019bot.jpg" />
+    <link href="https://fonts.googleapis.com/css?family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet" />
+    <title>
+      2852 Scouting App
+    </title>
+  </head>
 
-<body>
-  <div>
-    <ul class="flex fixed justify-between objects-top w-full items-center">
-      <div class="w-1/3">
-        <li class="flex-1 mr-2 text-center block border border-blue-500 rounded py-2 px-4 bg-blue-500 text-white">
-          Active Team Number
-        </li>
-      </div>
-      <div class="2/3 items-center justify-between">
-        <li class="mr-3 submenu" data-tab-id="information">
-          Info
-        </li>
-        <li class="mr-3 submenu" data-tab-id="offense">
-          Offense
-        </li>
-        <li class="mr-3 submenu" data-tab-id="defence">
-          Defence
-        </li>
-        <li class="mr-3 submenu" data-tab-id="postgame">
-          Postgame
-        </li>
-      </div>
-    </ul>
-  </div>
-
-
-  <div class="tab-container" id="information">
+  <body>
     <div>
-      <br><br><br>
-      <div class="title">
-        Information Tab
-      </div>
-      <br><br>
+      <ul class="flex fixed justify-between objects-top w-full items-center">
+        <div class="w-1/4">
+          <li class="flex-1 mr-2 text-center block border border-blue-500 rounded py-2 px-4 bg-blue-500 text-white">
+            Active Team Number
+          </li>
+        </div>
+        <div class="3/4 items-center justify-between">
+          <li class="mr-3 submenu" data-tab-id="information">
+            Info
+          </li>
+          <li class="mr-3 submenu" data-tab-id="offense">
+            Offense
+          </li>
+          <li class="mr-3 submenu" data-tab-id="defence">
+            Defence
+          </li>
+          <li class="mr-3 submenu" data-tab-id="postgame">
+            Status
+          </li>
+          <li class="mr-3 submenu" data-tab-id="endgame">
+            Endgame
+          </li>
+        </div>
+      </ul>
     </div>
-    <img class="robot-photo" src="assets/2019bot.jpg" alt="Robot Photo">
-    <br><br>
-    <div class="start-button">
-      Start Match
-    </div>
-  </div>
 
-  <div class="tab-container hidden" id="offense">
-    <div>
-      <br><br><br>
-      <div class="title">
-        Offense Tab
-      </div>
-      <br><br>
-    </div>
-    <div class="hud">
-      <hr />
-      <br />
+    <div class="tab-container" id="information">
       <div>
-        <div class="flex mb=4 text-center text-2xl">
-          <div class="w-1/4" id="ball-count-box">
-            Ball Count:
-            <div id="ball-count-display"></div>
-          </div>
-          <div class="w-1/4" id="high-ball-box">
-            High Goals:
-            <div id="high-ball-display"></div>
-          </div>
-          <div class="w-1/4" id="low-ball-box">
-            Low Goals:
-            <div id="low-ball-display"></div>
-          </div>
-          <div class="w-1/4" id="miss-box">
-            Misses:
-            <div id="miss-display"></div>
-          </div>
+        <br /><br /><br />
+        <div class="title">
+          Information Tab
         </div>
+        <br /><br />
       </div>
-      <br />
-      <hr />
-      <br />
+      <img class="robot-photo" src="assets/2019bot.jpg" alt="Robot Photo" />
+      <br /><br />
+      <div class="start-button">
+        Start Match
+      </div>
     </div>
-    <div class="flex mb-4 items-center">
-      <div class="w-1/3 items-center">
-        <div class="text-center scoring-button btn-pickup button-square button-event" data-event-type="pickup"
-          data-event-phase="teleop">
-          Pickup Ball
+
+    <div class="tab-container hidden" id="offense">
+      <div>
+        <br /><br /><br />
+        <div class="title">
+          Offense Tab
         </div>
+        <br /><br />
       </div>
-      <div class="w-1/3 items-center">
-        <div class="text-center w-full scoring-button btn-high-goal button-rectangle button-event"
-          data-event-type="high" data-event-phase="teleop">
-          High Goal
+      <div class="hud">
+        <hr />
+        <br />
+        <div>
+          <div class="flex mb=4 text-center text-2xl">
+            <div class="w-1/4" id="ball-count-box">
+              Ball Count:
+              <div id="ball-count-display"></div>
+            </div>
+            <div class="w-1/4" id="high-ball-box">
+              High Goals:
+              <div id="high-ball-display"></div>
+            </div>
+            <div class="w-1/4" id="low-ball-box">
+              Low Goals:
+              <div id="low-ball-display"></div>
+            </div>
+            <div class="w-1/4" id="miss-box">
+              Misses:
+              <div id="miss-display"></div>
+            </div>
+          </div>
         </div>
         <br />
-        <div class="text-center w-full scoring-button btn-low-goal button-rectangle button-event" data-event-type="low"
-          data-event-phase="teleop">
-          Low Goal
+        <hr />
+        <br />
+      </div>
+      <div class="flex mb-4 items-center">
+        <div class="w-1/3 items-center">
+          <div class="text-center scoring-button btn-pickup button-square button-event" data-event-type="pickup" data-event-phase="teleop">
+            Pickup Ball
+          </div>
+        </div>
+        <div class="w-1/3 items-center">
+          <div class="text-center w-full scoring-button btn-high-goal button-rectangle button-event" data-event-type="high" data-event-phase="teleop">
+            High Goal
+          </div>
+          <br />
+          <div class="text-center w-full scoring-button btn-low-goal button-rectangle button-event" data-event-type="low" data-event-phase="teleop">
+            Low Goal
+          </div>
+          <br />
+          <div class="text-center w-full scoring-button btn-miss button-rectangle button-event" data-event-type="miss" data-event-phase="teleop">
+            Missed Ball
+          </div>
+        </div>
+        <div class="w-1/3 items-center">
+          <div class="text-center btn-undo button-square undo" data-event-phase="teleop">
+            Undo Last Entry
+          </div>
+        </div>
+        <hr />
+      </div>
+      <div class="flex mb-4 items-center">
+        <div class="toggle button-square">
+          Successful Rotation Control
+        </div>
+        <div class="toggle button-square">
+          Successful Position Control
+        </div>
+      </div>
+      <br /><br />
+      <div class="btn-reset">
+        Save Data
+      </div>
+    </div>
+
+    <div class="tab-container hidden" id="defence">
+      <div>
+        <br /><br /><br />
+        <div class="title">
+          Defence Tab
         </div>
         <br />
-        <div class="text-center w-full scoring-button btn-miss button-rectangle button-event" data-event-type="miss"
-          data-event-phase="teleop">
-          Missed Ball
+      </div>
+      <div class="emoji-container">
+        <div class="emoji-toggle button-emoji">
+          <img src="assets/fire.png" alt="Good defence" id="fire" />
         </div>
       </div>
-      <div class="w-1/3 items-center">
-        <div class="text-center btn-undo button-square undo" data-event-phase="teleop">
-          Undo Last Entry
+      <div class="emoji-container">
+        <div class="emoji-toggle button-emoji">
+          <img src="assets/straight_face.png" alt="OK defence" id="ok" />
         </div>
       </div>
-      <hr />
-    </div>
-    <div class="flex mb-4 items-center">
-      <div class="toggle button-square">
-        Successful Rotation Control
-      </div>
-      <div class="toggle button-square">
-        Successful Position Control
+      <div class="emoji-container">
+        <div class="emoji-toggle button-emoji">
+          <img src="assets/poop_emoji.png" alt="bad" id="bad" />
+        </div>
       </div>
     </div>
-    <br><br>
-    <div class="btn-reset">
-      Save Data
-    </div>
-  </div>
 
-  <div class="tab-container hidden" id="defence">
-    <div>
-      <br><br><br>
-      <div class="title">
-        Defence Tab
+    <div class="tab-container hidden" id="postgame">
+      <div>
+        <br /><br />
+        <div class="title">
+          Postgame Status Tab
+        </div>
       </div>
-      <br>
-    </div>
-    <div class="emoji-container">
-      <div class="emoji-toggle button-emoji">
-        <img src="assets/fire.png" alt="Good defence" id="fire">
+      <div class="flex mb-4 items-center">
+        <div class="w-1/2 toggle button-endgame">
+          <img src="assets/disconnect.png" alt="Disconnect" id="disconnect" />
+        </div>
+        <div class="w-1/2 toggle button-endgame">
+          <img src="assets/mechanical_failure.png" alt="Mechanical Failure" id="failure" />
+        </div>
+      </div>
+      <div class="flex mb-4 items-center">
+        <div class="w-1/2 toggle button-endgame">
+          <img src="assets/yellow_card.png" alt="Yellow or Upgraded Card" id="yellow" />
+        </div>
+        <div class="w-1/2 toggle button-endgame">
+          <img src="assets/red_card.png" alt="Red Card or Disqualification" id="red" />
+        </div>
+      </div>
+      <div class="flex mb-4 items-center">
+        <div class="w-1/2 toggle button-estop">
+          <img src="assets/estop.png" alt="E-Stopped" id="estop" />
+        </div>
       </div>
     </div>
-    <div class="emoji-container">
-      <div class="emoji-toggle button-emoji">
-        <img src="assets/straight_face.png" alt="OK defence" id="ok">
-      </div>
-    </div>
-    <div class="emoji-container">
-      <div class="emoji-toggle button-emoji">
-        <img src="assets/poop_emoji.png" alt="bad" id="bad">
-      </div>
-    </div>
-  </div>
 
-  <div class="tab-container hidden" id="postgame">
-    <div>
-      <br><br>
-      <div class="title">
-        Postgame Status Tab
+    <div class="tab-container hidden" id="endgame">
+      <div>
+        <br /><br /><br />
+        <div class="title">
+          Endgame Tab
+        </div>
+        <br /><br />
+        <div>Note: Do not select a button if the robot did not attempt a climb.</div>
+        <br /><br />
+        <div class="endgame-container">
+          <div class="endgame-toggle text-center scoring-button button-square" id="climbed">
+            Climbed Successfully
+          </div>
+          <div class="endgame-toggle text-center scoring-button button-square" id="failed">
+            Failed Climb
+          </div>
+        </div>
+        <div class="endgame-container">
+          <div class="endgame-toggle text-center scoring-button button-square" id="balanced">
+            Autobalanced
+          </div>
+        </div>
+        <br /><br />
+        <div class="text-center">
+          Enter robot comments below.
+          <textarea class="comments" id="comments" rows="8" cols="50"> </textarea>
+        </div>
       </div>
     </div>
-    <div class="flex mb-4 items-center">
-      <div class="w-1/2 toggle button-endgame">
-        <img src="assets/disconnect.png" alt="Disconnect" id="disconnect">
-      </div>
-      <div class="w-1/2 toggle button-endgame">
-        <img src="assets/mechanical_failure.png" alt="Mechanical Failure" id="failure">
-      </div>
-    </div>
-    <div class="flex mb-4 items-center">
-      <div class="w-1/2 toggle button-endgame">
-        <img src="assets/yellow_card.png" alt="Yellow or Upgraded Card" id="yellow">
-      </div>
-      <div class="w-1/2 toggle button-endgame">
-        <img src="assets/red_card.png" alt="Red Card or Disqualification" id="red">
-      </div>
-    </div>
-    <div class="flex mb-4 items-center">
-      <div class="w-1/2 toggle button-estop">
-        <img src="assets/estop.png" alt="E-Stopped" id="estop">
-      </div>
-    </div>
-  </div>
 
-  <div>
+    <!-- <div>
     <ul class="flex fixed w-full object-bottom bottom-0 objects-justify">
       <li class="status-menu w-1/4">
         placeholder
@@ -202,7 +230,6 @@
       </li>
   </div>
   </ul>
-  </div>
-</body>
-
+  </div> -->
+  </body>
 </html>

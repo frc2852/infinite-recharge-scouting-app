@@ -3,7 +3,7 @@ import { saveSettings } from './functions/index-db';
 
 $(document).ready(function() {
   let settings = {
-    alliance: undefined,
+    colour: undefined,
     station: undefined,
     scout: undefined,
   };
@@ -13,7 +13,7 @@ $(document).ready(function() {
     const $allianceID = $chosen.attr('alliance-id');
     $('.alliance-colour').removeClass('colour-toggled');
     $chosen.addClass('colour-toggled');
-    settings.alliance = $allianceID;
+    settings.colour = $allianceID;
   });
 
   $('.alliance-station').click(function() {

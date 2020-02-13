@@ -127,6 +127,8 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
   height: 300px;
   width: 300px;
 }
@@ -166,10 +168,15 @@
 
 .start-button {
   border-color: transparent;
-  background-image: linear-gradient(to right, red, orange, yellow, green, blue);
-  border-radius: 50%;
+  background-image: linear-gradient(to right, cyan, rgb(57, 173, 219));
+  @apply rounded-lg;
+  height: 25%;
+  padding-top: 5rem;
+  margin-left: 4rem;
+  margin-right: 4rem;
   @apply text-6xl;
   text-align: center;
+  display: block;
 }
 /* the start button */
 
@@ -325,4 +332,26 @@
 
 .station-toggled {
   @apply bg-gray-500;
+}
+
+.main-team-number-display {
+  @apply flex-1;
+  @apply mr-2;
+  @apply text-center;
+  @apply text-lg;
+  @apply block;
+  @apply border;
+  @apply border-blue-500;
+  @apply rounded;
+  @apply py-2;
+  @apply px-4;
+  @apply bg-blue-500;
+  @apply text-white;
+}
+
+.info-panel-display {
+  @apply text-xl;
+  @apply leading-loose;
+  @apply font-black;
+  text-align: center;
 }

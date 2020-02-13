@@ -1,8 +1,9 @@
-import $ from 'jquery'; // uses $ as a variable for jquery (this file is js by default)
+import $ from 'jquery'; //uses $ as a variable for jquery (this file is js by default)
 import { getSettings, getFirstCollectionKey, getTotalLocalCollections, getDocumentLocally, saveSettings, saveFieldAppState, getFieldAppState } from './functions/index-db';
+import { saveDocument } from './functions/firebase-app';
 
 $(document).ready(async function() {
-  // forces jquery to wait until the site is ready
+  //forces jquery to wait until the site is ready
 
   let rotationSuccessStatusRaw = 0;
   let positionSuccessStatusRaw = 0;
@@ -12,17 +13,17 @@ $(document).ready(async function() {
   let yellowRaw = 0;
   let redRaw = 0;
   let estopRaw = 0;
-  // creates raw variables
-  // a raw variable is one that another variable filters to get a refined amount
-  // for example, modulus of 2 to find if it is even or odd and return that value
+  //creates raw variables
+  //a raw variable is one that another variable filters to get a refined amount
+  //for example, modulus of 2 to find if it is even or odd and return that value
 
   const settings = await getSettings();
-  // pulls the settings object from the object created in the settings page
+  //pulls the settings object from the object created in the settings page
 
   let match = undefined;
   let fieldAppState = await getFieldAppState();
-  // defining variables that allow the site to interact with others and data
-  // if values exist loads them into the page to avoid data loss
+  //defining variables that allow the site to interact with others and data
+  //if values exist loads them into the page to avoid data loss
 
   if (fieldAppState == undefined) {
     const matchKeys = await getTotalLocalCollections();
@@ -60,21 +61,27 @@ $(document).ready(async function() {
     scout: settings.scout,
     events: [],
   };
-  // robot object, contains all of a robot's numbers and events
+  //robot object, contains all of a robot's numbers and events
 
   if (fieldAppState != undefined) {
-    robot = fieldAppState.robot;
+    if (fieldAppState.robot != undefined) {
+      console.log(fieldAppState);
+      robot = fieldAppState.robot;
+    }
     match = fieldAppState.match;
   }
 
+  console.log(settings);
+
   function setupRobot() {
-    robot.team = fieldAppState.currentMatch[settings.alliance][settings.station].teamKey;
-    robot.colour = settings.teamColour;
-    robot.image = fieldAppState.currentMatch[settings.alliance][settings.station].imageURLs;
+    robot.team = fieldAppState.currentMatch[settings.colour][settings.station].teamKey;
+    robot.colour = settings.colour;
+    robot.image = fieldAppState.currentMatch[settings.colour][settings.station].imageURLs;
+    console.log(robot);
   }
 
   setupRobot();
-  // sets data inside of the robot object to data from settings and TBA
+  //sets data inside of the robot object to data from settings and TBA
 
   fieldAppState.robot = robot;
   saveFieldAppState(fieldAppState);
@@ -83,7 +90,39 @@ $(document).ready(async function() {
   $('#high-ball-display').text(robot.points.high);
   $('#low-ball-display').text(robot.points.low);
   $('#miss-display').text(robot.points.miss);
-  // set the HUD displays to reference the robot object.
+  //set the HUD displays to reference the robot object.
+
+  function parseTeam(team) {
+    return team.substring(3);
+  }
+
+  function parseColour(colour) {
+    if (colour == 'redTeam') {
+      return 'Red';
+    } else if (colour == 'blueTeam') {
+      return 'Blue';
+    } else {
+      return 'Corrupt Data';
+    }
+  }
+  //interprets alliance ids and changes them to more user-friendly text
+
+  function parseStation(station) {
+    return (station + 1).substring(1);
+  }
+  //changes the station number to be 1-based
+
+  $('#main-team-number-display').text('Scouting: ' + parseTeam(robot.team));
+  $('#team-number-display').text('Team Number: ' + parseTeam(robot.team));
+  $('#team-colour-display').text('Alliance: ' + parseColour(robot.colour));
+  $('#driver-station-display').text('Driver Station: ' + parseStation(settings.station));
+  // missing set team image
+  //sets up team data to be displayed in the info page
+
+  // if (robot.colour == "redTeam"){
+  //   do something
+  // }
+  // if alliance is red alliance change all features to red?
 
   $('.start-button').click(function() {
     robot.matchStartTime = Date.now();
@@ -92,7 +131,7 @@ $(document).ready(async function() {
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
   });
-  // triggers match to begin, moves to offense tab
+  //triggers match to begin, moves to offense tab
 
   $('.toggle').click(function() {
     const $toggled = $(this);
@@ -100,7 +139,7 @@ $(document).ready(async function() {
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
   });
-  // general toggle logic (on/off without reliance on other buttons)
+  //general toggle logic (on/off without reliance on other buttons)
 
   $('.emoji-toggle').click(function() {
     const $emojiToggled = $(this);
@@ -109,7 +148,7 @@ $(document).ready(async function() {
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
   });
-  // emoji toggle logic, only allows one to be active.
+  //emoji toggle logic, only allows one to be active.
 
   $('.submenu').click(function() {
     const $tab = $(this);
@@ -122,12 +161,12 @@ $(document).ready(async function() {
     $('.tab-container').addClass('hidden');
     $('#' + tabId).removeClass('hidden');
   });
-  // tab select logic, shows and hides respective tab containers
+  //tab select logic, shows and hides respective tab containers
 
-  // $('.scoring-button').click(function() {});
-  // all scoring buttons force the HUD to refresh
+  //$('.scoring-button').click(function() {});
+  //all scoring buttons force the HUD to refresh
 
-  // the preceeding three functions will still work without a ball, leaving the value at zero
+  //the preceeding three functions will still work without a ball, leaving the value at zero
 
   $('.btn-reset').click(function() {
     robot.events = [];
@@ -139,8 +178,11 @@ $(document).ready(async function() {
   $('.btn-save').click(function() {
     alert('Data saved. Press OK to view raw data.');
     alert(JSON.stringify(robot));
+    robot.formComplete = Date.now();
+    // await saveDocument(match.collectionPath);
   });
-  // displays a fake alert stating the data was saved
+  //displays a fake alert stating the data was saved
+  //actually saves the data
 
   function checkForInvalidNumbers() {
     if (robot.balls < 0) {
@@ -212,7 +254,7 @@ $(document).ready(async function() {
       $('#miss-box').removeClass('alert');
     }
   }
-  // checks if numbers are invalid for each value, and assigns/removes warning classes based on results
+  //checks if numbers are invalid for each value, and assigns/removes warning classes based on results
 
   function updateDisplay() {
     robot.balls = 0;
@@ -233,12 +275,15 @@ $(document).ready(async function() {
     $('#high-ball-display').text(robot.points.high);
     $('#low-ball-display').text(robot.points.low);
     $('#miss-display').text(robot.points.miss);
+    $('#team-number-display').text(robot.team);
+    $('#team-colour-display').text(parseColour(robot.colour));
+    $('#driver-station-display').text(parseStation(settings.station));
 
     checkForInvalidNumbers();
   }
-  // updates robot values for the count of each event
-  // refreshes all values to the HUD
-  // checks for inadmissible values
+  //updates robot values for the count of each event
+  //refreshes all values to the HUD
+  //checks for inadmissible values
   //
 
   $('.button-event').click(function() {
@@ -252,7 +297,7 @@ $(document).ready(async function() {
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
   });
-  // upon logging a button event (such as a pickup or score), adds the event to the robot's array of events
+  //upon logging a button event (such as a pickup or score), adds the event to the robot's array of events
 
   function countEvents(array, type) {
     let count = 0;
@@ -271,7 +316,6 @@ $(document).ready(async function() {
           count--;
         }
       }
-      console.log(count);
       return count;
     }
 
@@ -281,7 +325,6 @@ $(document).ready(async function() {
           count++;
         }
       }
-      console.log(count);
       return count;
     }
 
@@ -291,7 +334,6 @@ $(document).ready(async function() {
           count++;
         }
       }
-      console.log(count);
       return count;
     }
 
@@ -301,7 +343,6 @@ $(document).ready(async function() {
           count++;
         }
       }
-      console.log(count);
       return count;
     }
   }
@@ -333,8 +374,8 @@ $(document).ready(async function() {
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
   });
-  // undo button function, checks if the button event is one that allows undo (such as a pickup or score)
-  // if valid, removes that event from the robot's array
+  //undo button function, checks if the button event is one that allows undo (such as a pickup or score)
+  //if valid, removes that event from the robot's array
 
   function isEventValid(currentEvent) {
     if (currentEvent.eventType == 'pickup' || currentEvent.eventType == 'high' || currentEvent.eventType == 'low' || currentEvent.eventType == 'miss') {
@@ -342,14 +383,14 @@ $(document).ready(async function() {
     }
     return false;
   }
-  // tests if the previous event was undoable, checking its id against the four undoable actions
-  // these actions are pickup, high score, low score, miss
+  //tests if the previous event was undoable, checking its id against the four undoable actions
+  //these actions are pickup, high score, low score, miss
 
   $('#rotation-successful').click(function() {
     rotationSuccessStatusRaw++;
     robotStatus(robot);
   });
-  // toggles rotation success
+  //toggles rotation success
 
   $('#position-successful').click(function() {
     positionSuccessStatusRaw++;
@@ -357,7 +398,7 @@ $(document).ready(async function() {
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
   });
-  // toggles position success
+  //toggles position success
 
   $('#fire').click(function() {
     robot.defense.rating = 2;
@@ -376,7 +417,7 @@ $(document).ready(async function() {
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
   });
-  // set defense values to a number representing the chosen emoji
+  //set defense values to a number representing the chosen emoji
 
   $('#disconnect').click(function() {
     disconnectStatusRaw++;
@@ -407,10 +448,10 @@ $(document).ready(async function() {
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
   });
-  // toggle endgame status values
+  //toggle endgame status values
 });
 
-// make a function that does both
-// fieldAppState.robot = robot;
-// saveFieldAppState(fieldAppState);
-// to save space
+//make a function that does both
+//fieldAppState.robot = robot;
+//saveFieldAppState(fieldAppState);
+//to save space

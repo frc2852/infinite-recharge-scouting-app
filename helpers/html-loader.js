@@ -16,9 +16,7 @@ module.exports = (folder, plugins) => {
       return new HtmlWebpackPlugin({
         template: folder + file,
         filename: file,
-        chucks: [
-          'js/' + fileName
-        ]
+        inject: false,
       });
     })
     .concat(plugins);

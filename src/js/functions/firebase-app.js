@@ -3,7 +3,7 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 import { saveDocumentLocally, getDocumentLocally } from './index-db';
-import firebaseConfig from '../../configs/firebase-config.js';
+import firebaseConfig from '../../configs/firebase-config';
 
 export const firebaseApp = !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.apps[0];
 

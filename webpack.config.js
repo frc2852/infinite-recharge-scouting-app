@@ -9,14 +9,12 @@ const outputFolder = path.resolve('dist');
 
 module.exports = {
   entry: {
-    'js/app': srcPath + 'js/app.js',
-    'js/field-app': srcPath + 'js/field-app.js',
-    'js/download-schedule': srcPath + 'js/download-schedule.js',
-    'js/settings': srcPath + 'js/settings.js',
-    'service-worker': srcPath + 'js/service-worker.js',
+    app: srcPath + 'js/app.js',
+    downloadSchedule: srcPath + 'js/download-schedule.js',
+    fieldApp: srcPath + 'js/field-app.js',
   },
   output: {
-    path: outputFolder,
+    path: outputFolder + '/js',
     filename: '[name].js',
   },
   module: {
@@ -29,10 +27,6 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-      },
-      {
-        test: /\.html$/,
-        use: ['html-loader'],
       },
       {
         test: /\.(svg|jpg|png|gif)$/,

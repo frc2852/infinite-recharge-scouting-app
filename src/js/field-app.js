@@ -48,7 +48,7 @@ $(document).ready(async function() {
       rotation: rotationSuccessStatusRaw % 2,
       position: positionSuccessStatusRaw % 2,
     },
-    defence: {
+    defense: {
       rating: undefined,
     },
     status: {
@@ -58,6 +58,8 @@ $(document).ready(async function() {
       red: redRaw % 2,
       estop: estopRaw % 2,
     },
+    climb: 0,
+    comments: '',
     scout: settings.scout,
     events: [],
     image: undefined,
@@ -152,6 +154,13 @@ $(document).ready(async function() {
   });
   //emoji toggle logic, only allows one to be active.
 
+  $('.endgame-toggle').click(function() {
+    const $endgameToggled = $(this);
+    $('.endgame-toggle').removeClass('endgame-toggle-active');
+    $endgameToggled.addClass('endgame-toggle-active');
+  });
+  // endgame toggle logic, only allows one to be active.
+
   $('.submenu').click(function() {
     const $tab = $(this);
 
@@ -179,6 +188,7 @@ $(document).ready(async function() {
 
   $('.btn-save').click(function() {
     alert('Data saved. Press OK to view raw data.');
+    robot.comments = $('#comments').val();
     alert(JSON.stringify(robot));
     robot.formComplete = Date.now();
     // await saveDocument(match.collectionPath);
@@ -419,7 +429,20 @@ $(document).ready(async function() {
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
   });
-  //set defense values to a number representing the chosen emoji
+  //sets defense values corresponding to the emoji chosen
+
+  $('#balanced').click(function() {
+    robot.climb = 3;
+  });
+
+  $('#climbed').click(function() {
+    robot.climb = 2;
+  });
+
+  $('#failed').click(function() {
+    robot.climb = 1;
+  });
+  // set climb values corresponding to the chosen button (0 = no data)
 
   $('#disconnect').click(function() {
     disconnectStatusRaw++;

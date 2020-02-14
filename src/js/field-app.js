@@ -60,6 +60,7 @@ $(document).ready(async function() {
     },
     scout: settings.scout,
     events: [],
+    image: undefined,
   };
   //robot object, contains all of a robot's numbers and events
 
@@ -76,7 +77,7 @@ $(document).ready(async function() {
   function setupRobot() {
     robot.team = fieldAppState.currentMatch[settings.colour][settings.station].teamKey;
     robot.colour = settings.colour;
-    robot.image = fieldAppState.currentMatch[settings.colour][settings.station].imageURLs;
+    robot.image = fieldAppState.currentMatch[settings.colour][settings.station].imageUrls[0];
     console.log(robot);
   }
 
@@ -116,7 +117,8 @@ $(document).ready(async function() {
   $('#team-number-display').text('Team Number: ' + parseTeam(robot.team));
   $('#team-colour-display').text('Alliance: ' + parseColour(robot.colour));
   $('#driver-station-display').text('Driver Station: ' + parseStation(settings.station));
-  // missing set team image
+  console.log(robot, 'image');
+  $('#robot-image').attr('src', robot.image);
   //sets up team data to be displayed in the info page
 
   // if (robot.colour == "redTeam"){

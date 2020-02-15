@@ -1,15 +1,17 @@
 # Infinite Recharge Scouting App
 
-This project will be use for students to scout robots at FRC complitions
+This project will be use for students to scout robots at FRC competitions
 
 ## Dev server setup
 
 1. Install libraries
+
 ```
 npm install
 ```
 
 2. Start Server
+
 ```
 npm run dev-server
 ```
@@ -19,18 +21,20 @@ npm run dev-server
 ## Run dev server with service workers
 
 1. Start HTTPS server
+
 ```
 npm run dev-server-secure
 ```
 
 2. Start chrome to allow insecure origin
+
 ```
 .\chrome.exe --user-data-dir=/tmp/foo --ignore-certificate-errors --unsafely-treat-insecure-origin-as-secure=https://127.0.0.1/
 ```
 
 ## Deploying to github pages
 
-**This meathod requires your git repo to be setup with ssh git clone/remote**
+**This method requires your git repo to be setup with ssh git clone/remote**
 
 1. Add `.ssh/config` to the project with the following
 
@@ -43,12 +47,12 @@ Host github.com
 2. Add your private key in the .ssh folder and name it `github`
 
 3. Run the following command
+
 ```
 bash deploy.sh
 ```
 
 4. You should see your changes on https://frc2852.github.io/infinite-recharge-scouting-app/
-
 
 ## LICENSE
 

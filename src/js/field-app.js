@@ -3,78 +3,11 @@ import { getSettings, getFirstCollectionKey, getTotalLocalCollections, getDocume
 import { saveDocument, getDocument } from './functions/firebase-app';
 
 $(document).ready(async function() {
-  //forces jquery to wait until the site is ready
+  robot = fieldAppState.robot;
 
-  let rotationSuccessStatusRaw = 0;
-  let positionSuccessStatusRaw = 0;
+  resetRobot();
 
-  let disconnectStatusRaw = 0;
-  let failureStatusRaw = 0;
-  let yellowRaw = 0;
-  let redRaw = 0;
-  let estopRaw = 0;
-  //creates raw variables
-  //a raw variable is one that another variable filters to get a refined amount
-  //for example, modulus of 2 to find if it is even or odd and return that value
-
-  const settings = await getSettings();
-  //pulls the settings object from the object created in the settings page
-
-  let match = undefined;
-  let fieldAppState = await getFieldAppState();
-  //defining variables that allow the site to interact with others and data
-  //if values exist loads them into the page to avoid data loss
-
-  if (fieldAppState == undefined) {
-    const matchKeys = await getTotalLocalCollections();
-    fieldAppState = {
-      currentMatch: await getDocumentLocally(matchKeys[0]),
-    };
-  }
-
-  console.log(fieldAppState);
-
-  let robot = {
-    matchStartTime: 0,
-    team: 'No Team Number',
-    colour: 'No Alliance',
-    balls: 0,
-    points: {
-      high: 0,
-      low: 0,
-      miss: 0,
-    },
-    wheel: {
-      rotation: rotationSuccessStatusRaw % 2,
-      position: positionSuccessStatusRaw % 2,
-    },
-    defense: {
-      rating: null,
-    },
-    status: {
-      disconnect: disconnectStatusRaw % 2,
-      failure: failureStatusRaw % 2,
-      yellow: yellowRaw % 2,
-      red: redRaw % 2,
-      estop: estopRaw % 2,
-    },
-    climb: 0,
-    comments: null,
-    scout: settings.scout,
-    events: [],
-    image: null,
-  };
-  //robot object, contains all of a robot's numbers and events
-
-  if (fieldAppState != undefined) {
-    if (fieldAppState.robot != undefined) {
-      console.log(fieldAppState);
-      robot = fieldAppState.robot;
-    }
-    match = fieldAppState.match;
-  }
-
-  console.log(settings);
+  console.log(fieldAppState, settings, robot);
 
   function setupRobot() {
     console.log(fieldAppState);
@@ -190,14 +123,17 @@ $(document).ready(async function() {
   //the preceeding three functions will still work without a ball, leaving the value at zero
 
   $('.btn-reset').click(function() {
-    robot.events = [];
+    resetRobot();
     updateDisplay();
     alert('Data cleared. Refresh the page to restore data.');
   });
   //reset button logic, sets all values to 0
 
-  async function goToMatch(path, id) {
-    const match = await getDocument(path, id);
+  async function goToMatch(eventKey, matchID) {
+    const collectionPath = '/events/' + eventKey + '/matches';
+    const match = await getDocument(collectionPath, matchID);
+    resetRobot();
+    saveFieldAppState(fieldAppState);
   }
 
   $('.btn-save').click(async function() {
@@ -210,7 +146,7 @@ $(document).ready(async function() {
     fieldAppState.currentMatch.robot = robot;
     console.log(fieldAppState);
     await saveDocument(fieldAppState.currentMatch.collectionPath, fieldAppState.currentMatch.id, fieldAppState.currentMatch);
-    goToMatch(fieldAppState.currentMatch.collectionPath, fieldAppState.currentMatch.nextMatch);
+    goToMatch(fieldAppState.currentMatch.collectionPath);
   });
   //saves the data and uploads it to firestore or saves it locally
 
@@ -492,6 +428,76 @@ $(document).ready(async function() {
     saveFieldAppState(fieldAppState);
   });
   //toggle endgame status values
+
+  async function resetRobot() {
+    let rotationSuccessStatusRaw = 0;
+    let positionSuccessStatusRaw = 0;
+
+    let disconnectStatusRaw = 0;
+    let failureStatusRaw = 0;
+    let yellowRaw = 0;
+    let redRaw = 0;
+    let estopRaw = 0;
+
+    const settings = await getSettings();
+
+    let match = undefined;
+    let fieldAppState = await getFieldAppState();
+
+    if (fieldAppState == undefined) {
+      const matchKeys = await getTotalLocalCollections();
+      fieldAppState = {
+        currentMatch: await getDocumentLocally(matchKeys[0]),
+      };
+    }
+
+    if (fieldAppState != undefined) {
+      if (fieldAppState.robot != undefined) {
+        console.log(fieldAppState);
+        robot = fieldAppState.robot;
+      }
+      match = fieldAppState.match;
+    }
+
+    console.log(settings);
+
+    robot = {
+      matchStartTime: 0,
+      team: 'No Team Number',
+      colour: 'No Alliance',
+      balls: 0,
+      points: {
+        high: 0,
+        low: 0,
+        miss: 0,
+      },
+      wheel: {
+        rotation: rotationSuccessStatusRaw % 2,
+        position: positionSuccessStatusRaw % 2,
+      },
+      defense: {
+        rating: null,
+      },
+      status: {
+        disconnect: disconnectStatusRaw % 2,
+        failure: failureStatusRaw % 2,
+        yellow: yellowRaw % 2,
+        red: redRaw % 2,
+        estop: estopRaw % 2,
+      },
+      climb: 0,
+      comments: null,
+      scout: settings.scout,
+      events: [],
+      image: null,
+    };
+
+    $('.endgame-toggle').removeClass('endgame-toggle-active');
+    $('.emoji-toggle').removeClass('emoji-toggle-active');
+    $('toggle').removeClass('toggle-active');
+
+    console.log(fieldAppState);
+  }
 });
 
 //make a function that does both

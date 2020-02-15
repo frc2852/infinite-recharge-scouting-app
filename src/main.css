@@ -40,6 +40,17 @@
 }
 /* set for the bottom-row menu */
 
+.button-square-scoring {
+  @apply border;
+  @apply border-transparent;
+  @apply border-4;
+  @apply rounded-lg;
+  display: inline-block;
+  margin: 14px;
+  @apply p-12;
+  @apply text-2xl;
+}
+
 .button-square {
   @apply border;
   @apply border-transparent;
@@ -56,6 +67,17 @@
   @apply border-gray-700;
 }
 /* set for standard square buttons */
+
+.button-rectangle-scoring {
+  @apply border;
+  @apply border-transparent;
+  @apply border-4;
+  @apply rounded-lg;
+  display: inline-block;
+  margin: 2px;
+  @apply p-2;
+  @apply text-2xl;
+}
 
 .button-rectangle {
   @apply border;
@@ -155,7 +177,6 @@
 /* set for emoji buttons */
 
 .toggle-active {
-  @apply bg-gray-500;
   @apply border-green-500;
 }
 /* button is toggled on */
@@ -366,4 +387,8 @@
   @apply leading-loose;
   @apply font-black;
   text-align: center;
+}
+
+.bg-special {
+  background-image: linear-gradient(from left, rgb(238, 135, 135), rgb(236, 228, 110), rgb(107, 158, 224), rgb(124, 230, 115));
 }

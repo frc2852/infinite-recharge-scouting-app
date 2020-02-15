@@ -12,6 +12,7 @@ module.exports = {
     app: srcPath + 'js/app.js',
     downloadSchedule: srcPath + 'js/download-schedule.js',
     fieldApp: srcPath + 'js/field-app.js',
+    settings: srcPath + 'js/settings.js',
   },
   output: {
     path: outputFolder + '/js',

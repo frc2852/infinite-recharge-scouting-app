@@ -36,8 +36,8 @@ $(document).ready(async function() {
 
   let robot = {
     matchStartTime: 0,
-    team: undefined,
-    colour: undefined,
+    team: 'No Team Number',
+    colour: 'No Alliance',
     balls: 0,
     points: {
       high: 0,
@@ -77,9 +77,16 @@ $(document).ready(async function() {
   console.log(settings);
 
   function setupRobot() {
-    robot.team = fieldAppState.currentMatch[settings.colour][settings.station].teamKey;
-    robot.colour = settings.colour;
-    robot.image = fieldAppState.currentMatch[settings.colour][settings.station].imageUrls[0];
+    console.log(fieldAppState);
+    if (fieldAppState != undefined) {
+      robot.team = fieldAppState.currentMatch[settings.colour][settings.station].teamKey;
+      robot.colour = settings.colour;
+      const robotImages = fieldAppState.currentMatch[settings.colour][settings.station].imageUrls;
+      console.log(robotImages);
+      if (robotImages != null && robotImages.length > 0) {
+        robot.image = robotImages[0];
+      }
+    }
     console.log(robot);
   }
 
@@ -142,6 +149,7 @@ $(document).ready(async function() {
     $toggled.toggleClass('toggle-active');
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
+    console.log($toggled);
   });
   //general toggle logic (on/off without reliance on other buttons)
 
@@ -287,9 +295,9 @@ $(document).ready(async function() {
     $('#high-ball-display').text(robot.points.high);
     $('#low-ball-display').text(robot.points.low);
     $('#miss-display').text(robot.points.miss);
-    $('#team-number-display').text(robot.team);
-    $('#team-colour-display').text(parseColour(robot.colour));
-    $('#driver-station-display').text(parseStation(settings.station));
+    // $('#team-number-display').text(robot.team);
+    // $('#team-colour-display').text(parseColour(robot.colour));
+    // $('#driver-station-display').text(parseStation(settings.station));
 
     checkForInvalidNumbers();
   }

@@ -49,7 +49,7 @@ $(document).ready(async function() {
       position: positionSuccessStatusRaw % 2,
     },
     defense: {
-      rating: undefined,
+      rating: null,
     },
     status: {
       disconnect: disconnectStatusRaw % 2,
@@ -59,10 +59,10 @@ $(document).ready(async function() {
       estop: estopRaw % 2,
     },
     climb: 0,
-    comments: '',
+    comments: null,
     scout: settings.scout,
     events: [],
-    image: undefined,
+    image: null,
   };
   //robot object, contains all of a robot's numbers and events
 
@@ -83,8 +83,10 @@ $(document).ready(async function() {
       robot.colour = settings.colour;
       const robotImages = fieldAppState.currentMatch[settings.colour][settings.station].imageUrls;
       console.log(robotImages);
-      if (robotImages != null && robotImages.length > 0) {
+      if (robotImages != undefined) {
         robot.image = robotImages[0];
+      } else {
+        robot.image = null;
       }
     }
     console.log(robot);
@@ -201,9 +203,14 @@ $(document).ready(async function() {
   $('.btn-save').click(async function() {
     alert(robot.scout + "'s scouting data was saved.");
     robot.comments = $('#comments').val();
+    if (robot.comments === undefined) {
+      robot.comments = '';
+    }
     robot.formComplete = Date.now();
-    await saveDocument(currentMatch.collectionPath, currentMatch.id, currentMatch);
-    goToMatch(currentMatch.collectionPath, currentMatch.nextMatch);
+    fieldAppState.currentMatch.robot = robot;
+    console.log(fieldAppState);
+    await saveDocument(fieldAppState.currentMatch.collectionPath, fieldAppState.currentMatch.id, fieldAppState.currentMatch);
+    goToMatch(fieldAppState.currentMatch.collectionPath, fieldAppState.currentMatch.nextMatch);
   });
   //saves the data and uploads it to firestore or saves it locally
 

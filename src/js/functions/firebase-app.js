@@ -40,7 +40,9 @@ export const getDocument = async (collectionPath, documentId) => {
       .get();
     const docData = doc.data();
 
-    await saveDocumentLocally(collectionPath, documentId, docData);
+    if (docData != undefined) {
+      await saveDocumentLocally(collectionPath, documentId, docData);
+    }
     return docData;
   }
 

@@ -3,26 +3,23 @@ import { getSettings, getFirstCollectionKey, getTotalLocalCollections, getDocume
 import { saveDocument, getDocument } from './functions/firebase-app';
 
 $(document).ready(async function() {
-  robot = fieldAppState.robot;
-
-  resetRobot();
-
-  console.log(fieldAppState, settings, robot);
+  let robot = undefined;
+  let match = undefined;
+  let fieldAppState = undefined;
+  let settings = undefined;
+  await resetRobot();
 
   function setupRobot() {
-    console.log(fieldAppState);
     if (fieldAppState != undefined) {
       robot.team = fieldAppState.currentMatch[settings.colour][settings.station].teamKey;
       robot.colour = settings.colour;
       const robotImages = fieldAppState.currentMatch[settings.colour][settings.station].imageUrls;
-      console.log(robotImages);
       if (robotImages != undefined) {
         robot.image = robotImages[0];
       } else {
         robot.image = null;
       }
     }
-    console.log(robot);
   }
 
   setupRobot();
@@ -61,7 +58,6 @@ $(document).ready(async function() {
   $('#team-number-display').text('Team Number: ' + parseTeam(robot.team));
   $('#team-colour-display').text('Alliance: ' + parseColour(robot.colour));
   $('#driver-station-display').text('Driver Station: ' + parseStation(settings.station));
-  console.log(robot, 'image');
   $('#robot-image').attr('src', robot.image);
   //sets up team data to be displayed in the info page
 
@@ -84,7 +80,6 @@ $(document).ready(async function() {
     $toggled.toggleClass('toggle-active');
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
-    console.log($toggled);
   });
   //general toggle logic (on/off without reliance on other buttons)
 
@@ -129,9 +124,9 @@ $(document).ready(async function() {
   });
   //reset button logic, sets all values to 0
 
-  async function goToMatch(eventKey, matchID) {
-    const collectionPath = '/events/' + eventKey + '/matches';
-    const match = await getDocument(collectionPath, matchID);
+  async function goToMatch(collectionPath, matchID) {
+    console.log('collection path is', collectionPath);
+    fieldAppState.currentMatch = await getDocument(collectionPath, matchID);
     resetRobot();
     saveFieldAppState(fieldAppState);
   }
@@ -240,9 +235,10 @@ $(document).ready(async function() {
     $('#high-ball-display').text(robot.points.high);
     $('#low-ball-display').text(robot.points.low);
     $('#miss-display').text(robot.points.miss);
-    // $('#team-number-display').text(robot.team);
-    // $('#team-colour-display').text(parseColour(robot.colour));
-    // $('#driver-station-display').text(parseStation(settings.station));
+    $('#team-number-display').text(robot.team);
+    $('#team-colour-display').text(parseColour(robot.colour));
+    $('#driver-station-display').text(parseStation(settings.station));
+    $('#match-number-display').text('Match Number: ' + robot.matchNumber);
 
     checkForInvalidNumbers();
   }
@@ -257,7 +253,6 @@ $(document).ready(async function() {
       timestamp: Date.now(),
       eventType: $btnEvent.data('event-type'),
     });
-    console.log(robot);
     updateDisplay();
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
@@ -335,7 +330,6 @@ $(document).ready(async function() {
       }
     }
     updateDisplay();
-    console.log(robot);
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
   });
@@ -440,10 +434,10 @@ $(document).ready(async function() {
     let redRaw = 0;
     let estopRaw = 0;
 
-    const settings = await getSettings();
+    settings = await getSettings();
 
-    let match = undefined;
-    let fieldAppState = await getFieldAppState();
+    match = undefined;
+    fieldAppState = await getFieldAppState();
 
     if (fieldAppState == undefined) {
       const matchKeys = await getTotalLocalCollections();
@@ -454,19 +448,17 @@ $(document).ready(async function() {
 
     if (fieldAppState != undefined) {
       if (fieldAppState.robot != undefined) {
-        console.log(fieldAppState);
         robot = fieldAppState.robot;
       }
       match = fieldAppState.match;
     }
-
-    console.log(settings);
 
     robot = {
       matchStartTime: 0,
       team: 'No Team Number',
       colour: 'No Alliance',
       balls: 0,
+      matchNumber: fieldAppState.currentMatch.matchNumber,
       points: {
         high: 0,
         low: 0,
@@ -497,7 +489,7 @@ $(document).ready(async function() {
     $('.emoji-toggle').removeClass('emoji-toggle-active');
     $('toggle').removeClass('toggle-active');
 
-    console.log(fieldAppState);
+    updateDisplay();
   }
 });
 

@@ -1,6 +1,6 @@
 import $ from 'jquery'; //uses $ as a variable for jquery (this file is js by default)
 import { getSettings, getFirstCollectionKey, getTotalLocalCollections, getDocumentLocally, saveSettings, saveFieldAppState, getFieldAppState } from './functions/index-db';
-import { saveDocument } from './functions/firebase-app';
+import { saveDocument, getDocument } from './functions/firebase-app';
 
 $(document).ready(async function() {
   //forces jquery to wait until the site is ready
@@ -190,19 +190,22 @@ $(document).ready(async function() {
   $('.btn-reset').click(function() {
     robot.events = [];
     updateDisplay();
-    alert('Data cleared. Refresh the page to resture data.');
+    alert('Data cleared. Refresh the page to restore data.');
   });
   //reset button logic, sets all values to 0
 
-  $('.btn-save').click(function() {
-    alert('Data saved. Press OK to view raw data.');
+  async function goToMatch(path, id) {
+    const match = await getDocument(path, id);
+  }
+
+  $('.btn-save').click(async function() {
+    alert(robot.scout + "'s scouting data was saved.");
     robot.comments = $('#comments').val();
-    alert(JSON.stringify(robot));
     robot.formComplete = Date.now();
-    // await saveDocument(match.collectionPath);
+    await saveDocument(currentMatch.collectionPath, currentMatch.id, currentMatch);
+    goToMatch(currentMatch.collectionPath, currentMatch.nextMatch);
   });
-  //displays a fake alert stating the data was saved
-  //actually saves the data
+  //saves the data and uploads it to firestore or saves it locally
 
   function checkForInvalidNumbers() {
     if (robot.balls < 0) {

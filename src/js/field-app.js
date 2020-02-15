@@ -143,10 +143,9 @@ $(document).ready(async function() {
       robot.comments = '';
     }
     robot.formComplete = Date.now();
-    fieldAppState.currentMatch.robot = robot;
-    console.log(fieldAppState);
-    await saveDocument(fieldAppState.currentMatch.collectionPath, fieldAppState.currentMatch.id, fieldAppState.currentMatch);
-    goToMatch(fieldAppState.currentMatch.collectionPath);
+    const collectionPath = '/events/' + fieldAppState.currentMatch.event + '/robots/' + robot.team + '/matches/';
+    await saveDocument(collectionPath, fieldAppState.currentMatch.id, robot);
+    goToMatch(fieldAppState.currentMatch.collectionPath, fieldAppState.currentMatch.nextMatch);
   });
   //saves the data and uploads it to firestore or saves it locally
 

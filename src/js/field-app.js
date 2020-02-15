@@ -430,6 +430,8 @@ $(document).ready(async function() {
   //toggle endgame status values
 
   async function resetRobot() {
+    $('.tab-container').addClass('hidden');
+    $('#information').removeClass('hidden');
     let rotationSuccessStatusRaw = 0;
     let positionSuccessStatusRaw = 0;
 

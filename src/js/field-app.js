@@ -2,7 +2,7 @@ import $ from 'jquery'; //uses $ as a variable for jquery (this file is js by de
 import { getSettings, getFirstCollectionKey, getTotalLocalCollections, getDocumentLocally, saveSettings, saveFieldAppState, getFieldAppState } from './functions/index-db';
 import { saveDocument, getDocument } from './functions/firebase-app';
 
-$(document).ready(async function() {
+$(document).ready(async function () {
   let robot = undefined;
   let match = undefined;
   let fieldAppState = undefined;
@@ -20,6 +20,7 @@ $(document).ready(async function() {
         robot.image = null;
       }
     }
+    updateDisplay();
   }
 
   setupRobot();
@@ -54,19 +55,12 @@ $(document).ready(async function() {
   }
   //changes the station number to be 1-based
 
-  $('#main-team-number-display').text('Scouting: ' + parseTeam(robot.team));
-  $('#team-number-display').text('Team Number: ' + parseTeam(robot.team));
-  $('#team-colour-display').text('Alliance: ' + parseColour(robot.colour));
-  $('#driver-station-display').text('Driver Station: ' + parseStation(settings.station));
-  $('#robot-image').attr('src', robot.image);
-  //sets up team data to be displayed in the info page
-
   // if (robot.colour == "redTeam"){
   //   do something
   // }
   // if alliance is red alliance change all features to red?
 
-  $('.start-button').click(function() {
+  $('.start-button').click(function () {
     robot.matchStartTime = Date.now();
     $('#information').addClass('hidden');
     $('#offense').removeClass('hidden');
@@ -75,7 +69,7 @@ $(document).ready(async function() {
   });
   //triggers match to begin, moves to offense tab
 
-  $('.toggle').click(function() {
+  $('.toggle').click(function () {
     const $toggled = $(this);
     $toggled.toggleClass('toggle-active');
     fieldAppState.robot = robot;
@@ -83,7 +77,7 @@ $(document).ready(async function() {
   });
   //general toggle logic (on/off without reliance on other buttons)
 
-  $('.emoji-toggle').click(function() {
+  $('.emoji-toggle').click(function () {
     const $emojiToggled = $(this);
     $('.emoji-toggle').removeClass('emoji-toggle-active');
     $emojiToggled.addClass('emoji-toggle-active');
@@ -92,14 +86,14 @@ $(document).ready(async function() {
   });
   //emoji toggle logic, only allows one to be active.
 
-  $('.endgame-toggle').click(function() {
+  $('.endgame-toggle').click(function () {
     const $endgameToggled = $(this);
     $('.endgame-toggle').removeClass('endgame-toggle-active');
     $endgameToggled.addClass('endgame-toggle-active');
   });
   // endgame toggle logic, only allows one to be active.
 
-  $('.submenu').click(function() {
+  $('.submenu').click(function () {
     const $tab = $(this);
 
     $('.tab-container').removeClass('tab-active');
@@ -117,7 +111,7 @@ $(document).ready(async function() {
 
   //the preceeding three functions will still work without a ball, leaving the value at zero
 
-  $('.btn-reset').click(function() {
+  $('.btn-reset').click(function () {
     resetRobot();
     updateDisplay();
     alert('Data cleared. Refresh the page to restore data.');
@@ -125,13 +119,16 @@ $(document).ready(async function() {
   //reset button logic, sets all values to 0
 
   async function goToMatch(collectionPath, matchID) {
-    console.log('collection path is', collectionPath);
     fieldAppState.currentMatch = await getDocument(collectionPath, matchID);
-    resetRobot();
-    saveFieldAppState(fieldAppState);
+    await saveFieldAppState(fieldAppState);
+    await resetRobot();
+    setupRobot();
+    fieldAppState.robot = robot;
+    await saveFieldAppState(fieldAppState);
+    updateDisplay();
   }
 
-  $('.btn-save').click(async function() {
+  $('.btn-save').click(async function () {
     alert(robot.scout + "'s scouting data was saved.");
     robot.comments = $('#comments').val();
     if (robot.comments === undefined) {
@@ -235,10 +232,13 @@ $(document).ready(async function() {
     $('#high-ball-display').text(robot.points.high);
     $('#low-ball-display').text(robot.points.low);
     $('#miss-display').text(robot.points.miss);
-    $('#team-number-display').text(robot.team);
-    $('#team-colour-display').text(parseColour(robot.colour));
-    $('#driver-station-display').text(parseStation(settings.station));
     $('#match-number-display').text('Match Number: ' + robot.matchNumber);
+    $('#team-number-display').text('Team Number: ' + parseTeam(robot.team));
+    $('#team-colour-display').text('Alliance: ' + parseColour(robot.colour));
+    $('#driver-station-display').text('Driver Station: ' + parseStation(settings.station));
+    $('#robot-image').attr('src', robot.image);
+
+    $("#info-panel").addClass(robot.colour);
 
     checkForInvalidNumbers();
   }
@@ -247,7 +247,7 @@ $(document).ready(async function() {
   //checks for inadmissible values
   //
 
-  $('.button-event').click(function() {
+  $('.button-event').click(function () {
     const $btnEvent = $(this);
     robot.events.push({
       timestamp: Date.now(),
@@ -309,12 +309,12 @@ $(document).ready(async function() {
 
   /* Undo Logic */
 
-  $('.undo').click(function() {
+  $('.undo').click(function () {
     if (robot.events.length > 0) {
       const $btnEvent = $(this);
 
       let lastEventIndex = undefined;
-      robot.events.forEach(function(event, index) {
+      robot.events.forEach(function (event, index) {
         if (isEventValid(event)) {
           lastEventIndex = index;
           fieldAppState.robot = robot;
@@ -345,13 +345,13 @@ $(document).ready(async function() {
   //tests if the previous event was undoable, checking its id against the four undoable actions
   //these actions are pickup, high score, low score, miss
 
-  $('#rotation-successful').click(function() {
+  $('#rotation-successful').click(function () {
     rotationSuccessStatusRaw++;
     robotStatus(robot);
   });
   //toggles rotation success
 
-  $('#position-successful').click(function() {
+  $('#position-successful').click(function () {
     positionSuccessStatusRaw++;
     robotStatus(robot);
     fieldAppState.robot = robot;
@@ -359,63 +359,63 @@ $(document).ready(async function() {
   });
   //toggles position success
 
-  $('#fire').click(function() {
+  $('#fire').click(function () {
     robot.defense.rating = 2;
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
   });
 
-  $('#ok').click(function() {
+  $('#ok').click(function () {
     robot.defense.rating = 1;
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
   });
 
-  $('#bad').click(function() {
+  $('#bad').click(function () {
     robot.defense.rating = 0;
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
   });
   //sets defense values corresponding to the emoji chosen
 
-  $('#balanced').click(function() {
+  $('#balanced').click(function () {
     robot.climb = 3;
   });
 
-  $('#climbed').click(function() {
+  $('#climbed').click(function () {
     robot.climb = 2;
   });
 
-  $('#failed').click(function() {
+  $('#failed').click(function () {
     robot.climb = 1;
   });
   // set climb values corresponding to the chosen button (0 = no data)
 
-  $('#disconnect').click(function() {
+  $('#disconnect').click(function () {
     disconnectStatusRaw++;
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
   });
 
-  $('#failure').click(function() {
+  $('#failure').click(function () {
     failureStatusRaw++;
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
   });
 
-  $('#yellow').click(function() {
+  $('#yellow').click(function () {
     yellowRaw++;
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
   });
 
-  $('#red').click(function() {
+  $('#red').click(function () {
     redRaw++;
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
   });
 
-  $('#estop').click(function() {
+  $('#estop').click(function () {
     estopRaw++;
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);

@@ -4,6 +4,7 @@ import { getAllDocumentsInCollection } from './functions/firebase-app';
 $(document).ready(function() {
   $('#btn-download').click(async function() {
     $('#btn-download').addClass('bg-red-400');
+    $('#btn-download').text('Please wait...');
     const eventKey = $('#event-key').val();
     const matches = await getAllDocumentsInCollection('/events/' + eventKey + '/matches');
 

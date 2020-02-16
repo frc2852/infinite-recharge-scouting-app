@@ -446,6 +446,14 @@ $(document).ready(async function() {
       };
     }
 
+    if (settings.collectionPath != undefined) {
+      let collectionPath = await getDocumentLocally(settings.collectionPath);
+      console.log(collectionPath);
+      fieldAppState.match = collectionPath;
+      fieldAppState.currentMatch = collectionPath;
+      settings.collectionPath = undefined;
+    }
+
     if (fieldAppState != undefined) {
       if (fieldAppState.robot != undefined) {
         robot = fieldAppState.robot;

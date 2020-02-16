@@ -16,10 +16,6 @@ export const saveDocumentLocally = async (collectionPath, documentId, data) => {
     collectionPath += '/';
   }
 
-  console.log(collectionPath);
-  console.log(data);
-  console.log(documentId);
-
   data.documentId = documentId;
 
   return db.put('collections', data, collectionPath + documentId);

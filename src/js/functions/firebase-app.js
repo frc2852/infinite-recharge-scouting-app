@@ -14,9 +14,6 @@ const firebaseConfig = {
   messagingSenderId: '63114247978',
   appId: '1:63114247978:web:c257b4f61d522ad30ca853',
 };
-
-console.log(firebaseConfig);
-
 export const firebaseApp = !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.apps[0];
 
 export const saveDocument = (collectionPath, documentId, data) => {

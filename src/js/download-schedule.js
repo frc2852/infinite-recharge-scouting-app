@@ -18,7 +18,7 @@ $(document).ready(function () {
           });
 
           await Promise.all(robotImages);
-          window.location = '/settings.html';
+          window.location = 'settings.html';
         }
       });
     });

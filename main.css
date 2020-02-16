@@ -11860,6 +11860,16 @@ video {
   background-image: linear-gradient(from left, rgb(238, 135, 135), rgb(236, 228, 110), rgb(107, 158, 224), rgb(124, 230, 115));
 }
 
+#info-panel.blueTeam {
+  background: #3498db;
+  color: #ecf0f1;
+}
+
+#info-panel.redTeam {
+  background: #e74c3c;
+  color: #ecf0f1;
+}
+
 @media (min-width: 640px) {
   .sm\:sr-only {
     position: absolute;

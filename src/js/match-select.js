@@ -6,7 +6,8 @@ $(document).ready(function() {
   $('#btn-select').click(function() {
     $('#btn-select').addClass('bg-red-400');
     const matchID = $('#match-id').val();
-    const eventKey = $('event-key').val();
+    const eventKey = $('#event-key').val();
     console.log(matchID, eventKey);
+    window.location.assign('field-app.html?goToMatch=' + '/events/' + eventKey + '/matches/' + matchID);
   });
 });

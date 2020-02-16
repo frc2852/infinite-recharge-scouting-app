@@ -11,6 +11,7 @@ module.exports = {
   entry: {
     app: srcPath + 'js/app.js',
     'download-schedule': srcPath + 'js/download-schedule.js',
+    'match-select': srcPath + 'js/match-select.js',
     'field-app': srcPath + 'js/field-app.js',
     settings: srcPath + 'js/settings.js',
   },
@@ -31,7 +32,7 @@ module.exports = {
       },
       {
         test: /\.html$/,
-        use: ['html-loader']
+        use: ['html-loader'],
       },
       {
         test: /\.(svg|jpg|png|gif)$/,

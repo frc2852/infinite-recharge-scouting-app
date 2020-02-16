@@ -124,7 +124,7 @@ $(document).ready(async function() {
   });
   //reset button logic, sets all values to 0
 
-  async function goToMatch(collectionPath, matchID) {
+  export async function goToMatch(collectionPath, matchID) {
     console.log('collection path is', collectionPath);
     fieldAppState.currentMatch = await getDocument(collectionPath, matchID);
     resetRobot();

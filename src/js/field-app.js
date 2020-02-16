@@ -20,6 +20,7 @@ $(document).ready(async function() {
         robot.image = null;
       }
     }
+    updateDisplay();
   }
 
   setupRobot();
@@ -53,13 +54,6 @@ $(document).ready(async function() {
     return (station + 1).substring(1);
   }
   //changes the station number to be 1-based
-
-  $('#main-team-number-display').text('Scouting: ' + parseTeam(robot.team));
-  $('#team-number-display').text('Team Number: ' + parseTeam(robot.team));
-  $('#team-colour-display').text('Alliance: ' + parseColour(robot.colour));
-  $('#driver-station-display').text('Driver Station: ' + parseStation(settings.station));
-  $('#robot-image').attr('src', robot.image);
-  //sets up team data to be displayed in the info page
 
   // if (robot.colour == "redTeam"){
   //   do something
@@ -124,11 +118,14 @@ $(document).ready(async function() {
   });
   //reset button logic, sets all values to 0
 
-  export async function goToMatch(collectionPath, matchID) {
-    console.log('collection path is', collectionPath);
+  async function goToMatch(collectionPath, matchID) {
     fieldAppState.currentMatch = await getDocument(collectionPath, matchID);
-    resetRobot();
-    saveFieldAppState(fieldAppState);
+    await saveFieldAppState(fieldAppState);
+    await resetRobot();
+    setupRobot();
+    fieldAppState.robot = robot;
+    await saveFieldAppState(fieldAppState);
+    updateDisplay();
   }
 
   $('.btn-save').click(async function() {
@@ -235,10 +232,13 @@ $(document).ready(async function() {
     $('#high-ball-display').text(robot.points.high);
     $('#low-ball-display').text(robot.points.low);
     $('#miss-display').text(robot.points.miss);
-    $('#team-number-display').text(robot.team);
-    $('#team-colour-display').text(parseColour(robot.colour));
-    $('#driver-station-display').text(parseStation(settings.station));
     $('#match-number-display').text('Match Number: ' + robot.matchNumber);
+    $('#team-number-display').text('Team Number: ' + parseTeam(robot.team));
+    $('#team-colour-display').text('Alliance: ' + parseColour(robot.colour));
+    $('#driver-station-display').text('Driver Station: ' + parseStation(settings.station));
+    $('#robot-image').attr('src', robot.image);
+
+    $('#info-panel').addClass(robot.colour);
 
     checkForInvalidNumbers();
   }

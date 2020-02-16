@@ -392,3 +392,7 @@
 .bg-special {
   background-image: linear-gradient(from left, rgb(238, 135, 135), rgb(236, 228, 110), rgb(107, 158, 224), rgb(124, 230, 115));
 }
+
+.downloading {
+  @apply bg-blue-400;
+}

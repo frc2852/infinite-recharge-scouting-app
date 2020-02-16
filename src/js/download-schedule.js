@@ -5,6 +5,7 @@ import { getDocumentLocally } from './functions/index-db';
 
 $(document).ready(function() {
   $('#btn-download').click(async function() {
+    $('#btn-download').addClass('bg-red-400');
     const eventKey = $('#event-key').val();
     const matches = await getAllDocumentsInCollection('/events/' + eventKey + '/matches');
 

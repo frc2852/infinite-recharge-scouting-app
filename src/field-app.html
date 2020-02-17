@@ -32,6 +32,9 @@
         <li class="mr-3 submenu" data-tab-id="postgame">
           Postgame
         </li>
+        <li class="mr-3 submenu" data-tab-id="endgame">
+          Endgame
+        </li>
       </div>
     </ul>
   </div>
@@ -196,6 +199,36 @@
       </div>
     </div>
   </div>
+  <div class="tab-container hidden" id="endgame">
+    <div>
+      <br /><br /><br />
+      <div class="title">
+        Endgame Tab
+      </div>
+      <br /><br />
+      <div>Note: Do not select a button if the robot did not attempt a climb.</div>
+      <br /><br />
+      <div class="endgame-container">
+        <div class="endgame-toggle text-center scoring-button button-square" id="climbed">
+          Climbed Successfully
+        </div>
+        <div class="endgame-toggle text-center scoring-button button-square" id="failed">
+          Failed Climb
+        </div>
+      </div>
+      <div class="endgame-container">
+        <div class="endgame-toggle text-center scoring-button button-square" id="balanced">
+          Autobalanced
+        </div>
+      </div>
+      <br /><br />
+      <div class="text-center">
+        Enter robot comments below.
+        <textarea class="comments" id="comments" rows="8" cols="50"> </textarea>
+      </div>
+    </div>
+  </div>
+
   <script src="./js/app.js"></script>
   <script src="./js/field-app.js"></script>
 </body>

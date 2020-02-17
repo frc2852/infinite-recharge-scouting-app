@@ -177,9 +177,15 @@
 /* set for emoji buttons */
 
 .toggle-active {
+  @apply bg-gray-500;
   @apply border-green-500;
 }
 /* button is toggled on */
+
+.endgame-toggle-active {
+  @apply bg-gray-500;
+  @apply border-green-500;
+}
 
 .emoji-toggle-active {
   @apply bg-gray-500;

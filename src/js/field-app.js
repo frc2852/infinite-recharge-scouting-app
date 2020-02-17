@@ -422,6 +422,24 @@ $(document).ready(async function() {
   });
   //toggle endgame status values
 
+  $('#climbed').click(function() {
+    climbed++;
+    fieldAppState.robot = robot;
+    saveFieldAppState(fieldAppState);
+  });
+
+  $('#failed').click(function() {
+    failed++;
+    fieldAppState.robot = robot;
+    saveFieldAppState(fieldAppState);
+  });
+
+  $('#balanced').click(function() {
+    balanced++;
+    fieldAppState.robot = robot;
+    saveFieldAppState(fieldAppState);
+  });
+
   async function resetRobot() {
     $('.tab-container').addClass('hidden');
     $('#information').removeClass('hidden');
@@ -494,6 +512,7 @@ $(document).ready(async function() {
     };
 
     $('.endgame-toggle').removeClass('endgame-toggle-active');
+    $('.climb-toggle').removeClass('climb-toggle-active');
     $('.emoji-toggle').removeClass('emoji-toggle-active');
     $('toggle').removeClass('toggle-active');
 

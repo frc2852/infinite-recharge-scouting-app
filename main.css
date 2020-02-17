@@ -11593,10 +11593,16 @@ video {
 /* set for emoji buttons */
 
 .toggle-active {
+  background-color: #a0aec0;
   border-color: #48bb78;
 }
 
 /* button is toggled on */
+
+.endgame-toggle-active {
+  background-color: #a0aec0;
+  border-color: #48bb78;
+}
 
 .emoji-toggle-active {
   background-color: #a0aec0;
@@ -11858,6 +11864,10 @@ video {
 .bg-special {
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(left, from), color-stop(rgb(238, 135, 135)), color-stop(rgb(236, 228, 110)), color-stop(rgb(107, 158, 224)), to(rgb(124, 230, 115)));
   background-image: linear-gradient(from left, rgb(238, 135, 135), rgb(236, 228, 110), rgb(107, 158, 224), rgb(124, 230, 115));
+}
+
+.downloading {
+  background-color: #63b3ed;
 }
 
 #info-panel.blueTeam {

@@ -493,7 +493,7 @@ $(document).ready(async function() {
       image: null,
     };
 
-    $('#comments').val() = '';
+    document.getElementById('comments').setAttribute('value').val = '';
 
     $('.endgame-toggle').removeClass('endgame-toggle-active');
     $('.climb-toggle').removeClass('climb-toggle-active');
@@ -503,8 +503,3 @@ $(document).ready(async function() {
     updateDisplay();
   }
 });
-
-//make a function that does both
-//fieldAppState.robot = robot;
-//saveFieldAppState(fieldAppState);
-//to save space

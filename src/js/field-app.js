@@ -211,6 +211,7 @@ $(document).ready(async function() {
     $('#team-number-display').text('Team Number: ' + parseTeam(robot.team));
     $('#team-colour-display').text('Alliance: ' + parseColour(robot.colour));
     $('#driver-station-display').text('Driver Station: ' + parseStation(settings.station));
+    $('#main-team-number-display').text('Scouting: ' + parseTeam(robot.team));
     $('#robot-image').attr('src', robot.image);
 
     $('#info-panel').addClass(robot.colour);

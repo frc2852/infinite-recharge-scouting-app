@@ -96,7 +96,7 @@
 }
 /* set for standard rectangle (short) buttons */
 
-.button-endgame {
+.button-summary {
   @apply border;
   @apply border-transparent;
   @apply border-4;
@@ -112,7 +112,7 @@
   @apply px-16;
 }
 
-.button-endgame:hover {
+.button-summary:hover {
   @apply border-gray-700;
 }
 /* set for endgame status buttons */
@@ -182,7 +182,7 @@
 }
 /* button is toggled on */
 
-.endgame-toggle-active {
+.summary-toggle-active {
   @apply bg-gray-500;
   @apply border-green-500;
 }
@@ -209,13 +209,13 @@
 
 .btn-reset {
   @apply rounded-lg;
-  @apply text-2xl;
+  @apply text-3xl;
   position: absolute;
   bottom: 4;
   left: 1;
   margin-bottom: 4px;
   margin-left: 4px;
-  @apply bg-red-700;
+  @apply bg-red-500;
 }
 /* reset button */
 
@@ -227,49 +227,13 @@
   right: 1;
   margin-bottom: 4px;
   margin-left: 4px;
-  @apply bg-blue-700;
+  @apply bg-blue-500;
 }
 /*save button*/
 
-.pre-alert {
-  background-color: white;
-  animation-name: pre-alert-animation;
-  animation-duration: 2s;
-  animation-iteration-count: infinite;
-}
-
-@keyframes pre-alert-animation {
-  0% {
-    background-color: red;
-  }
-  50% {
-    background-color: transparent;
-  }
-  100% {
-    background-color: red;
-  }
-}
-/* a slower alert for non-vital issues */
-
 .alert {
-  background-color: white;
-  animation-name: alert-animation;
-  animation-duration: 0.2s;
-  animation-iteration-count: infinite;
+  background-color: red;
 }
-
-@keyframes alert-animation {
-  0% {
-    background-color: red;
-  }
-  50% {
-    background-color: transparent;
-  }
-  100% {
-    background-color: red;
-  }
-}
-/* a fast alert for issues requiring immediate action */
 
 .endgame-container {
   text-align: center;
@@ -395,8 +359,10 @@
   text-align: center;
 }
 
-.bg-special {
-  background-image: linear-gradient(from left, rgb(238, 135, 135), rgb(236, 228, 110), rgb(107, 158, 224), rgb(124, 230, 115));
+.bg-rainbow {
+  border-color: transparent;
+  border-width: 0;
+  background-image: linear-gradient(to right, rgb(238, 135, 135), rgb(236, 228, 110), rgb(107, 158, 224), rgb(124, 230, 115));
 }
 
 .downloading {
@@ -404,11 +370,11 @@
 }
 
 #info-panel.blueTeam {
-  background: #3498db;
+  background: #5f89a5;
   color: #ecf0f1;
 }
 
 #info-panel.redTeam {
-  background: #e74c3c;
+  background: #b95b51;
   color: #ecf0f1;
 }

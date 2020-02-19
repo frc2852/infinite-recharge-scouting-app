@@ -79,8 +79,15 @@ $(document).ready(async function() {
 
   $('.emoji-toggle').click(function() {
     const $emojiToggled = $(this);
-    $('.emoji-toggle').removeClass('emoji-toggle-active');
-    $emojiToggled.addClass('emoji-toggle-active');
+    console.log(h);
+    if ($($emojiToggled).hasClass('emoji-toggle-active')) {
+      $($emojiToggled).removeClass('emoji-toggle-active');
+      console.log(h2);
+    } else {
+      $('.emoji-toggle').removeClass('emoji-toggle-active');
+      $emojiToggled.addClass('emoji-toggle-active');
+      console.log(h3);
+    }
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
   });
@@ -88,8 +95,7 @@ $(document).ready(async function() {
 
   $('.endgame-toggle').click(function() {
     const $endgameToggled = $(this);
-    $('.endgame-toggle').removeClass('endgame-toggle-active');
-    $endgameToggled.addClass('endgame-toggle-active');
+    $endgameToggled.toggleClass('endgame-toggle-active');
   });
   // endgame toggle logic, only allows one to be active.
 
@@ -144,53 +150,27 @@ $(document).ready(async function() {
   function checkForInvalidNumbers() {
     if (robot.balls < 0) {
       $('#ball-count-box').addClass('alert');
-      $('.btn-undo').addClass('pre-alert');
     }
     if (robot.balls == 0) {
       $('#ball-count-box').removeClass('alert');
-      $('#ball-count-box').removeClass('pre-alert');
-      $('.btn-undo').removeClass('alert');
-      $('.btn-undo').removeClass('pre-alert');
     }
     if (robot.balls == 1) {
       $('#ball-count-box').removeClass('alert');
-      $('#ball-count-box').removeClass('pre-alert');
-      $('.btn-undo').removeClass('alert');
-      $('.btn-undo').removeClass('pre-alert');
     }
     if (robot.balls == 2) {
       $('#ball-count-box').removeClass('alert');
-      $('#ball-count-box').removeClass('pre-alert');
-      $('.btn-undo').removeClass('alert');
-      $('.btn-undo').removeClass('pre-alert');
     }
     if (robot.balls == 3) {
       $('#ball-count-box').removeClass('alert');
-      $('#ball-count-box').removeClass('pre-alert');
-      $('.btn-undo').removeClass('alert');
-      $('.btn-undo').removeClass('pre-alert');
     }
     if (robot.balls == 4) {
       $('#ball-count-box').removeClass('alert');
-      $('#ball-count-box').removeClass('pre-alert');
-      $('.btn-undo').removeClass('alert');
-      $('.btn-undo').removeClass('pre-alert');
     }
     if (robot.balls == 5) {
       $('#ball-count-box').removeClass('alert');
-      $('#ball-count-box').removeClass('pre-alert');
-      $('.btn-undo').removeClass('alert');
-      $('.btn-undo').removeClass('pre-alert');
     }
     if (robot.balls == 6) {
-      $('#ball-count-box').removeClass('alert');
-      $('#ball-count-box').addClass('pre-alert');
-      $('.btn-undo').removeClass('alert');
-      $('.btn-undo').addClass('pre-alert');
-    }
-    if (robot.balls > 6) {
       $('#ball-count-box').addClass('alert');
-      $('.btn-undo').addClass('alert');
     }
     if (robot.points.high < 0) {
       $('#high-ball-box').addClass('alert');
@@ -214,11 +194,6 @@ $(document).ready(async function() {
   //checks if numbers are invalid for each value, and assigns/removes warning classes based on results
 
   function updateDisplay() {
-    robot.balls = 0;
-    robot.points.high = 0;
-    robot.points.low = 0;
-    robot.points.miss = 0;
-
     robot.balls = countEvents(robot.events, 'pickup');
     robot.points.high = countEvents(robot.events, 'high');
     robot.points.low = countEvents(robot.events, 'low');
@@ -423,19 +398,25 @@ $(document).ready(async function() {
   //toggle endgame status values
 
   $('#climbed').click(function() {
-    climbed++;
+    climbedRaw++;
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
   });
 
   $('#failed').click(function() {
-    failed++;
+    failedRaw++;
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
   });
 
   $('#balanced').click(function() {
-    balanced++;
+    balancedRaw++;
+    fieldAppState.robot = robot;
+    saveFieldAppState(fieldAppState);
+  });
+
+  $('#parked').click(function() {
+    parkedRaw++;
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
   });
@@ -510,6 +491,8 @@ $(document).ready(async function() {
       events: [],
       image: null,
     };
+
+    $('#comments').val() = '';
 
     $('.endgame-toggle').removeClass('endgame-toggle-active');
     $('.climb-toggle').removeClass('climb-toggle-active');

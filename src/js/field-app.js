@@ -326,12 +326,16 @@ $(document).ready(async function() {
   //these actions are pickup, high score, low score, miss
 
   $('#rotation-successful').click(function() {
+    '#rotation-successful'.toggleClass('rotation-active');
     rotationSuccessStatusRaw++;
     robotStatus(robot);
+    fieldAppState.robot = robot;
+    saveFieldAppState(fieldAppState);
   });
   //toggles rotation success
 
   $('#position-successful').click(function() {
+    '#position-successful'.toggleClass('position-active');
     positionSuccessStatusRaw++;
     robotStatus(robot);
     fieldAppState.robot = robot;

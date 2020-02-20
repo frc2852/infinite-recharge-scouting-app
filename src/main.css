@@ -182,10 +182,23 @@
 }
 /* button is toggled on */
 
+.rotation-toggle-active {
+  @apply bg-purple-500;
+  @apply border-green-500;
+}
+/* indicates rotation control is completed */
+
+.position-toggle-active {
+  @apply border-green-500;
+  background-image: linear-gradient(to right, rgb(198, 95, 95), rgb(196, 188, 70), rgb(67, 148, 184), rgb(84, 190, 75));
+}
+/* darkens all gradient colours equally, indicating position control is completed */
+
 .summary-toggle-active {
   @apply bg-gray-500;
   @apply border-green-500;
 }
+/* card and estop buttons */
 
 .emoji-toggle-active {
   @apply bg-gray-500;

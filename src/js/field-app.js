@@ -79,14 +79,11 @@ $(document).ready(async function() {
 
   $('.emoji-toggle').click(function() {
     const $emojiToggled = $(this);
-    console.log(h);
     if ($($emojiToggled).hasClass('emoji-toggle-active')) {
       $($emojiToggled).removeClass('emoji-toggle-active');
-      console.log(h2);
     } else {
       $('.emoji-toggle').removeClass('emoji-toggle-active');
       $emojiToggled.addClass('emoji-toggle-active');
-      console.log(h3);
     }
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
@@ -335,7 +332,7 @@ $(document).ready(async function() {
   //toggles rotation success
 
   $('#position-successful').click(function() {
-    '#position-successful'.toggleClass('position-active');
+    '#position-successful'.toggleClass('position-toggle-active');
     positionSuccessStatusRaw++;
     robotStatus(robot);
     fieldAppState.robot = robot;
@@ -430,6 +427,18 @@ $(document).ready(async function() {
     saveFieldAppState(fieldAppState);
   });
 
+  $('#foul').click(function() {
+    robot.foul++;
+    fieldAppState.robot = robot;
+    saveFieldAppState(fieldAppState);
+  });
+
+  $('#tech-foul').click(function() {
+    robot.techfoul++;
+    fieldAppState.robot = robot;
+    saveFieldAppState(fieldAppState);
+  });
+
   async function resetRobot() {
     $('.tab-container').addClass('hidden');
     $('#information').removeClass('hidden');
@@ -501,7 +510,7 @@ $(document).ready(async function() {
       image: null,
     };
 
-    document.getElementById('comments').setAttribute('value').val = '';
+    document.getElementById('comments').setAttribute('value', '');
 
     $('.endgame-toggle').removeClass('endgame-toggle-active');
     $('.climb-toggle').removeClass('climb-toggle-active');

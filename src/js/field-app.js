@@ -120,6 +120,7 @@ $(document).ready(async function() {
 
   async function goToMatch(collectionPath, matchID) {
     fieldAppState.currentMatch = await getDocument(collectionPath, matchID);
+    fieldAppState.robot = undefined;
     await saveFieldAppState(fieldAppState);
     await resetRobot();
     setupRobot();

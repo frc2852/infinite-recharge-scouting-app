@@ -189,7 +189,7 @@
   @apply border-4;
   @apply bg-green-400;
 }
-/* darkens all gradient colours equally, indicating position control is completed */
+/* indicates position control is completed */
 
 .summary-toggle-active {
   @apply bg-gray-500;
@@ -395,4 +395,15 @@
 
 .comments {
   font-size: 16px;
+}
+
+.button-fouls {
+  @apply border;
+  @apply border-transparent;
+  @apply border-4;
+  @apply rounded-lg;
+  display: inline-block;
+  margin: 4px;
+  @apply p-2;
+  @apply text-2xl;
 }

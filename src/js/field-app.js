@@ -471,13 +471,6 @@ $(document).ready(async function() {
       settings.collectionPath = undefined;
     }
 
-    if (fieldAppState != undefined) {
-      if (fieldAppState.robot != undefined) {
-        robot = fieldAppState.robot;
-      }
-      match = fieldAppState.match;
-    }
-
     robot = {
       matchStartTime: 0,
       team: 'No Team Number',
@@ -510,7 +503,16 @@ $(document).ready(async function() {
       image: null,
     };
 
+<<<<<<< HEAD
     document.getElementById('comments').setAttribute('value', '');
+=======
+    if (fieldAppState != undefined) {
+      if (fieldAppState.robot != undefined) {
+        robot = fieldAppState.robot;
+      }
+      match = fieldAppState.match;
+    }
+>>>>>>> eb6fd544648e2ef12540d3b3f6ed36ab214a372e
 
     $('.endgame-toggle').removeClass('endgame-toggle-active');
     $('.climb-toggle').removeClass('climb-toggle-active');

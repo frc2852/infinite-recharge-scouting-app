@@ -9,15 +9,16 @@ const outputFolder = path.resolve('dist');
 
 module.exports = {
   entry: {
-    app: srcPath + 'js/app.js',
-    'download-schedule': srcPath + 'js/download-schedule.js',
-    'match-select': srcPath + 'js/match-select.js',
-    'field-app': srcPath + 'js/field-app.js',
-    settings: srcPath + 'js/settings.js',
+    'js/app': srcPath + 'js/app.js',
+    'js/download-schedule': srcPath + 'js/download-schedule.js',
+    'js/match-select': srcPath + 'js/match-select.js',
+    'js/field-app': srcPath + 'js/field-app.js',
+    'js/settings': srcPath + 'js/settings.js',
+    'service-worker': srcPath + 'js/service-worker.js',
   },
   output: {
     path: outputFolder,
-    filename: 'js/[name].js',
+    filename: '[name].js',
   },
   module: {
     rules: [

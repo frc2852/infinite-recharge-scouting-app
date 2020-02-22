@@ -7,6 +7,20 @@ $(document).ready(async function() {
   let match = undefined;
   let fieldAppState = undefined;
   let settings = undefined;
+
+  let rotationSuccessStatusRaw = 0;
+  let positionSuccessStatusRaw = 0;
+
+  let disconnectStatusRaw = 0;
+  let failureStatusRaw = 0;
+  let yellowRaw = 0;
+  let redRaw = 0;
+  let estopRaw = 0;
+
+  let climbedRaw = 0;
+  let failedRaw = 0;
+  let balancedRaw = 0;
+  let parkedRaw = 0;
   await resetRobot();
 
   function setupRobot() {
@@ -195,6 +209,8 @@ $(document).ready(async function() {
     robot.points.high = countEvents(robot.events, 'high');
     robot.points.low = countEvents(robot.events, 'low');
     robot.points.miss = countEvents(robot.events, 'miss');
+    robot.defense.fouls = countEvents(robot.events, 'foul');
+    robot.defense.tech = countEvents(robot.events, 'tech');
 
     if (robot.balls < 0) {
       robot.balls = 0;
@@ -210,8 +226,8 @@ $(document).ready(async function() {
     $('#driver-station-display').text('Driver Station: ' + parseStation(settings.station));
     $('#main-team-number-display').text('Scouting: ' + parseTeam(robot.team));
     $('#robot-image').attr('src', robot.image);
-    $('fouls-display').text('Fouls: ' + robot.defense.fouls);
-    $('tech-fouls-display').text('Techs: ' + robot.defense.tech);
+    $('#fouls-display').text('Fouls: ' + robot.defense.fouls + '  ');
+    $('#tech-fouls-display').text('Techs: ' + robot.defense.tech);
 
     $('#info-panel').addClass(robot.colour);
 
@@ -238,6 +254,7 @@ $(document).ready(async function() {
     updateDisplay();
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
+    console.log(robot);
   });
   //upon logging a button event (such as a pickup or score), adds the event to the robot's array of events
 
@@ -288,6 +305,29 @@ $(document).ready(async function() {
       }
       return count;
     }
+
+    if (type == 'foul') {
+      for (var i = 0; i < array.length; ++i) {
+        if (array[i].eventType == 'foul') {
+          count++;
+        }
+        if (array[i].eventType == 'remove-foul') {
+          count--;
+        }
+      }
+      return count;
+    }
+    if (type == 'tech') {
+      for (var i = 0; i < array.length; ++i) {
+        if (array[i].eventType == 'tech') {
+          count++;
+        }
+        if (array[i].eventType == 'remove-tech') {
+          count--;
+        }
+      }
+      return count;
+    }
   }
 
   /* Undo Logic */
@@ -328,19 +368,17 @@ $(document).ready(async function() {
   //tests if the previous event was undoable, checking its id against the four undoable actions
   //these actions are pickup, high score, low score, miss
 
-  $('#rotation-successful').click(function() {
-    '#rotation-successful'.toggleClass('rotation-active');
+  $('#rotation').click(function() {
+    $('#rotation').toggleClass('wheel-toggle-active');
     rotationSuccessStatusRaw++;
-    robotStatus(robot);
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
   });
   //toggles rotation success
 
-  $('#position-successful').click(function() {
-    '#position-successful'.toggleClass('position-toggle-active');
+  $('#position').click(function() {
+    $('#position').toggleClass('wheel-toggle-active');
     positionSuccessStatusRaw++;
-    robotStatus(robot);
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
   });
@@ -378,17 +416,17 @@ $(document).ready(async function() {
   });
   // set climb values corresponding to the chosen button (0 = no data)
 
-  $('#disconnect').click(function() {
-    disconnectStatusRaw++;
-    fieldAppState.robot = robot;
-    saveFieldAppState(fieldAppState);
-  });
+  // $('#disconnect').click(function() {
+  //   disconnectStatusRaw++;
+  //   fieldAppState.robot = robot;
+  //   saveFieldAppState(fieldAppState);
+  // });
 
-  $('#failure').click(function() {
-    failureStatusRaw++;
-    fieldAppState.robot = robot;
-    saveFieldAppState(fieldAppState);
-  });
+  // $('#failure').click(function() {
+  //   failureStatusRaw++;
+  //   fieldAppState.robot = robot;
+  //   saveFieldAppState(fieldAppState);
+  // });
 
   $('#yellow').click(function() {
     yellowRaw++;
@@ -402,7 +440,7 @@ $(document).ready(async function() {
     saveFieldAppState(fieldAppState);
   });
 
-  $('#estop').click(function() {
+  $('#issue').click(function() {
     estopRaw++;
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
@@ -429,30 +467,6 @@ $(document).ready(async function() {
 
   $('#parked').click(function() {
     parkedRaw++;
-    fieldAppState.robot = robot;
-    saveFieldAppState(fieldAppState);
-  });
-
-  $('#foul-up').click(function() {
-    robot.defense.fouls++;
-    fieldAppState.robot = robot;
-    saveFieldAppState(fieldAppState);
-  });
-
-  $('#foul-down').click(function() {
-    robot.defense.fouls--;
-    fieldAppState.robot = robot;
-    saveFieldAppState(fieldAppState);
-  });
-
-  $('#tech-foul-up').click(function() {
-    robot.defense.tech++;
-    fieldAppState.robot = robot;
-    saveFieldAppState(fieldAppState);
-  });
-
-  $('#tech-foul-down').click(function() {
-    robot.defense.tech--;
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
   });

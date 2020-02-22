@@ -17,7 +17,7 @@ self.addEventListener('fetch', event => {
             return response;
           }
         } catch (e) {
-          console.log(e);
+          console.error(e);
         }
       }
 

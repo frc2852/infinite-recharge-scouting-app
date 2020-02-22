@@ -28,6 +28,7 @@
     },
     "dependencies": {
         "firebase": "^7.8.0",
+        "firebaseui": "^4.4.0",
         "idb": "^5.0.1",
         "jquery": "^3.4.1",
         "tailwindcss": "^1.1.4"

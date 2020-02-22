@@ -10,6 +10,7 @@ const outputFolder = path.resolve('dist');
 module.exports = {
   entry: {
     'js/app': srcPath + 'js/app.js',
+    'js/login': srcPath + 'js/login.js',
     'js/download-schedule': srcPath + 'js/download-schedule.js',
     'js/match-select': srcPath + 'js/match-select.js',
     'js/field-app': srcPath + 'js/field-app.js',

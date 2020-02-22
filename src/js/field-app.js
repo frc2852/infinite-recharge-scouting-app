@@ -128,7 +128,9 @@ $(document).ready(async function() {
 
   //the preceeding three functions will still work without a ball, leaving the value at zero
 
-  $('.btn-reset').click(function() {
+  $('.btn-reset').click(async function() {
+    fieldAppState.robot = undefined;
+    await saveFieldAppState(fieldAppState);
     resetRobot();
     updateDisplay();
     alert('Data cleared. Refresh the page to restore data.');
@@ -137,6 +139,7 @@ $(document).ready(async function() {
 
   async function goToMatch(collectionPath, matchID) {
     fieldAppState.currentMatch = await getDocument(collectionPath, matchID);
+    fieldAppState.robot = undefined;
     await saveFieldAppState(fieldAppState);
     await resetRobot();
     setupRobot();
@@ -266,6 +269,9 @@ $(document).ready(async function() {
         if (array[i].eventType == 'pickup') {
           count++;
         }
+        if (array[i].eventType == 'auto-pickup') {
+          count++;
+        }
         if (array[i].eventType == 'high') {
           count--;
         }
@@ -277,6 +283,14 @@ $(document).ready(async function() {
         }
         return count;
       }
+
+      if (count < 0) {
+        robot.events.push({
+          timestamp: Date.now(),
+          eventType: 'auto-pickup',
+        });
+      }
+      return count;
     }
 
     if (type == 'high') {
@@ -334,8 +348,6 @@ $(document).ready(async function() {
 
   $('.undo').click(function() {
     if (robot.events.length > 0) {
-      const $btnEvent = $(this);
-
       let lastEventIndex = undefined;
       robot.events.forEach(function(event, index) {
         if (isEventValid(event)) {
@@ -346,10 +358,15 @@ $(document).ready(async function() {
       });
 
       if (lastEventIndex != undefined) {
-        const event = robot.events[lastEventIndex];
         robot.events.splice(lastEventIndex, 1);
         fieldAppState.robot = robot;
         saveFieldAppState(fieldAppState);
+
+        if (robot.events[events.length].eventType === 'auto-pickup') {
+          robot.events.splice(lastEventIndex, 1);
+          fieldAppState.robot = robot;
+          saveFieldAppState(fieldAppState);
+        }
       }
     }
     updateDisplay();
@@ -502,7 +519,6 @@ $(document).ready(async function() {
 
     if (settings.collectionPath != undefined) {
       let collectionPath = await getDocumentLocally(settings.collectionPath);
-      console.log(collectionPath);
       fieldAppState.match = collectionPath;
       fieldAppState.currentMatch = collectionPath;
       settings.collectionPath = undefined;

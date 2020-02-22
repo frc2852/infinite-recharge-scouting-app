@@ -3,7 +3,6 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 import { saveDocumentLocally, getDocumentLocally } from './index-db';
-// import firebaseConfig from '../../configs/firebase-config';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAeG697qsKGtAYKaozDNflZYAIElYfou-w',
@@ -14,19 +13,42 @@ const firebaseConfig = {
   messagingSenderId: '63114247978',
   appId: '1:63114247978:web:c257b4f61d522ad30ca853',
 };
+
 export const firebaseApp = !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.apps[0];
+firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 
 export const saveDocument = (collectionPath, documentId, data) => {
   if (navigator.onLine) {
-    return firebaseApp
+    firebaseApp
       .firestore()
       .collection(collectionPath)
       .doc(documentId)
       .set(data);
+
+      data.sentToFirebase = true;
   }
 
   return saveDocumentLocally(collectionPath, documentId, data);
 };
+
+export const saveRobotEventDocumentsToFirestore = async (docs) => {
+  const batch = firebaseApp.firestore().batch();
+  
+  docs.forEach(doc => {
+    const robotMatchEvent = firebaseApp.firestore().doc(doc.documentPath);
+
+    if(!doc.sentToFirebase) {
+      batch.set(robotMatchEvent, doc);
+    }
+  })
+
+  batch.commit().then(() => {
+    docs.forEach(doc => {
+      doc.sentToFirebase = true;
+      saveDocumentLocally(doc.documentPath, doc.documentId, doc);
+    }); 
+  }).catch(e => console.error(e));
+}
 
 export const getDocument = async (collectionPath, documentId) => {
   if (navigator.onLine) {

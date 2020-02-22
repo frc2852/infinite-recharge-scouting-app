@@ -9,7 +9,6 @@ $(document).ready(function() {
     $('#btn-select').text('Please wait...');
     const matchID = $('#match-id').val();
     const eventKey = $('#event-key').val();
-    console.log(matchID, eventKey);
     let settings = await getSettings();
     settings.collectionPath = '/events/' + eventKey + '/matches/' + eventKey + '_' + matchID;
     await saveSettings(settings);

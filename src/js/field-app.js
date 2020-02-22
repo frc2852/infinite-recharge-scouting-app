@@ -111,7 +111,7 @@ $(document).ready(async function() {
 
   //the preceeding three functions will still work without a ball, leaving the value at zero
 
-  $('.btn-reset').click(function() {
+  $('.btn-reset').click(async function() {
     resetRobot();
     updateDisplay();
     alert('Data cleared. Refresh the page to restore data.');
@@ -267,6 +267,9 @@ $(document).ready(async function() {
         if (array[i].eventType == 'pickup') {
           count++;
         }
+        if (array[i].eventType == 'auto-pickup') {
+          count++;
+        }
         if (array[i].eventType == 'high') {
           count--;
         }
@@ -276,6 +279,13 @@ $(document).ready(async function() {
         if (array[i].eventType == 'miss') {
           count--;
         }
+      }
+
+      if(count < 0) {
+        robot.events.push({
+          timestamp: Date.now(),
+          eventType: 'auto-pickup',
+        });
       }
       return count;
     }
@@ -312,7 +322,6 @@ $(document).ready(async function() {
 
   $('.undo').click(function() {
     if (robot.events.length > 0) {
-      const $btnEvent = $(this);
 
       let lastEventIndex = undefined;
       robot.events.forEach(function(event, index) {
@@ -324,10 +333,15 @@ $(document).ready(async function() {
       });
 
       if (lastEventIndex != undefined) {
-        const event = robot.events[lastEventIndex];
         robot.events.splice(lastEventIndex, 1);
         fieldAppState.robot = robot;
         saveFieldAppState(fieldAppState);
+
+        if(robot.events[events.length].eventType === 'auto-pickup') {
+          robot.events.splice(lastEventIndex, 1);
+          fieldAppState.robot = robot;
+          saveFieldAppState(fieldAppState);
+        }
       }
     }
     updateDisplay();

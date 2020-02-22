@@ -499,7 +499,7 @@ $(document).ready(async function() {
 
     robot = {
       matchStartTime: 0,
-      team: 'Corrupt Team Number',
+      team: '###Corrupt Team Number',
       colour: 'Corrupt Alliance',
       balls: 0,
       matchNumber: fieldAppState.currentMatch.matchNumber,

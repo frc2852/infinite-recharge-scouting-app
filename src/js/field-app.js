@@ -8,19 +8,6 @@ $(document).ready(async function() {
   let fieldAppState = undefined;
   let settings = undefined;
 
-  let rotationSuccessStatusRaw = 0;
-  let positionSuccessStatusRaw = 0;
-
-  let disconnectStatusRaw = 0;
-  let failureStatusRaw = 0;
-  let yellowRaw = 0;
-  let redRaw = 0;
-  let estopRaw = 0;
-
-  let climbedRaw = 0;
-  let failedRaw = 0;
-  let balancedRaw = 0;
-  let parkedRaw = 0;
   await resetRobot();
 
   function setupRobot() {
@@ -69,10 +56,18 @@ $(document).ready(async function() {
   }
   //changes the station number to be 1-based
 
-  // if (robot.colour == "redTeam"){
-  //   do something
-  // }
-  // if alliance is red alliance change all features to red?
+  function writeMods() {
+    console.log(robot);
+    robot.wheel.rotation = robot.clicks.rotationSuccessStatusRaw % 2;
+    robot.wheel.position = robot.clicks.positionSuccessStatusRaw % 2;
+    robot.status.yellow = robot.clicks.yellowRaw % 2;
+    robot.status.red = robot.clicks.redRaw % 2;
+    robot.status.estop = robot.clicks.estopRaw % 2;
+    robot.endgame.climbed = robot.clicks.climbedRaw % 2;
+    robot.endgame.failed = robot.clicks.failedRaw % 2;
+    robot.endgame.balanced = robot.clicks.balancedRaw % 2;
+    robot.endgame.parked = robot.clicks.parkedRaw % 2;
+  }
 
   $('.start-button').click(function() {
     robot.matchStartTime = Date.now();
@@ -80,6 +75,7 @@ $(document).ready(async function() {
     $('#offense').removeClass('hidden');
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
+    writeMods();
   });
   //triggers match to begin, moves to offense tab
 
@@ -88,6 +84,7 @@ $(document).ready(async function() {
     $toggled.toggleClass('toggle-active');
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
+    writeMods();
   });
   //general toggle logic (on/off without reliance on other buttons)
 
@@ -101,12 +98,14 @@ $(document).ready(async function() {
     }
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
+    writeMods();
   });
   //emoji toggle logic, only allows one to be active.
 
   $('.endgame-toggle').click(function() {
     const $endgameToggled = $(this);
     $endgameToggled.toggleClass('endgame-toggle-active');
+    writeMods();
   });
   // endgame toggle logic, only allows one to be active.
 
@@ -120,12 +119,9 @@ $(document).ready(async function() {
 
     $('.tab-container').addClass('hidden');
     $('#' + tabId).removeClass('hidden');
+    writeMods();
   });
   //tab select logic, shows and hides respective tab containers
-
-  //$('.scoring-button').click(function() {});
-  //all scoring buttons force the HUD to refresh
-
   //the preceeding three functions will still work without a ball, leaving the value at zero
 
   $('.btn-reset').click(async function() {
@@ -150,6 +146,7 @@ $(document).ready(async function() {
 
   $('.btn-save').click(async function() {
     alert(robot.scout + "'s scouting data was saved.");
+    writeMods();
     robot.comments = $('#comments').val();
     if (robot.comments === undefined) {
       robot.comments = '';
@@ -234,12 +231,13 @@ $(document).ready(async function() {
 
     $('#info-panel').addClass(robot.colour);
 
+    writeMods();
+
     checkForInvalidNumbers();
   }
   //updates robot values for the count of each event
   //refreshes all values to the HUD
   //checks for inadmissible values
-  //
 
   $('.button-event').click(function() {
     const $btnEvent = $(this);
@@ -258,13 +256,13 @@ $(document).ready(async function() {
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
     console.log(robot);
+    writeMods();
   });
   //upon logging a button event (such as a pickup or score), adds the event to the robot's array of events
 
   function countEvents(array, type) {
     let count = 0;
     if (type == 'pickup') {
-      console.log(robot.events);
       for (var i = 0; i < array.length; i++) {
         if (array[i].eventType == 'pickup') {
           count++;
@@ -281,7 +279,6 @@ $(document).ready(async function() {
         if (array[i].eventType == 'miss') {
           count--;
         }
-        return count;
       }
 
       if (count < 0) {
@@ -371,6 +368,7 @@ $(document).ready(async function() {
     }
     updateDisplay();
     fieldAppState.robot = robot;
+    writeMods();
     saveFieldAppState(fieldAppState);
   });
   //undo button function, checks if the button event is one that allows undo (such as a pickup or score)
@@ -387,7 +385,8 @@ $(document).ready(async function() {
 
   $('#rotation').click(function() {
     $('#rotation').toggleClass('wheel-toggle-active');
-    rotationSuccessStatusRaw++;
+    robot.clicks.rotationSuccessStatusRaw++;
+    writeMods();
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
   });
@@ -395,115 +394,89 @@ $(document).ready(async function() {
 
   $('#position').click(function() {
     $('#position').toggleClass('wheel-toggle-active');
-    positionSuccessStatusRaw++;
+    robot.clicks.positionSuccessStatusRaw++;
+    writeMods();
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
   });
   //toggles position success
 
   $('#fire').click(function() {
-    robot.defense.rating = 2;
+    robot.defense.rating = 3;
+    writeMods();
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
   });
 
   $('#ok').click(function() {
-    robot.defense.rating = 1;
+    robot.defense.rating = 2;
+    writeMods();
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
   });
 
   $('#bad').click(function() {
-    robot.defense.rating = 0;
+    robot.defense.rating = 1;
+    writeMods();
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
   });
   //sets defense values corresponding to the emoji chosen
 
-  $('#balanced').click(function() {
-    robot.climb = 3;
-  });
-
-  $('#climbed').click(function() {
-    robot.climb = 2;
-  });
-
-  $('#failed').click(function() {
-    robot.climb = 1;
-  });
-  // set climb values corresponding to the chosen button (0 = no data)
-
-  // $('#disconnect').click(function() {
-  //   disconnectStatusRaw++;
-  //   fieldAppState.robot = robot;
-  //   saveFieldAppState(fieldAppState);
-  // });
-
-  // $('#failure').click(function() {
-  //   failureStatusRaw++;
-  //   fieldAppState.robot = robot;
-  //   saveFieldAppState(fieldAppState);
-  // });
-
   $('#yellow').click(function() {
-    yellowRaw++;
+    robot.clicks.yellowRaw++;
+    writeMods();
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
   });
 
   $('#red').click(function() {
-    redRaw++;
+    robot.clicks.redRaw++;
+    writeMods();
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
   });
 
   $('#issue').click(function() {
-    estopRaw++;
+    robot.clicks.estopRaw++;
+    writeMods();
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
   });
-  //toggle endgame status values
+  //toggle status values
 
   $('#climbed').click(function() {
-    climbedRaw++;
+    robot.clicks.climbedRaw++;
+    writeMods();
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
   });
 
   $('#failed').click(function() {
-    failedRaw++;
+    robot.clicks.failedRaw++;
+    writeMods();
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
   });
 
   $('#balanced').click(function() {
-    balancedRaw++;
+    robot.clicks.balancedRaw++;
+    writeMods();
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
   });
 
   $('#parked').click(function() {
-    parkedRaw++;
+    robot.clicks.parkedRaw++;
+    writeMods();
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
   });
+  //toggle engdame values
 
   async function resetRobot() {
     $('.tab-container').addClass('hidden');
     $('#information').removeClass('hidden');
-    let rotationSuccessStatusRaw = 0;
-    let positionSuccessStatusRaw = 0;
-
-    let disconnectStatusRaw = 0;
-    let failureStatusRaw = 0;
-    let yellowRaw = 0;
-    let redRaw = 0;
-    let estopRaw = 0;
-
-    let climbedRaw = 0;
-    let failedRaw = 0;
-    let balancedRaw = 0;
-    let parkedRaw = 0;
 
     settings = await getSettings();
 
@@ -530,31 +503,42 @@ $(document).ready(async function() {
       colour: 'Corrupt Alliance',
       balls: 0,
       matchNumber: fieldAppState.currentMatch.matchNumber,
+      clicks: {
+        rotationSuccessStatusRaw: 0,
+        positionSuccessStatusRaw: 0,
+        yellowRaw: 0,
+        redRaw: 0,
+        estopRaw: 0,
+        climbedRaw: 0,
+        failedRaw: 0,
+        balancedRaw: 0,
+        parkedRaw: 0,
+      },
       points: {
         high: 0,
         low: 0,
         miss: 0,
       },
       wheel: {
-        rotation: rotationSuccessStatusRaw % 2,
-        position: positionSuccessStatusRaw % 2,
+        rotation: 0,
+        position: 0,
       },
       defense: {
-        rating: null,
+        rating: 0,
         fouls: 0,
         tech: 0,
       },
       status: {
-        disconnect: disconnectStatusRaw % 2,
-        failure: failureStatusRaw % 2,
-        yellow: yellowRaw % 2,
-        red: redRaw % 2,
-        estop: estopRaw % 2,
+        yellow: 0,
+        red: 0,
+        estop: 0,
       },
-      climbed: climbedRaw % 2,
-      failed: failedRaw % 2,
-      balanced: balancedRaw % 2,
-      parked: parkedRaw % 2,
+      endgame: {
+        climbed: 0,
+        failed: 0,
+        balanced: 0,
+        parked: 0,
+      },
       scout: settings.scout,
       events: [],
       image: null,

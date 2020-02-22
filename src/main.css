@@ -255,7 +255,7 @@ img {
 /*save button*/
 
 .alert {
-  background-color: red;
+  @apply bg-red-400;
 }
 
 .endgame-container {
@@ -316,7 +316,7 @@ img {
 .app-select-button {
   @apply rounded-lg;
   @apply border-4;
-  @apply text-6xl;
+  @apply text-4xl;
   @apply font-bold;
   @apply text-center;
   @apply border-gray-500;
@@ -347,7 +347,7 @@ img {
 .wipe {
   @apply rounded-lg;
   @apply border-4;
-  @apply text-6xl;
+  @apply text-4xl;
   @apply font-bold;
   @apply text-center;
   @apply border-red-400;

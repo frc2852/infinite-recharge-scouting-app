@@ -341,8 +341,6 @@ $(document).ready(async function() {
     }
   }
 
-  /* Undo Logic */
-
   $('.undo').click(function() {
     if (robot.events.length > 0) {
       let lastEventIndex = undefined;
@@ -356,10 +354,12 @@ $(document).ready(async function() {
 
       if (lastEventIndex != undefined) {
         robot.events.splice(lastEventIndex, 1);
+        updateDisplay();
         fieldAppState.robot = robot;
         saveFieldAppState(fieldAppState);
 
         if (robot.events[events.length].eventType === 'auto-pickup') {
+          updateDisplay();
           robot.events.splice(lastEventIndex, 1);
           fieldAppState.robot = robot;
           saveFieldAppState(fieldAppState);

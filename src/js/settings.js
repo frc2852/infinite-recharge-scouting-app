@@ -3,17 +3,17 @@ import { saveSettings } from './functions/index-db';
 
 $(document).ready(function() {
   let settings = {
-    colour: undefined,
+    color: undefined,
     station: undefined,
     scout: undefined,
   };
 
-  $('.alliance-colour').click(function() {
+  $('.alliance-color').click(function() {
     const $chosen = $(this);
     const $allianceID = $chosen.attr('alliance-id');
-    $('.alliance-colour').removeClass('colour-toggled');
-    $chosen.addClass('colour-toggled');
-    settings.colour = $allianceID;
+    $('.alliance-color').removeClass('color-toggled');
+    $chosen.addClass('color-toggled');
+    settings.color = $allianceID;
   });
 
   $('.alliance-station').click(function() {

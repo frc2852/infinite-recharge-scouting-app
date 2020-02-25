@@ -12,9 +12,9 @@ $(document).ready(async function() {
 
   function setupRobot() {
     if (fieldAppState != undefined) {
-      robot.team = fieldAppState.currentMatch[settings.colour][settings.station].teamKey;
-      robot.colour = settings.colour;
-      const robotImages = fieldAppState.currentMatch[settings.colour][settings.station].imageUrls;
+      robot.team = fieldAppState.currentMatch[settings.color][settings.station].teamKey;
+      robot.color = settings.color;
+      const robotImages = fieldAppState.currentMatch[settings.color][settings.station].imageUrls;
       if (robotImages != undefined) {
         robot.image = robotImages[0];
       } else {
@@ -40,10 +40,10 @@ $(document).ready(async function() {
     return team.substring(3);
   }
 
-  function parseColour(colour) {
-    if (colour == 'redTeam') {
+  function parsecolor(color) {
+    if (color == 'redTeam') {
       return 'Red';
-    } else if (colour == 'blueTeam') {
+    } else if (color == 'blueTeam') {
       return 'Blue';
     } else {
       return 'Corrupt Data';
@@ -222,14 +222,14 @@ $(document).ready(async function() {
     $('#miss-display').text(robot.points.miss);
     $('#match-number-display').text('Match Number: ' + robot.matchNumber);
     $('#team-number-display').text('Team Number: ' + parseTeam(robot.team));
-    $('#team-colour-display').text('Alliance: ' + parseColour(robot.colour));
+    $('#team-color-display').text('Alliance: ' + parsecolor(robot.color));
     $('#driver-station-display').text('Driver Station: ' + parseStation(settings.station));
     $('#main-team-number-display').text('Scouting: ' + parseTeam(robot.team));
     $('#robot-image').attr('src', robot.image);
     $('#fouls-display').text('Fouls: ' + robot.defense.fouls + '  ');
     $('#tech-fouls-display').text('Techs: ' + robot.defense.tech);
 
-    $('#info-panel').addClass(robot.colour);
+    $('#info-panel').addClass(robot.color);
 
     writeMods();
 
@@ -500,7 +500,7 @@ $(document).ready(async function() {
     robot = {
       matchStartTime: 0,
       team: '###Corrupt Team Number',
-      colour: 'Corrupt Alliance',
+      color: 'Corrupt Alliance',
       balls: 0,
       matchNumber: fieldAppState.currentMatch.matchNumber,
       clicks: {

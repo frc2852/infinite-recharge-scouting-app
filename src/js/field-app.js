@@ -57,7 +57,6 @@ $(document).ready(async function() {
   //changes the station number to be 1-based
 
   function writeMods() {
-    console.log(robot);
     robot.wheel.rotation = robot.clicks.rotationSuccessStatusRaw % 2;
     robot.wheel.position = robot.clicks.positionSuccessStatusRaw % 2;
     robot.status.yellow = robot.clicks.yellowRaw % 2;
@@ -255,7 +254,6 @@ $(document).ready(async function() {
     updateDisplay();
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
-    console.log(robot);
     writeMods();
   });
   //upon logging a button event (such as a pickup or score), adds the event to the robot's array of events

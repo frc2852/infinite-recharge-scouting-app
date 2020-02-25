@@ -377,19 +377,19 @@ $(document).ready(async function() {
   //toggles position success
 
   $('#fire').click(function() {
-    robot.defense.rating = 2;
+    robot.defense = 2;
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
   });
 
   $('#ok').click(function() {
-    robot.defense.rating = 1;
+    robot.defense = 1;
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
   });
 
   $('#bad').click(function() {
-    robot.defense.rating = 0;
+    robot.defense = 0;
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);
   });
@@ -503,9 +503,7 @@ $(document).ready(async function() {
         rotation: rotationSuccessStatusRaw % 2,
         position: positionSuccessStatusRaw % 2,
       },
-      defense: {
-        rating: null,
-      },
+      defense: null,
       status: {
         disconnect: disconnectStatusRaw % 2,
         failure: failureStatusRaw % 2,

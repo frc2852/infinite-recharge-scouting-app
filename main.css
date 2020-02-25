@@ -11401,18 +11401,24 @@ video {
   z-index: auto;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 .submenu {
   display: inline-block;
   border-width: 1px;
   border-color: #fff;
   border-radius: 0.5rem;
   color: #4299e1;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   padding-left: 0.75rem;
   padding-right: 0.75rem;
   font-size: 0.875rem;
   background-color: #f7fafc;
+  border-color: #cbd5e0;
 }
 
 .submenu:hover {
@@ -11504,7 +11510,7 @@ video {
 
 /* set for standard rectangle (short) buttons */
 
-.button-endgame {
+.button-summary {
   border-width: 1px;
   border-color: transparent;
   border-width: 4px;
@@ -11514,18 +11520,17 @@ video {
   margin-right: 4px;
   margin-top: 4px;
   margin-bottom: 4px;
-  height: 60%;
-  width: 60%;
+  width: 40%;
+  height: auto;
   background-color: #e2e8f0;
-  padding-left: 4rem;
-  padding-right: 4rem;
+  padding: 1rem;
 }
 
-.button-endgame:hover {
+.button-summary:hover {
   border-color: #4a5568;
 }
 
-/* set for endgame status buttons */
+/* set for summary buttons */
 
 .button-estop {
   border-width: 1px;
@@ -11536,7 +11541,7 @@ video {
   margin-left: auto;
   margin-right: auto;
   margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 4px;
   height: 60%;
   width: 60%;
   background-color: #e2e8f0;
@@ -11581,16 +11586,21 @@ video {
   margin-top: 10px;
   margin-bottom: 10px;
   width: 60%;
+  height: auto;
   background-color: #e2e8f0;
   padding-left: 4rem;
   padding-right: 4rem;
 }
 
-.button-emoji:hover {
-  border-color: #4a5568;
-}
-
 /* set for emoji buttons */
+
+img {
+  max-width: 60%;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 .toggle-active {
   background-color: #a0aec0;
@@ -11599,10 +11609,19 @@ video {
 
 /* button is toggled on */
 
-.endgame-toggle-active {
+.wheel-toggle-active {
+  border-color: #48bb78;
+  background-color: #68d391;
+}
+
+/* indicates position control is completed */
+
+.summary-toggle-active {
   background-color: #a0aec0;
   border-color: #48bb78;
 }
+
+/* card and estop buttons */
 
 .emoji-toggle-active {
   background-color: #a0aec0;
@@ -11629,112 +11648,59 @@ video {
 
 .btn-reset {
   border-radius: 0.5rem;
-  font-size: 1.5rem;
-  position: absolute;
-  bottom: 4;
-  left: 1;
-  margin-bottom: 4px;
-  margin-left: 4px;
-  background-color: #c53030;
+  font-size: 3rem;
+  align-self: center;
+  width: 60%;
+  margin: 1rem;
+  padding: 1.5rem;
+  background-color: #e53e3e;
+  text-align: center;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* reset button */
 
 .btn-save {
   border-radius: 0.5rem;
-  font-size: 1.5rem;
-  position: absolute;
-  bottom: 4;
-  right: 1;
-  margin-bottom: 4px;
-  margin-left: 4px;
-  background-color: #2b6cb0;
+  font-size: 3rem;
+  align-self: center;
+  width: 60%;
+  margin: 1rem;
+  padding: 1.5rem;
+  background-color: #3182ce;
+  text-align: center;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /*save button*/
 
-.pre-alert {
-  background-color: white;
-  -webkit-animation-name: pre-alert-animation;
-          animation-name: pre-alert-animation;
-  -webkit-animation-duration: 2s;
-          animation-duration: 2s;
-  -webkit-animation-iteration-count: infinite;
-          animation-iteration-count: infinite;
-}
-
-@-webkit-keyframes pre-alert-animation {
-  0% {
-    background-color: red;
-  }
-
-  50% {
-    background-color: transparent;
-  }
-
-  100% {
-    background-color: red;
-  }
-}
-
-@keyframes pre-alert-animation {
-  0% {
-    background-color: red;
-  }
-
-  50% {
-    background-color: transparent;
-  }
-
-  100% {
-    background-color: red;
-  }
-}
-
-/* a slower alert for non-vital issues */
-
 .alert {
-  background-color: white;
-  -webkit-animation-name: alert-animation;
-          animation-name: alert-animation;
-  -webkit-animation-duration: 0.2s;
-          animation-duration: 0.2s;
-  -webkit-animation-iteration-count: infinite;
-          animation-iteration-count: infinite;
+  background-color: #fc8181;
 }
-
-@-webkit-keyframes alert-animation {
-  0% {
-    background-color: red;
-  }
-
-  50% {
-    background-color: transparent;
-  }
-
-  100% {
-    background-color: red;
-  }
-}
-
-@keyframes alert-animation {
-  0% {
-    background-color: red;
-  }
-
-  50% {
-    background-color: transparent;
-  }
-
-  100% {
-    background-color: red;
-  }
-}
-
-/* a fast alert for issues requiring immediate action */
 
 .endgame-container {
+  align-content: center;
+}
+
+.endgame-toggle {
+  font-size: 1.5rem;
   text-align: center;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  display: table-cell;
+  -webkit-box-flex: 1;
+          flex-grow: 1;
+  vertical-align: center;
+}
+
+.endgame-toggle-active {
+  background-color: #a0aec0;
 }
 
 .comments {
@@ -11778,7 +11744,7 @@ video {
 .app-select-button {
   border-radius: 0.5rem;
   border-width: 4px;
-  font-size: 4rem;
+  font-size: 2.25rem;
   font-weight: 700;
   text-align: center;
   border-color: #a0aec0;
@@ -11809,7 +11775,7 @@ video {
 .wipe {
   border-radius: 0.5rem;
   border-width: 4px;
-  font-size: 4rem;
+  font-size: 2.25rem;
   font-weight: 700;
   text-align: center;
   border-color: #fc8181;
@@ -11861,9 +11827,11 @@ video {
   text-align: center;
 }
 
-.bg-special {
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(left, from), color-stop(rgb(238, 135, 135)), color-stop(rgb(236, 228, 110)), color-stop(rgb(107, 158, 224)), to(rgb(124, 230, 115)));
-  background-image: linear-gradient(from left, rgb(238, 135, 135), rgb(236, 228, 110), rgb(107, 158, 224), rgb(124, 230, 115));
+.bg-rainbow {
+  border-color: transparent;
+  border-width: 0;
+  background-color: #faf089;
+  /* background-image: linear-gradient(to right, rgb(238, 135, 135), rgb(236, 228, 110), rgb(107, 158, 224), rgb(124, 230, 115)); */
 }
 
 .downloading {
@@ -11871,13 +11839,43 @@ video {
 }
 
 #info-panel.blueTeam {
-  background: #3498db;
+  background: #5f89a5;
   color: #ecf0f1;
 }
 
 #info-panel.redTeam {
-  background: #e74c3c;
+  background: #b95b51;
   color: #ecf0f1;
+}
+
+.comments {
+  font-size: 16px;
+}
+
+.button-fouls {
+  -webkit-box-align: center;
+          align-items: center;
+  border-width: 1px;
+  border-color: transparent;
+  border-width: 4px;
+  border-radius: 0.5rem;
+  display: inline-block;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  padding: 0.5rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.foul-display {
+  font-size: 2.25rem;
+  background-color: #feb2b2;
+}
+
+.card-container {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media (min-width: 640px) {

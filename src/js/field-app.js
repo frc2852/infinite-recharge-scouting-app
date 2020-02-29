@@ -51,6 +51,14 @@ $(document).ready(async function() {
   }
   //interprets alliance ids and changes them to more user-friendly text
 
+  function removeToggles() {
+    $('.endgame-toggle').removeClass('endgame-toggle-active');
+    $('.climb-toggle').removeClass('climb-toggle-active');
+    $('.emoji-toggle').removeClass('emoji-toggle-active');
+    $('.toggle').removeClass('toggle-active');
+    $('.toggle').removeClass('wheel-toggle-active');
+  }
+
   function parseStation(station) {
     return parseInt(station, 10) + 1;
   }
@@ -553,11 +561,7 @@ $(document).ready(async function() {
       match = fieldAppState.match;
     }
 
-    $('.endgame-toggle').removeClass('endgame-toggle-active');
-    $('.climb-toggle').removeClass('climb-toggle-active');
-    $('.emoji-toggle').removeClass('emoji-toggle-active');
-    $('toggle').removeClass('toggle-active');
-
+    removeToggles();
     updateDisplay();
   }
 });

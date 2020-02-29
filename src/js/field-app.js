@@ -52,7 +52,7 @@ $(document).ready(async function() {
   //interprets alliance ids and changes them to more user-friendly text
 
   function parseStation(station) {
-    return station.substring(1) + 1;
+    return parseInt(station, 10) + 1;
   }
   //changes the station number to be 1-based
 

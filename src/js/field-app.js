@@ -59,6 +59,67 @@ $(document).ready(async function() {
     $('.toggle').removeClass('wheel-toggle-active');
   }
 
+  function triggerToggles() {
+    console.log(robot);
+    if (robot.wheel.rotation) {
+      $('#rotation').toggleClass('wheel-toggle-active');
+    }
+
+    if (robot.wheel.position) {
+      $('#position').toggleClass('wheel-toggle-active');
+    }
+
+    if (robot.defense.rating === 2) {
+      $('#fire')
+        .parent()
+        .addClass('emoji-toggle-active');
+    } else if (robot.defense.rating === 1) {
+      $('#ok')
+        .parent()
+        .addClass('emoji-toggle-active');
+    } else if (robot.defense.rating === -1) {
+      $('#bad')
+        .parent()
+        .addClass('emoji-toggle-active');
+    }
+
+    if (robot.endgame.climbed) {
+      $('#climbed').toggleClass('endgame-toggle-active');
+    }
+
+    if (robot.endgame.failed) {
+      $('#failed').toggleClass('endgame-toggle-active');
+    }
+
+    if (robot.endgame.balanced) {
+      $('#balanced').toggleClass('endgame-toggle-active');
+    }
+
+    if (robot.endgame.parked) {
+      $('#parked').toggleClass('endgame-toggle-active');
+    }
+
+    if (robot.status.yellow) {
+      $('#yellow')
+        .parent()
+        .toggleClass('toggle-active');
+    }
+
+    if (robot.status.red) {
+      $('#red')
+        .parent()
+        .toggleClass('toggle-active');
+    }
+
+    if (robot.status.estop) {
+      $('#issue')
+        .parent()
+        .toggleClass('toggle-active');
+    }
+  }
+
+  triggerToggles();
+
   function parseStation(station) {
     return parseInt(station, 10) + 1;
   }

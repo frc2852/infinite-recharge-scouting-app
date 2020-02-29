@@ -60,7 +60,6 @@ $(document).ready(async function() {
   }
 
   function triggerToggles() {
-    console.log(robot);
     if (robot.wheel.rotation) {
       $('#rotation').toggleClass('wheel-toggle-active');
     }

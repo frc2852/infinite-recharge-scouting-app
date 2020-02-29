@@ -124,11 +124,12 @@ $(document).ready(async function() {
   //the preceeding three functions will still work without a ball, leaving the value at zero
 
   $('.btn-reset').click(async function() {
-    fieldAppState.robot = undefined;
-    await saveFieldAppState(fieldAppState);
-    resetRobot();
-    updateDisplay();
-    alert('Data cleared. Refresh the page to restore data.');
+    if (confirm('CLICKING OK WILL ERASE YOUR DATA! ARE YOU SURE?')) {
+      fieldAppState.robot = undefined;
+      await saveFieldAppState(fieldAppState);
+      resetRobot();
+      updateDisplay();
+    }
   });
   //reset button logic, sets all values to 0
 

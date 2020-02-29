@@ -127,7 +127,8 @@ $(document).ready(async function() {
     if (confirm('CLICKING OK WILL ERASE YOUR DATA! ARE YOU SURE?')) {
       fieldAppState.robot = undefined;
       await saveFieldAppState(fieldAppState);
-      resetRobot();
+      await resetRobot();
+      setupRobot();
       updateDisplay();
     }
   });

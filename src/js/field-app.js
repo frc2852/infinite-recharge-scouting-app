@@ -424,7 +424,7 @@ $(document).ready(async function() {
   });
 
   $('#bad').click(function() {
-    robot.defense.rating = 0;
+    robot.defense.rating = -1;
     writeMods();
     fieldAppState.robot = robot;
     saveFieldAppState(fieldAppState);

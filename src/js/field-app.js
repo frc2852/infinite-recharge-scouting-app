@@ -356,7 +356,7 @@ $(document).ready(async function() {
         fieldAppState.robot = robot;
         saveFieldAppState(fieldAppState);
 
-        if (robot.events[events.length].eventType === 'auto-pickup') {
+        if (robot.events[robot.events.length - 1].eventType === 'auto-pickup') {
           updateDisplay();
           robot.events.splice(lastEventIndex, 1);
           fieldAppState.robot = robot;

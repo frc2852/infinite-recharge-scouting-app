@@ -226,12 +226,26 @@ img {
 
 .btn-reset {
   @apply rounded-lg;
-  @apply text-5xl;
+  @apply text-4xl;
   align-self: center;
   width: 60%;
-  @apply m-4;
+  @apply m-6;
   @apply p-6;
   @apply bg-red-600;
+  @apply text-center;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn-skip {
+  @apply rounded-lg;
+  @apply text-4xl;
+  align-self: center;
+  width: 60%;
+  @apply m-6;
+  @apply p-6;
+  @apply bg-gray-600;
   @apply text-center;
   text-align: center;
   margin-left: auto;
@@ -241,10 +255,10 @@ img {
 
 .btn-save {
   @apply rounded-lg;
-  @apply text-5xl;
+  @apply text-4xl;
   align-self: center;
   width: 60%;
-  @apply m-4;
+  @apply m-6;
   @apply p-6;
   @apply bg-blue-600;
   @apply text-center;

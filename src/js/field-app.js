@@ -191,13 +191,28 @@ $(document).ready(async function() {
   //tab select logic, shows and hides respective tab containers
   //the preceeding three functions will still work without a ball, leaving the value at zero
 
+  async function resetAll() {
+    await resetRobot();
+    setupRobot();
+    updateDisplay();
+  }
+
   $('.btn-reset').click(async function() {
     if (confirm('CLICKING OK WILL ERASE YOUR DATA! ARE YOU SURE?')) {
       fieldAppState.robot = undefined;
       await saveFieldAppState(fieldAppState);
-      await resetRobot();
-      setupRobot();
-      updateDisplay();
+      await resetAll();
+    }
+  });
+
+  $('.btn-skip').click(async function() {
+    if (confirm('Click this will not save your current match. Are you sure?')) {
+      fieldAppState.robot = undefined;
+      const collectionPath = fieldAppState.currentMatch.collectionPath;
+      const matchID = fieldAppState.currentMatch.nextMatch;
+      fieldAppState.currentMatch = await getDocument(collectionPath, matchID);
+      await saveFieldAppState(fieldAppState);
+      await resetAll();
     }
   });
   //reset button logic, sets all values to 0

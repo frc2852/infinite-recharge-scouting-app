@@ -11648,12 +11648,26 @@ img {
 
 .btn-reset {
   border-radius: 0.5rem;
-  font-size: 3rem;
+  font-size: 2.25rem;
   align-self: center;
   width: 60%;
-  margin: 1rem;
+  margin: 1.5rem;
   padding: 1.5rem;
   background-color: #e53e3e;
+  text-align: center;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn-skip {
+  border-radius: 0.5rem;
+  font-size: 2.25rem;
+  align-self: center;
+  width: 60%;
+  margin: 1.5rem;
+  padding: 1.5rem;
+  background-color: #718096;
   text-align: center;
   text-align: center;
   margin-left: auto;
@@ -11664,10 +11678,10 @@ img {
 
 .btn-save {
   border-radius: 0.5rem;
-  font-size: 3rem;
+  font-size: 2.25rem;
   align-self: center;
   width: 60%;
-  margin: 1rem;
+  margin: 1.5rem;
   padding: 1.5rem;
   background-color: #3182ce;
   text-align: center;

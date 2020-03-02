@@ -25,30 +25,32 @@ export const saveDocument = (collectionPath, documentId, data) => {
       .doc(documentId)
       .set(data);
 
-      data.sentToFirebase = true;
+    data.sentToFirebase = true;
   }
 
   return saveDocumentLocally(collectionPath, documentId, data);
 };
 
-export const saveRobotEventDocumentsToFirestore = async (docs) => {
+export const saveRobotEventDocumentsToFirestore = async docs => {
   const batch = firebaseApp.firestore().batch();
-  
-  docs.forEach(doc => {
-    const robotMatchEvent = firebaseApp.firestore().doc(doc.documentPath);
 
-    if(!doc.sentToFirebase) {
+  docs.forEach(doc => {
+    if (!doc.sentToFirebase) {
+      const robotMatchEvent = firebaseApp.firestore().doc(doc.documentPath);
       batch.set(robotMatchEvent, doc);
     }
-  })
+  });
 
-  batch.commit().then(() => {
-    docs.forEach(doc => {
-      doc.sentToFirebase = true;
-      saveDocumentLocally(doc.documentPath, doc.documentId, doc);
-    }); 
-  }).catch(e => console.error(e));
-}
+  batch
+    .commit()
+    .then(() => {
+      docs.forEach(doc => {
+        doc.sentToFirebase = true;
+        saveDocumentLocally(doc.documentPath, undefined, doc);
+      });
+    })
+    .catch(e => console.error(e));
+};
 
 export const getDocument = async (collectionPath, documentId) => {
   if (navigator.onLine) {

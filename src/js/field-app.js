@@ -289,7 +289,7 @@ $(document).ready(async function() {
     $('#high-ball-display').text(robot.points.high);
     $('#low-ball-display').text(robot.points.low);
     $('#miss-display').text(robot.points.miss);
-    $('#match-number-display').text('Match Number: ' + robot.matchNumber);
+    $('#match-number-display').text('Match Number: ' + fieldAppState.currentMatch.matchNumber);
     $('#team-number-display').text('Team Number: ' + parseTeam(robot.team));
     $('#team-color-display').text('Alliance: ' + parsecolor(robot.color));
     $('#driver-station-display').text('Driver Station: ' + parseStation(settings.station));
@@ -556,13 +556,6 @@ $(document).ready(async function() {
       fieldAppState = {
         currentMatch: await getDocumentLocally(matchKeys[0]),
       };
-    }
-
-    if (settings.collectionPath != undefined) {
-      let collectionPath = await getDocumentLocally(settings.collectionPath);
-      fieldAppState.match = collectionPath;
-      fieldAppState.currentMatch = collectionPath;
-      settings.collectionPath = undefined;
     }
 
     robot = {

@@ -12,13 +12,18 @@ const getDB = () => {
 export const saveDocumentLocally = async (collectionPath, documentId, data) => {
   const db = await getDB();
 
-  if (collectionPath[collectionPath.length - 1] !== '/') {
-    collectionPath += '/';
+  if (documentId) {
+    if (collectionPath[collectionPath.length - 1] !== '/') {
+      collectionPath += '/';
+    }
+
+    data.documentId = documentId;
+    return db.put('collections', data, collectionPath + documentId);
   }
 
-  data.documentId = documentId;
-
-  return db.put('collections', data, collectionPath + documentId);
+  const documentPath = collectionPath.split('/');
+  data.documentId = documentPath[documentPath.length - 1];
+  return db.put('collections', data, collectionPath);
 };
 
 export const getDocumentLocally = async (collectionPath, documentId) => {

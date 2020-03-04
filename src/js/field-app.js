@@ -137,7 +137,9 @@ $(document).ready(async function() {
   }
 
   $('.start-button').click(function() {
-    robot.matchStartTime = Date.now();
+    if (!robot.matchStartTime || robot.matchStartTime === 0) {
+      robot.matchStartTime = Date.now();
+    }
     $('#information').addClass('hidden');
     $('#offense').removeClass('hidden');
     fieldAppState.robot = robot;
@@ -178,6 +180,10 @@ $(document).ready(async function() {
 
   $('.submenu').click(function() {
     const $tab = $(this);
+
+    if (robot.matchStartTime || robot.matchStartTime === 0) {
+      robot.matchStartTime = Date.now();
+    }
 
     $('.tab-container').removeClass('tab-active');
     $tab.addClass('tab-active');
@@ -229,7 +235,7 @@ $(document).ready(async function() {
   }
 
   $('.btn-save').click(async function() {
-    alert(robot.scout + "'s scouting data was saved.");
+    alert('Scouting data was saved.');
     writeMods();
     robot.comments = $('#comments').val();
     if (robot.comments === undefined) {
@@ -562,6 +568,7 @@ $(document).ready(async function() {
     $('#information').removeClass('hidden');
 
     settings = await getSettings();
+    console.log(settings);
 
     match = undefined;
     fieldAppState = await getFieldAppState();
@@ -616,6 +623,7 @@ $(document).ready(async function() {
         parked: 0,
       },
       scout: settings.scout,
+      driveStation: parseInt(settings.station, 10) + 1,
       events: [],
       image: null,
       comments: null,

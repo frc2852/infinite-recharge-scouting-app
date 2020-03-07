@@ -21,6 +21,9 @@ $(document).ready(async function() {
         robot.image = null;
       }
     }
+
+    $("#comments").val(robot.comments);
+
     updateDisplay();
   }
 
@@ -568,7 +571,6 @@ $(document).ready(async function() {
     $('#information').removeClass('hidden');
 
     settings = await getSettings();
-    console.log(settings);
 
     match = undefined;
     fieldAppState = await getFieldAppState();
